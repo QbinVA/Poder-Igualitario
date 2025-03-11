@@ -1,0 +1,126 @@
+/* Estilos generales */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+.container {
+    display: flex;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background: #6a0dad;
+    color: #fff;
+    padding: 20px;
+    height: 100vh; /* Hacer que el sidebar abarque toda la altura de la página */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.sidebar h2 {
+    font-size: 24px;
+}
+
+.user-info {
+    margin-top: 20px;
+}
+
+.user-name {
+    font-weight: bold;
+}
+
+.user-email {
+    font-size: 14px;
+}
+
+.back-link {
+    display: block;
+    margin-top: 30px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+/* Contenido principal */
+.main-content {
+    flex: 1;
+    padding: 40px;
+}
+
+h1 {
+    font-size: 36px;
+    color: #000000;
+}
+
+h2 {
+    font-size: 24px;
+    color: #0d0d0d;
+}
+
+/* Botón nuevo */
+.button-container {
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+.new-button {
+    background: #b43de7;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.new-button:hover {
+    background: #9a32c9;
+}
+
+/* Tabla de noticias */
+.news-table {
+    width: 100%;
+    background: #fff;
+    border-collapse: collapse;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.news-table th, .news-table td {
+    padding: 12px;
+    text-align: left;
+}
+
+.news-table th {
+    background: #eee;
+}
+
+.news-table tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+.published {
+    color: green;
+}
+
+.draft {
+    color: orange;
+}
+
+/* Iconos */
+td {
+    text-align: center;
+}
+
+.news-table td:last-child {
+    color: red;
+    cursor: pointer;
+}
+
+.news-table td:last-child:hover {
+    text-decoration: underline;
+}

@@ -1,0 +1,18 @@
+# Habilitar el módulo de reescritura
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Redirigir todas las solicitudes a index.php si el archivo o directorio no existe
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule . index.html [L]
+</IfModule>
+
+# Evitar que los archivos .htaccess y .htpasswd sean visibles
+<Files ".ht*">
+    Require all denied
+</Files>
+
+# Configurar el manejo de errores personalizados
+ErrorDocument 404 /404.html
+ErrorDocument 500 /500.html

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración</title>
+    <link rel="stylesheet" href="adminStyles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h2>Poder Igualitario</h2>
+            <div class="user-info">
+                <p class="user-name">Kevin Valdovinos</p>
+                <p class="user-email">kvaldovinos2@puol.com</p>
+            </div>
+            <a href="#" class="back-link">⬅ Regresar al Blog</a>
+        </aside>
+
+        <!-- Main content -->
+        <main class="main-content">
+            <h1>¡Bienvenido, Kevin!</h1>
+            <h2>Noticias</h2>
+
+            <!-- Botón Nuevo -->
+            <div class="button-container">
+                <form action="crearPublicacionForms.html" method="get">
+                    <button type="submit" class="new-button">Crear</button>
+                </form>
+            </div>
+
+            <!-- Tabla de noticias -->
+            <table class="news-table">
+                <thead>
+                    <tr>
+                        <th>Encabezado</th>
+                        <th>Fecha</th>
+                        <th>Estado</th>
+                        <th>Previsualizar</th>
+                        <th>Editar</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>38 instituciones se manifiestan...</td>
+                        <td>17/02/25</td>
+                        <td class="published">PUBLICADO</td>
+                        <td>🔍</td>
+                        <td>✏️</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr>
+                        <td>La brecha salarial entre mujeres...</td>
+                        <td>14/02/25</td>
+                        <td class="draft">BORRADOR</td>
+                        <td>🔍</td>
+                        <td>✏️</td>
+                        <td>❌</td>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
+    </div>
+</body>
+</html>
