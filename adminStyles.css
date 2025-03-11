@@ -16,6 +16,10 @@ body {
     background: #6a0dad;
     color: #fff;
     padding: 20px;
+    height: 100vh; /* Hacer que el sidebar abarque toda la altura de la página */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .sidebar h2 {
@@ -50,12 +54,12 @@ body {
 
 h1 {
     font-size: 36px;
-    color: #333;
+    color: #000000;
 }
 
 h2 {
     font-size: 24px;
-    color: #555;
+    color: #0d0d0d;
 }
 
 /* Botón nuevo */
