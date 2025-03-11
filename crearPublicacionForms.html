@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Publicación</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #f3f4f6;
+            margin: 0;
+        }
+        h2 {
+            text-align: center;
+            color: #4a5568;
+        }
+        form {
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #4a5568;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="date"],
+        input[type="file"],
+        input[type="url"],
+        textarea {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border: 1px solid #cbd5e0;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+        textarea {
+            resize: vertical;
+        }
+        button {
+            background: #6b46c1;
+            color: #ffffff;
+            border: none;
+            padding: 0.75rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            width: 100%;
+            transition: background 0.3s ease;
+        }
+        button:hover {
+            background: #553c9a;
+        }
+    </style>
+</head>
+<body>
+    <form action="guardar_publicacion.php" method="POST" enctype="multipart/form-data">
+        <h2>Crear Nueva Publicación</h2>
+        <label for="titular">Titular:</label>
+        <input type="text" name="titular" id="titular" required>
+
+        <label for="fecha">Fecha:</label>
+        <input type="date" name="fecha" id="fecha" required>
+
+        <label for="descripcion_corta">Descripción Corta:</label>
+        <input type="text" name="descripcion_corta" id="descripcion_corta" required>
+
+        <label for="imagen_principal">Imagen Principal:</label>
+        <input type="file" name="imagen_principal" id="imagen_principal" accept="image/*" required>
+
+        <label for="contenido">Contenido:</label>
+        <textarea name="contenido" id="contenido" rows="5" required></textarea>
+
+        <label for="referencia">Referencia (opcional):</label>
+        <input type="url" name="referencia" id="referencia">
+
+        <button type="submit">Publicar</button>
+    </form>
+</body>
+</html>
