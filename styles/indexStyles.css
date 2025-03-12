@@ -1,5 +1,5 @@
 body {
-    font-family: 'Raleway', sans-serif; /* Aplicar la fuente Raleway a todo el documento */
+    font-family: 'Raleway', sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -15,10 +15,10 @@ header {
 }
 
 .blog-intro {
-    background: rgba(0, 0, 0, 0.377); /* Fondo oscuro y transparente */
-    padding: 50px 0; /* Espaciado interno */
-    width: 100%; /* Abarcar todo el ancho de la página */
-    box-sizing: border-box; /* Incluir el padding en el ancho total */
+    background: rgba(0, 0, 0, 0.377);
+    padding: 50px 0;
+    width: 100%;
+    box-sizing: border-box;
     margin: 0;
 }
 
@@ -56,10 +56,11 @@ main {
 }
 
 .main-news img {
-    width: 1300px;
-    height: 650px;
+    width: 100%; /* Cambiar para que la imagen ocupe el 100% del contenedor */
+    max-width: 1300px;
+    height: auto;
     object-fit: cover;
-    border-radius: 10px; /* Bordes redondeados para la imagen */
+    border-radius: 10px;
     margin-bottom: 20px;
 }
 
@@ -74,78 +75,10 @@ main {
     font-size: 1.2rem;
 }
 
-/* Noticias secundarias sin cardview */
-
-/* ...existing code... */
-
-.news-item {
-    display: flex;
-    flex-direction: row; /* Mantener fila para alinear horizontalmente */
-    align-items: flex-start; /* Alinear al inicio */
-    gap: 20px; /* Ajustar el espacio entre la imagen y el texto */
-    margin-left: 50px;
-    margin-top: 50px;
-    margin-right: 50px;
-    margin-bottom: 40px;
-    background-color: #d4a4e0c8;
-    padding: 20px; /* Añadir relleno interno */
-    border-radius: 10px; /* Bordes redondeados */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra inicial */
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Transición suave */
+.publication-date {
+    font-size: 0.9rem;
+    color: #555;
+    margin-top: 5px;
 }
 
-.news-item:hover {
-    transform: scale(1.02); /* Aumentar ligeramente el tamaño al pasar el cursor */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada al pasar el cursor */
-}
-
-.news-item img {
-    width: 400px; /* Ajustar el ancho de la imagen a un tamaño específico */
-    height: 200px; /* Ajustar la altura de la imagen a un tamaño específico */
-    object-fit: cover;
-    border-radius: 10px; /* Bordes redondeados para la imagen */
-}
-
-.news-item div {
-    display: flex;
-    flex-direction: column; /* Apilar el encabezado y la descripción verticalmente */
-    justify-content: center;
-    width: calc(100% - 170px); /* Ajustar el ancho del contenedor de texto */
-    margin-left: 30px;
-}
-
-.news-item h5 {
-    margin: 0;
-    font-size: 1.5rem;
-}
-
-.news-item p {
-    margin: 5px 0 0;
-    color: #303030;
-}
-
-/* ...existing code... */
-
-footer {
-    position: relative; /* Necesario para posicionar el div dentro del footer */
-    text-align: center;
-    color: black;
-    padding: 20px 0;
-    margin-top: 50px;
-}
-
-.hidden-square {
-    position: absolute; /* Posicionarlo de manera absoluta dentro del footer */
-    bottom: 20px; /* Espaciado desde la parte inferior del footer */
-    right: 20px; /* Espaciado desde la parte derecha del footer */
-    width: 50px; /* Ancho del cuadrado */
-    height: 50px; /* Altura del cuadrado */
-    background-color: transparent; /* Fondo transparente */
-    cursor: pointer; /* Cambiar el cursor al pasar sobre el div */
-}
-
-/* ...existing code... */
-/* Mantener funcionalidad de clic en divs */
-.clickable {
-    cursor: pointer;
-}
+/* Noticias

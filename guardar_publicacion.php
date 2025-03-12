@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ]);
 
         // Redirigir si todo salió bien
-        header("Location: index.php");
+        header("Location: admin.php");
         exit;
     } catch (PDOException $e) {
         die("Error en la base de datos: " . $e->getMessage());
