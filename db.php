@@ -4,7 +4,7 @@
 $host = 'localhost';
 $dbname = 'poder_igualitario';
 $username = 'root';
-$password = '';
+$password = '123456789';
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
