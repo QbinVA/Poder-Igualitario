@@ -81,4 +81,26 @@ main {
     margin-top: 5px;
 }
 
-/* Noticias
+/* Estilo para hidden-square */
+.hidden-square {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    padding: 10px;
+}
+
+.hidden-square button {
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+}
+
+.hidden-square button:hover {
+    background: white;
+    color: black;
+}
