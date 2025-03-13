@@ -23,8 +23,8 @@ try {
 <body>
     <div class="container">
         <aside class="sidebar">
-            <h2>Poder Igualitario</h2>
-            <div class="user-info">
+        <h2><a href="index.php" class="home-link">Poder Igualitario</a></h2>
+        <div class="user-info">
                 <p class="user-name">Kevin Valdovinos</p>
                 <p class="user-email">kvaldovinos2@puol.com</p>
             </div>
