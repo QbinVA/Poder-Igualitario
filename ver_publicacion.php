@@ -48,7 +48,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     <!-- Encabezado -->
     <section class="encabezado">
         <h1><?php echo htmlspecialchars($noticia['titular']); ?></h1>
-        <p><strong>Fecha:</strong> <?php echo date("l j \d\e F \d\e Y", strtotime($noticia['fecha'])); ?></p>
+        <p><strong>Fecha:</strong> <?php echo date("d/m/y", strtotime($noticia['fecha'])); ?></p>
     </section>
 
     <!-- Imagen principal -->
