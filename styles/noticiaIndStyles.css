@@ -1,0 +1,135 @@
+body {
+    font-family: 'Raleway', sans-serif; /* Aplicar la fuente Raleway a todo el documento */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: white;
+    min-height: 100vh;
+}
+
+header {
+    background: linear-gradient(135deg, #5e0560, #954ba7, #bc9ac9);
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+header nav a {
+    text-decoration: none;
+    color: inherit;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.encabezado {
+    text-align: center;
+    padding: 20px;
+    color: rgb(0, 0, 0);
+}
+
+.encabezado h1 {
+    margin: 0;
+    font-size: 2.5rem;
+}
+
+.encabezado p {
+    margin: 10px 0 0;
+    font-size: 1rem;
+}
+
+.imagen-principal {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.imagen-principal img {
+    width: 99%;
+    border-radius: 10px;
+}
+
+.contenido {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+}
+
+.contenido p {
+    margin: 10px 0;
+    line-height: 1.6;
+}
+
+.imagenes {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+}
+
+.imagenes h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.galeria {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.galeria img {
+    width: 30%;
+    margin: 10px 0;
+    border-radius: 10px;
+}
+
+.referencia {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+}
+
+.referencia h3 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.referencia ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.referencia ul li {
+    margin: 10px 0;
+}
+
+.referencia ul li a {
+    color: #9b33b5;
+    text-decoration: none;
+}
+
+.referencia ul li a:hover {
+    text-decoration: underline;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+    position: relative;
+}
+
+.hidden-square {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    cursor: pointer;
+}

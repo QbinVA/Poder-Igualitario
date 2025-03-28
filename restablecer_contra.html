@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restablecer Contraseña</title>
+    <link rel="stylesheet" href="styles/loginStyles.css">
+</head>
+<body>
+    <div class="login-container">
+        <h2>Restablecer Contraseña</h2>
+        <form action="procesar_restauracion.php" method="POST">
+            <input type="hidden" name="token" value="<?php echo isset($_GET['token']) ? htmlspecialchars($_GET['token']) : ''; ?>">
+            
+            <label for="new_password">Nueva Contraseña:</label>
+            <input type="password" id="new_password" name="new_password" required>
+
+            <button type="submit">Actualizar</button>
+        </form>
+    </div>
+</body>
+</html>

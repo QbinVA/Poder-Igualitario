@@ -1,6 +1,7 @@
 <?php
 
 include("con_db.php");
+include("con_lo.php");
 
 if(isset($_POST['registro'])){
     if (strlen($_POST['name']) >= 1 && strlen($_POST['email']) >= 1 ) {
