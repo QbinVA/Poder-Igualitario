@@ -65,27 +65,37 @@
     </style>
 </head>
 <body>
-    <form action="guardar_publicacion.php" method="POST" enctype="multipart/form-data">
-        <h2>Crear Nueva Publicación</h2>
-        <label for="titular">Titular:</label>
-        <input type="text" name="titular" id="titular" required>
+    <!-- ... encabezado igual ... -->
+<form action="guardar_publicacion.php" method="POST" enctype="multipart/form-data">
+    <h2>Crear Nueva Publicación</h2>
 
-        <label for="fecha">Fecha:</label>
-        <input type="date" name="fecha" id="fecha" required>
+    <label for="titular">Titular:</label>
+    <input type="text" name="titular" id="titular" required>
 
-        <label for="descripcion_corta">Descripción Corta:</label>
-        <input type="text" name="descripcion_corta" id="descripcion_corta" required>
+    <label for="fecha">Fecha:</label>
+    <input type="date" name="fecha" id="fecha" required>
 
-        <label for="imagen_principal">Imagen Principal:</label>
-        <input type="file" name="imagen_principal" id="imagen_principal" accept="image/*" required>
+    <label for="descripcion_corta">Descripción Corta:</label>
+    <input type="text" name="descripcion_corta" id="descripcion_corta" required>
 
-        <label for="contenido">Contenido:</label>
-        <textarea name="contenido" id="contenido" rows="5" required></textarea>
+    <label for="imagen_principal">Imagen Principal:</label>
+    <input type="file" name="imagen_principal" id="imagen_principal" accept="image/*" required>
 
-        <label for="referencia">Referencia (opcional):</label>
-        <input type="url" name="referencia" id="referencia">
+    <label for="contenido">Contenido:</label>
+    <textarea name="contenido" id="contenido" rows="5" required></textarea>
 
-        <button type="submit">Publicar</button>
-    </form>
-</body>
-</html>
+    <label for="referencia">Referencia (opcional):</label>
+    <input type="url" name="referencia" id="referencia">
+
+    <!-- Nuevo campo: Categoría -->
+    <label for="categoria">Categoría:</label>
+    <select name="categoria" id="categoria" required>
+        <option value="">Selecciona una categoría</option>
+        <option value="Noticias">Noticias</option>
+        <option value="Eventos">Eventos</option>
+        <option value="Tecnología">Tecnología</option>
+        <option value="Cultura">Cultura</option>
+    </select>
+
+    <button type="submit">Publicar</button>
+</form>

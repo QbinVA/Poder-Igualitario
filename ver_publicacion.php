@@ -52,7 +52,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     </section>
 
     <!-- Imagen principal -->
-    <section class="imagen-principal">
+    <section class="uploads/img_67d139acdc8b75.13064540.png">
         <a href="<?php echo htmlspecialchars($noticia['url_imagen']); ?>" target="_blank">
             <img src="<?php echo htmlspecialchars($noticia['url_imagen']); ?>" alt="Imagen de la noticia" width="99%">
         </a>
