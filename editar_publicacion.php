@@ -56,5 +56,7 @@ if (!$noticia) {
 
         <button type="submit">Actualizar</button>
     </form>
+
+    
 </body>
 </html>
