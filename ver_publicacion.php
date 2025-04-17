@@ -34,6 +34,18 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     <title><?php echo htmlspecialchars($noticia['titular']); ?></title>
     <link rel="stylesheet" href="styles/noticiaIndStyles.css">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+  /* Ocultar barra de Google Translate */
+  .goog-te-banner-frame.skiptranslate,
+  .goog-logo-link,
+  .goog-te-gadget {
+    display: none !important;
+  }
+
+  body {
+    top: 0px !important;
+  }
+</style>
 </head>
 <body>
     <!-- Header -->
@@ -94,5 +106,61 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     <footer>
         <p>Las noticias encontradas en este blog no fueron redactadas por nuestro equipo, solo nos encargamos de difundir información.</p>
     </footer>
+<div id="language-switcher" style="text-align: right; padding: 10px;">
+  <button id="lang-btn" onclick="changeLanguage('en')" style="
+      background-color: black;
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 14px;
+  ">🌐 Inglés</button>
+</div>
+
+<!-- Contenedor oculto de Google Translate -->
+<div id="google_translate_element" style="display: none;"></div>
+
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'es',
+      includedLanguages: 'es,en',
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    }, 'google_translate_element');
+  }
+
+  function changeLanguage(lang) {
+    const select = document.querySelector('.goog-te-combo');
+    if (select) {
+      select.value = lang;
+      select.dispatchEvent(new Event('change'));
+
+      // Guardar preferencia en navegador
+      localStorage.setItem('idiomaPreferido', lang);
+
+      // Cambiar texto del botón
+      const btn = document.getElementById('lang-btn');
+      const nextLang = lang === 'en' ? 'es' : 'en';
+      btn.textContent = nextLang === 'en' ? '🌐 Inglés' : '🌐 Español';
+      btn.setAttribute('onclick', `changeLanguage('${nextLang}')`);
+    }
+  }
+
+  // Aplicar idioma guardado
+  window.addEventListener('load', () => {
+    const lang = localStorage.getItem('idiomaPreferido');
+    if (lang) {
+      const interval = setInterval(() => {
+        const select = document.querySelector('.goog-te-combo');
+        if (select) {
+          changeLanguage(lang);
+          clearInterval(interval);
+        }
+      }, 300);
+    }
+  });
+</script>
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>

@@ -39,6 +39,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="styles/loginStyles.css">
+    <style>
+  /* Ocultar barra de Google Translate */
+  .goog-te-banner-frame.skiptranslate,
+  .goog-logo-link,
+  .goog-te-gadget {
+    display: none !important;
+  }
+
+  body {
+    top: 0px !important;
+  }
+</style>
 </head>
 <body>
     <div class="login-container">
@@ -54,5 +66,65 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <button type="submit">Ingresar</button>
         </form>
     </div>
+    <!-- 🌐 Botón de idioma personalizado -->
+<div id="language-switcher" style="text-align: right; padding: 10px;">
+  <button id="lang-btn" onclick="changeLanguage('en')" style="
+      background-color: black;
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 14px;
+  ">🌐 Inglés</button>
+</div>
+
+<!-- Contenedor oculto de Google Translate -->
+<div id="google_translate_element" style="display: none;"></div>
+
+<!-- Script para manejar cambio de idioma -->
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'es',
+      includedLanguages: 'es,en',
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    }, 'google_translate_element');
+  }
+
+  function changeLanguage(lang) {
+    const select = document.querySelector('.goog-te-combo');
+    if (select) {
+      select.value = lang;
+      select.dispatchEvent(new Event('change'));
+
+      // Guardar preferencia en navegador
+      localStorage.setItem('idiomaPreferido', lang);
+
+      // Cambiar texto del botón
+      const btn = document.getElementById('lang-btn');
+      const nextLang = lang === 'en' ? 'es' : 'en';
+      btn.textContent = nextLang === 'en' ? '🌐 Inglés' : '🌐 Español';
+      btn.setAttribute('onclick', `changeLanguage('${nextLang}')`);
+    }
+  }
+
+  // Aplicar idioma guardado
+  window.addEventListener('load', () => {
+    const lang = localStorage.getItem('idiomaPreferido');
+    if (lang) {
+      const interval = setInterval(() => {
+        const select = document.querySelector('.goog-te-combo');
+        if (select) {
+          changeLanguage(lang);
+          clearInterval(interval);
+        }
+      }, 300);
+    }
+  });
+</script>
+
+<!-- Script de Google Translate -->
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
