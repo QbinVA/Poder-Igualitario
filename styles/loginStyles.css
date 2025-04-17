@@ -1,70 +1,84 @@
-body {
-    font-family: 'Raleway', sans-serif;
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background: linear-gradient(135deg, #9b33b5, #d4a4e0c8, #ececec);
+  }
+  
+  body, html {
+    height: 100%;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .container {
     display: flex;
-    justify-content: center;
-    align-items: center;
     height: 100vh;
-}
-
-.login-container {
-    background: rgba(255, 255, 255, 0.9);
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 100%;
+  }
+  
+  .image-side {
+    flex: 1;
+    background-image: url('https://imgix.ranker.com/list_img_v2/3239/2823239/original/25-random-anime-memes-that-are-way-too-funny-not-to-share?auto=format&q=50&fit=crop&fm=pjpg&dpr=2&crop=faces&h=185.86387434554973&w=355');
+    background-size: cover;
+    background-position: center;
+    clip-path: polygon(0 0, 90% 0, 100% 100%, 0% 100%);
+  }
+  
+  .form-container {
+    flex: 1;
+    background-color: white;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 10% 100%);
+    box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
     text-align: center;
-    width: 300px;
-}
-
-h2 {
-    margin-bottom: 20px;
-    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
     color: #333;
-}
-
-label {
-    display: block;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label {
+    margin-bottom: 0.5rem;
     font-weight: bold;
-    margin: 10px 0 5px;
-    color: #555;
-}
-
-input {
-    width: 100%;
-    padding: 8px;
+  }
+  
+  input {
+    padding: 0.75rem;
+    margin-bottom: 1.5rem;
+    border-radius: 0.5rem;
     border: 1px solid #ccc;
-    border-radius: 5px;
     font-size: 1rem;
-}
-
-button {
-    width: 100%;
-    padding: 10px;
-    background: #9b33b5;
+  }
+  
+  button {
+    padding: 0.75rem;
+    background-color: #222;
+    color: white;
+    font-size: 1rem;
     border: none;
-    color: white;
-    font-size: 1rem;
-    border-radius: 5px;
-    margin-top: 15px;
+    border-radius: 0.5rem;
     cursor: pointer;
-    transition: background 0.3s ease-in-out;
-}
-
-button:hover {
-    background: #7c278f;
-}
-
-/* Estilo para el botón de Admin */
-.admin-btn {
-    background: transparent;
-    border: 2px solid #9b33b5;
-    color: #9b33b5;
-}
-
-.admin-btn:hover {
-    background: #9b33b5;
-    color: white;
-}
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #444;
+  }
+  
+  .admin-btn {
+    margin-top: 1.5rem;
+    background-color: #007bff;
+  }
+  
+  .admin-btn:hover {
+    background-color: #0056b3;
+  }
+  
