@@ -3,52 +3,34 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title data-i18n="title">Voces Igualitarias</title>
+  <title>Voces Igualitarias</title>
   <link rel="stylesheet" href="styles/indexStyles.css" />
 </head>
 <body>
   <header>
     <div class="top-bar">
-      <!-- placeholder traducible -->
       <input 
         type="text" 
         class="search-bar" 
-        data-i18n="search_placeholder" 
-        data-i18n-attr="placeholder" 
         placeholder="Buscar..."
       />
-      <!-- cabecera dividida en dos partes -->
-      <h1>
-        <span data-i18n="voces">VOCES</span><br>
-        <strong data-i18n="igualitarias">IGUALITARIAS</strong>
+      <h1 class="translatable">
+        <span>VOCES</span><br>
+        <strong>IGUALITARIAS</strong>
       </h1>
       <nav>
-        <a href="#" data-i18n="nav_news">Noticias</a>
-        <a href="#" data-i18n="nav_login">Log in</a>
+        <a href="#" class="translatable">Noticias</a>
+        <a href="#" class="translatable">Log in</a>
       </nav>
     </div>
-  </div>
+  </header>
 
-  <!-- botón de cambio de idioma dentro del header -->
-  <div id="language-switcher" style="
-      position: absolute;
-      top: 10px;
-      right: 10px;
-  ">
+  <div id="language-switcher" style="position: absolute; top: 10px; right: 10px;">
     <button id="lang-btn"
-      style="
-        background:black;
-        color:white;
-        padding:8px 16px;
-        border:none;
-        border-radius:10px;
-        cursor:pointer;
-        font-size:14px;
-      ">
+      style="background:black; color:white; padding:8px 16px; border:none; border-radius:10px; cursor:pointer; font-size:14px;">
       🌐 Inglés
     </button>
   </div>
-  </header>
 
   <main>
     <section class="carousel">
@@ -57,11 +39,11 @@
         <div class="carousel-content">
           <img src="https://img.icons8.com/ios/452/gender-equality.png" alt="Igualdad" />
           <div class="carousel-text">
-            <p class="date">14/04/22 <span class="tag">ECONOMÍA</span></p>
-            <h2 data-i18n="carousel_title">
+            <p class="date translatable">14/04/22 <span class="tag translatable">ECONOMÍA</span></p>
+            <h2 class="translatable">
               Medidas para favorecer la igualdad en las empresas
             </h2>
-            <p data-i18n="carousel_text">
+            <p class="translatable">
               La igualdad en el entorno laboral es un objetivo fundamental en la sociedad contemporánea...
             </p>
           </div>
@@ -71,38 +53,72 @@
     </section>
 
     <section class="categories">
-      <h2 data-i18n="categories">CATEGORÍAS</h2>
+      <h2 class="translatable">CATEGORÍAS</h2>
       <div class="cards">
         <div class="card">
-          <span class="label" data-i18n="label_ambiental">Ambiental</span>
-          <h3 data-i18n="card1_title">Mujeres, la fuerza que el Medio Ambiente Necesita</h3>
-          <p data-i18n="card1_info">08/03/19<br>Por: Naciones Unidas</p>
+          <span class="label translatable">Ambiental</span>
+          <h3 class="translatable">Mujeres, la fuerza que el Medio Ambiente Necesita</h3>
+          <p class="translatable">08/03/19<br>Por: Naciones Unidas</p>
         </div>
         <div class="card">
-          <span class="label" data-i18n="label_comunitaria">Comunitaria</span>
-          <h3 data-i18n="card2_title">Nueva Embajadora de la UNESCO...</h3>
-          <p data-i18n="card2_info">01/10/19<br>Por: Naciones Unidas</p>
+          <span class="label translatable">Comunitaria</span>
+          <h3 class="translatable">Nueva Embajadora de la UNESCO...</h3>
+          <p class="translatable">01/10/19<br>Por: Naciones Unidas</p>
         </div>
         <div class="card">
-          <span class="label" data-i18n="label_politica">Política</span>
-          <h3 data-i18n="card3_title">Arranca en México el Foro Generación Igualdad</h3>
-          <p data-i18n="card3_info">29/03/21<br>Por: Naciones Unidas</p>
+          <span class="label translatable">Política</span>
+          <h3 class="translatable">Arranca en México el Foro Generación Igualdad</h3>
+          <p class="translatable">29/03/21<br>Por: Naciones Unidas</p>
         </div>
         <div class="card">
-          <span class="label" data-i18n="label_salud">Salud</span>
-          <h3 data-i18n="card4_title">La respuesta de las mujeres líderes ante la pandemia del coronavirus</h3>
-          <p data-i18n="card4_info">08/03/20<br>Por: Naciones Unidas</p>
+          <span class="label translatable">Salud</span>
+          <h3 class="translatable">La respuesta de las mujeres líderes ante la pandemia del coronavirus</h3>
+          <p class="translatable">08/03/20<br>Por: Naciones Unidas</p>
         </div>
       </div>
     </section>
   </main>
 
   <footer>
-    <p data-i18n="footer_quote">
+    <p class="translatable">
       “Voces que inspiran, acciones que transforman.”
     </p>
   </footer>
-  <!-- script de traducción -->
-  <script src="translator.js"></script>
+
+  <script>
+    let currentLanguage = "es";
+
+    async function translateText(textArray, toLanguage = "en") {
+      const response = await fetch("translate.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ texts: textArray, to: toLanguage })
+      });
+
+      const data = await response.json();
+      return data.translations;
+    }
+
+    document.getElementById("lang-btn").addEventListener("click", async () => {
+      const elements = document.querySelectorAll(".translatable");
+
+      const originalTexts = Array.from(elements).map(el => el.textContent.trim());
+      const targetLang = currentLanguage === "es" ? "en" : "es";
+
+      try {
+        const translatedTexts = await translateText(originalTexts, targetLang);
+        elements.forEach((el, i) => {
+          el.textContent = translatedTexts[i];
+        });
+
+        currentLanguage = targetLang;
+        document.getElementById("lang-btn").textContent = currentLanguage === "es" ? "🌐 Inglés" : "🌐 Español";
+      } catch (error) {
+        console.error("Error al traducir:", error);
+      }
+    });
+  </script>  
 </body>
 </html>
