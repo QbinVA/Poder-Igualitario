@@ -1,7 +1,7 @@
 <?php
 // index.php
 
-require 'db.php';                  // tu conexión a MySQL
+require 'config/db.php';                  // tu conexión a MySQL
 require 'azure-translator.php';    // el helper que ya probamos
 
 // 1) ¿Idioma solicitado? 'es' por defecto

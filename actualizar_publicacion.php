@@ -1,5 +1,5 @@
 <?php
-require 'db.php'; // tu archivo de conexión a la BD
+require 'config/db.php'; // tu archivo de conexión a la BD
 
 // Activar errores visibles
 ini_set('display_errors', 1);

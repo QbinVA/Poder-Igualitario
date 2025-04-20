@@ -4,7 +4,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 // Incluir archivo de conexión
-require 'db.php';
+require 'config/db.php';
 
 // Función para guardar publicación
 function guardarPublicacion($pdo, $fecha, $titular, $descripcion_corta, $imagen_principal, $contenido, $referencia, $categoria) {
