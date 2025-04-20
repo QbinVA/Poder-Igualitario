@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['usuario'] = $admin['nombre'];
         $_SESSION['is_admin'] = true;
 
-        header('Location: admin.php'); // o el archivo correcto del panel
+        header('Location: admin/admin.php'); // o el archivo correcto del panel
         exit();
     } else {
         $error = "Usuario o contraseña incorrectos.";
@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="styles/loginStyles.css">
+    <link rel="stylesheet" href="views/css/login.css">
     <style>
   /* Ocultar barra de Google Translate */
   .goog-te-banner-frame.skiptranslate,

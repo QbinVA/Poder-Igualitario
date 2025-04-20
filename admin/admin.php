@@ -1,5 +1,5 @@
 <?php
-require 'config/db.php'; // Conexión a la base de datos
+require '../config/db.php'; // Conexión a la base de datos
 
 // Obtener todas las publicaciones
 try {
@@ -18,7 +18,7 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel de Administración</title>
-    <link rel="stylesheet" href="styles/adminStyles.css">
+    <link rel="stylesheet" href="../views/css/admin.css">
     <style>
   /* Ocultar barra de Google Translate */
   .goog-te-banner-frame.skiptranslate,
@@ -35,7 +35,7 @@ try {
 <body>
     <div class="container">
         <aside class="sidebar">
-        <h2><a href="index.php" class="home-link">Poder Igualitario</a></h2>
+        <h2><a href="../index.php" class="home-link">Poder Igualitario</a></h2>
         <div class="user-info">
                 <p class="user-name">Kevin Valdovinos</p>
                 <p class="user-email">kvaldovinos2@puol.com</p>
@@ -66,7 +66,7 @@ try {
                         <tr>
                             <td><?php echo htmlspecialchars($publicacion['titular']); ?></td>
                             <td><?php echo date("d/m/Y", strtotime($publicacion['fecha'])); ?></td>
-                            <td><a href="ver_publicacion.php?id=<?php echo $publicacion['id_noticia']; ?>">🔍</a></td>
+                            <td><a href="../ver_publicacion.php?id=<?php echo $publicacion['id_noticia']; ?>">🔍</a></td>
                             <td><a href="editar_publicacion.php?id=<?php echo $publicacion['id_noticia']; ?>">✏️</a></td>
                             <td><a href="eliminar_publicacion.php?id=<?php echo $publicacion['id_noticia']; ?>" onclick="return confirm('¿Seguro que quieres eliminar esta publicación?');">❌</a></td>
                         </tr>

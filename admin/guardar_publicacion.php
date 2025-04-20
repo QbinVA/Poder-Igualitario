@@ -4,7 +4,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 // Incluir archivo de conexión
-require 'config/db.php';
+require '../config/db.php';
 
 // Función para guardar publicación
 function guardarPublicacion($pdo, $fecha, $titular, $descripcion_corta, $imagen_principal, $contenido, $referencia, $categoria) {
@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             die("Error: Formato de imagen no permitido. Solo JPG, JPEG, PNG y GIF.");
         }
 //
-        $upload_dir = 'uploads/';
+        $upload_dir = '../uploads/';
         if (!is_dir($upload_dir) && !mkdir($upload_dir, 0777, true)) {
             die("Error: No se pudo crear la carpeta de imágenes.");
         }
