@@ -1,6 +1,6 @@
 <?php
 // Conexión a la base de datos
-require 'db.php';
+require 'config/db.php';
 
 // Verificar si se pasa un ID en la URL
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
