@@ -1,5 +1,5 @@
 <?php
-require 'db.php'; // Conexión a la base de datos
+require 'config/db.php'; // Conexión a la base de datos
 
 // Obtener todas las publicaciones
 try {

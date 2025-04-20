@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'db.php';
+require 'config/db.php';
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
