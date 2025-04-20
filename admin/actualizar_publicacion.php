@@ -1,5 +1,5 @@
 <?php
-require 'config/db.php'; // tu archivo de conexión a la BD
+require '../config/db.php'; // tu archivo de conexión a la BD
 
 // Activar errores visibles
 ini_set('display_errors', 1);
@@ -45,7 +45,7 @@ $imagen_actual = $publicacion['imagen_principal'] ?? '';
 // Manejo de imagen
 if (!empty($_FILES['imagen_principal']['name'])) {
     if ($_FILES['imagen_principal']['error'] === UPLOAD_ERR_OK) {
-        $nombre_nuevo = 'uploads/img_' . uniqid() . '.' . pathinfo($_FILES['imagen_principal']['name'], PATHINFO_EXTENSION);
+        $nombre_nuevo = '../uploads/img_' . uniqid() . '.' . pathinfo($_FILES['imagen_principal']['name'], PATHINFO_EXTENSION);
         move_uploaded_file($_FILES['imagen_principal']['tmp_name'], $nombre_nuevo);
         $imagen_guardada = $nombre_nuevo;
     } else {

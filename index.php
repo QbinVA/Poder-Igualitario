@@ -27,7 +27,7 @@ ob_start();
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Poder Igualitario</title>
-  <link rel="stylesheet" href="styles/indexStyles.css">
+  <link rel="stylesheet" href="views/css/index.css">
   <style>
     header { position: relative; }
     #lang-switcher { position: absolute; top:15px; right:15px; }

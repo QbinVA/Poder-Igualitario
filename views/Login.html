@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="styles/loginStyles.css">
+    <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
     <div class="container">
         <div class="image-side"></div>
         <div class="form-container">
             <h2>Iniciar Sesión</h2>
-            <form action="admin.php" method="POST">
+            <form action="admin/admin.php" method="POST">
                 <label for="usuario">Usuario:</label>
                 <input type="text" id="usuario" name="usuario" required>
 
@@ -21,7 +21,7 @@
                 <button type="submit">Ingresar</button>
             </form>
 
-            <button class="admin-btn" onclick="window.location.href='admin.php'">Ir a Admin</button>
+            <button class="admin-btn" onclick="window.location.href='admin/admin.php'">Ir a Admin</button>
         </div>
     </div>
 </body>
