@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title data-i18n="page_title">Noticia - Voces Igualitarias</title>
+  <title>Noticia - Voces Igualitarias</title>
   <link rel="stylesheet" href="css/noticia.css">
   <style>
     header { position: relative; }
@@ -20,21 +20,19 @@
       <input 
         type="text" 
         class="search-bar" 
-        data-i18n="search_placeholder" 
-        data-i18n-attr="placeholder" 
         placeholder="Buscar..."
       />
       <h1>
-        <span data-i18n="voces">VOCES</span><br>
-        <strong data-i18n="igualitarias">IGUALITARIAS</strong>
+        <span>VOCES</span><br>
+        <strong>IGUALITARIAS</strong>
       </h1>
       <nav>
-        <a href="#" data-i18n="nav_news">Noticias</a>
-        <a href="#" data-i18n="nav_login">Log in</a>
+        <a href="#">Noticias</a>
+        <a href="#">Log in</a>
       </nav>
     </div>
 
-    <!-- Botón de cambio de idioma -->
+    <!-- Botón de cambio de idioma (puedes adaptarlo luego para Azure) -->
     <div id="language-switcher">
       <button id="lang-btn"
         style="background:black;color:white;padding:8px 16px;border:none;border-radius:10px;cursor:pointer;font-size:14px;">
@@ -45,50 +43,49 @@
 
   <main>
     <section class="noticia">
-      <div class="etiqueta-categoria" data-i18n="label_salud">Salud</div>
-      <h2 data-i18n="article_title">Las respuestas de las mujeres frente a la pandemia</h2>
-      <blockquote data-i18n="article_quote">
+      <div class="etiqueta-categoria">Salud</div>
+      <h2>Las respuestas de las mujeres frente a la pandemia</h2>
+      <blockquote>
         “La pandemia demostró el rol esencial de las mujeres en el sistema de salud.”
       </blockquote>
       <img src="https://example.com/salud.jpg" alt="Mujeres en la salud durante pandemia" />
 
-      <p data-i18n="article_para1">
+      <p>
         En todo el mundo, las mujeres lideraron acciones de cuidado, prevención y respuesta durante la crisis del COVID-19.
       </p>
-      <p data-i18n="article_para2">
+      <p>
         Representando más del 70% del personal sanitario, han sostenido comunidades en los momentos más difíciles.
       </p>
-      <p data-i18n="article_para3">
+      <p>
         La pandemia también visibilizó la necesidad de proteger su salud mental y bienestar físico.
       </p>
     </section>
 
     <section class="referencias">
-      <h3 data-i18n="references_header">Referencias</h3>
+      <h3>Referencias</h3>
       <div class="ref-box">
-        <span data-i18n="ref1_info">
+        <span>
           Naciones Unidas. (2020, 8 de marzo). Mujeres en la salud durante el COVID-19.
         </span>
-        <a href="https://www.who.int/es/news-room" target="_blank" data-i18n="ref1_link">OMS</a>
+        <a href="https://www.who.int/es/news-room" target="_blank">OMS</a>
       </div>
     </section>
 
     <section class="comentarios">
-      <h3 data-i18n="comments_header">Comentarios</h3>
+      <h3>Comentarios</h3>
       <div class="comentario">
-        <p><strong data-i18n="comment_label">Comentario</strong></p>
-        <p class="usuario" data-i18n="comment_user">Usuario</p>
-        <p class="fecha" data-i18n="comment_date">dd/mm/aa</p>
+        <p><strong>Comentario</strong></p>
+        <p class="usuario">Usuario</p>
+        <p class="fecha">dd/mm/aa</p>
       </div>
     </section>
   </main>
 
   <footer>
-    <p data-i18n="footer_quote">
+    <p>
       “Voces que inspiran, acciones que transforman.”
     </p>
   </footer>
 
-  <script src="translator-noticia.js"></script>
 </body>
 </html>

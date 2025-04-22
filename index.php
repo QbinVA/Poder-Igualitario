@@ -1,13 +1,14 @@
 <?php
 // index.php
 
-require 'config/db.php';                  // tu conexión a MySQL
-require 'azure-translator.php';    // el helper que ya probamos
+require __DIR__ . '/config/db.php';                  // Conexión a MySQL
+require __DIR__ . '/azure/config.php';               // Constantes Azure
+require __DIR__ . '/azure/azure-translator.php';     // Función de traducción
 
-// 1) ¿Idioma solicitado? 'es' por defecto
+//  Idioma solicitado
 $lang = $_GET['lang'] ?? 'es';
 
-// 2) Traer publicaciones (siempre en ES)
+// Obtén las publicaciones desde la base (siempre en ES)
 try {
     $sql  = "SELECT id_noticia, fecha, titular, descripcion_corta, imagen_principal
              FROM publicaciones
@@ -18,59 +19,37 @@ try {
     die("Error al obtener publicaciones: " . $e->getMessage());
 }
 
-// 3) Iniciar buffer de salida
+// Inicia el buffer
 ob_start();
 ?>
 <!DOCTYPE html>
-<html lang="<?= $lang ?>">
+<html lang="<?= htmlspecialchars($lang) ?>">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Poder Igualitario</title>
   <link rel="stylesheet" href="views/css/index.css">
-  <style>
-    header { position: relative; }
-    #lang-switcher { position: absolute; top:15px; right:15px; }
-  </style>
 </head>
 <body>
-  <header>
-    <div class="blog-intro">
-      <h1>Poder Igualitario</h1>
-      <h4>Blog Web dedicado a noticias sobre la batalla a favor de la igualdad de género.</h4>
-    </div>
 
-    <div id="lang-switcher">
-      <?php if ($lang === 'es'): ?>
-        <a href="?lang=en"
-           style="background:black;color:white;padding:8px 12px;border-radius:5px;text-decoration:none;">
-          🌐 English
-        </a>
-      <?php else: ?>
-        <a href="?lang=es"
-           style="background:black;color:white;padding:8px 12px;border-radius:5px;text-decoration:none;">
-          🌐 Español
-        </a>
-      <?php endif; ?>
-    </div>
-  </header>
+  <?php
+    // Aqui cargamos el header portátil
+    require __DIR__ . '/views/layout/header.php';
+  ?>
 
   <main>
     <section class="main-news clickable">
-      <?php if (!empty($pubs)):
-        $p = $pubs[0];
-      ?>
+      <?php if (!empty($pubs)): 
+        $p = $pubs[0]; ?>
         <a href="ver_publicacion.php?id=<?= $p['id_noticia'] ?>&lang=<?= $lang ?>">
           <img src="uploads/<?= htmlspecialchars($p['imagen_principal']) ?>" alt="">
         </a>
         <h4><?= htmlspecialchars($p['titular']) ?></h4>
         <p><?= htmlspecialchars($p['descripcion_corta']) ?></p>
         <p class="publication-date">
-          <?php
-            echo ($lang === 'es')
-              ? date("d/m/Y", strtotime($p['fecha']))
-              : date("m/d/Y", strtotime($p['fecha']));
-          ?>
+          <?= ($lang === 'es')
+                ? date("d/m/Y", strtotime($p['fecha']))
+                : date("m/d/Y", strtotime($p['fecha'])); ?>
         </p>
       <?php endif; ?>
     </section>
@@ -104,10 +83,10 @@ ob_start();
 </body>
 </html>
 <?php
-// 4) Capturar HTML completo
+// Captura el HTML
 $html = ob_get_clean();
 
-// 5) Si pidieron inglés, traducir TODO el HTML preservando tags
+// Si pidieron English, traduce todo conservando etiquetas
 if ($lang === 'en') {
     echo azureTranslate($html, 'en', 'es', true);
 } else {
