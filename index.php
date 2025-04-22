@@ -31,12 +31,6 @@ ob_start();
   <link rel="stylesheet" href="views/css/index.css">
 </head>
 <body>
-
-  <?php
-    // Aqui cargamos el header portátil
-    require __DIR__ . '/views/layout/header.php';
-  ?>
-
   <main>
     <section class="main-news clickable">
       <?php if (!empty($pubs)): 
