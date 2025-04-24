@@ -8,7 +8,7 @@ require __DIR__ . '/azure/azure-translator.php';     // Función de traducción
 // Idioma solicitado
 $lang = $_GET['lang'] ?? 'es';
 
-// Obtén las publicaciones desde la base (siempre en ES)
+// Traer publicaciones (siempre en ES)
 try {
     $sql  = "SELECT id_noticia, fecha, titular, descripcion_corta, imagen_principal
              FROM publicaciones
@@ -19,21 +19,33 @@ try {
     die("Error al obtener publicaciones: " . $e->getMessage());
 }
 
-// Inicia el buffer
-ob_start();
-?>
-<!DOCTYPE html>
+//
+// 1) Salida fija de <head> y header (no se traduce)
+//
+?><!DOCTYPE html>
 <html lang="<?= htmlspecialchars($lang) ?>">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Poder Igualitario</title>
   <link rel="stylesheet" href="views/css/index.css">
+  <link rel="stylesheet" href="views/css/header.css">
+  <link rel="stylesheet" href="views/css/footer.css">
 </head>
 <body>
+  <?php include __DIR__ . '/views/layouts/header.php'; ?>
+
+<?php
+//
+// 2) Abrimos buffer para TODO lo que sí queremos traducir,
+//    incluyendo <main> y el footer.
+// 
+ob_start();
+?>
+
   <main>
     <section class="main-news">
-      <?php if (!empty($pubs)): 
+      <?php if (!empty($pubs)):
         $p = $pubs[0]; ?>
         <a href="ver_publicacion.php?id=<?= $p['id_noticia'] ?>&lang=<?= $lang ?>" class="main-news-link">
           <div class="main-news-card clickable">
@@ -75,18 +87,18 @@ ob_start();
     </section>
   </main>
 
-  <footer>
-    <p>Las noticias encontradas en este blog no fueron redactadas por nuestro equipo; solo nos encargamos de difundir información.</p>
-  </footer>
+  <?php include __DIR__ . '/views/layouts/footer.php'; ?>
+
 </body>
 </html>
-<?php
-// Captura el HTML
-$html = ob_get_clean();
 
-// Si pidieron English, traduce todo conservando etiquetas
+<?php
+// 3) Capturamos todo el contenido traducible
+$content = ob_get_clean();
+
+// 4) Imprime el contenido, traducido solo si el lang es 'en'
 if ($lang === 'en') {
-    echo azureTranslate($html, 'en', 'es', true);
+    echo azureTranslate($content, 'en', 'es', true);
 } else {
-    echo $html;
+    echo $content;
 }

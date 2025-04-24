@@ -7,23 +7,32 @@
 
 body {
   font-family: Arial, sans-serif;
-  background-color: #fff;
+  background: linear-gradient(
+    135deg,
+    #009193 35%,
+    #01BDA3 52%,
+    #B3D6D1 100%
+  );
   color: #000;
   line-height: 1.6;
-  padding: 20px;
+  padding: 0; /* sin padding en el body */
+}
+
+/* Damos padding al contenido principal */
+main {
+  padding: 20px;  /* espacio interior del main */
 }
 
 /* Eliminamos el subrayado para todos los enlaces */
 a {
-  text-decoration: none;  /* Evitar subrayado */
+  text-decoration: none;
 }
 
 /* Enlaces específicos en las tarjetas */
 .main-news-link,
 .news-item-link {
-  display: block; /* Asegura que el enlace ocupe todo el espacio del div */
-  text-decoration: none;  /* Eliminamos subrayado de los enlaces */
-  color: inherit;  /* Heredamos el color del texto sin cambiarlo */
+  display: block;
+  color: inherit;
 }
 
 /* Clickable efecto */
@@ -31,20 +40,23 @@ a {
   cursor: pointer;
 }
 
-.main-news-card, .news-item-card {
+/* ==== Tarjetas de noticias ==== */
+.main-news-card,
+.news-item-card {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 20px;          /* más espacio entre elementos internos */
   border: 1px solid #ddd;
   border-radius: 8px;
-  padding: 10px;
-  margin-bottom: 20px;
+  padding: 20px;      /* padding aumentado */
+  margin-bottom: 30px;/* margen inferior aumentado */
   background-color: #f9f9f9;
 }
 
-.main-news-card:hover, .news-item-card:hover {
+.main-news-card:hover,
+.news-item-card:hover {
   background-color: #efefef;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
 
 /* Estilo para noticia principal */
@@ -57,46 +69,89 @@ a {
 
 .main-news h4 {
   font-size: 1.5em;
-  margin-top: 10px;
+  margin-top: 15px;   /* un poco más de espacio arriba */
 }
 
 .main-news p {
-  margin: 8px 0;
+  margin: 12px 0;     /* espaciado vertical aumentado */
 }
 
 .publication-date {
   font-size: 0.9em;
   color: #555;
+  padding-top: 5px;
 }
 
 /* Noticias secundarias */
 .secondary-news {
-  margin-top: 40px;
+  margin-top: 50px;   /* más separación antes de la sección */
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 30px;          /* más espacio entre items */
 }
 
 .news-item {
   display: flex;
   align-items: flex-start;
-  gap: 20px;
+  gap: 25px;          /* más espacio entre imagen y texto */
 }
 
 .news-item img {
-  width: 150px;
-  height: 100px;
+  width: 160px;
+  height: 110px;
   object-fit: cover;
   border-radius: 5px;
 }
 
 .news-item h5 {
-  margin-bottom: 5px;
-  font-size: 1.2em;
+  margin-bottom: 8px; /* un poco más de espacio tras el título */
+  font-size: 1.3em;
 }
 
+/* ==== Grid de tarjetitas para noticias secundarias ==== */
+.secondary-news {
+  display: grid;
+  /* Cada tarjeta mínimo 280px, y tantas columnas que entren */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;       /* Espacio entre tarjetas */
+  margin-top: 40px;
+}
+
+/* Ajustes para cada tarjeta */
+.news-item-card {
+  /* Sombra suave y transición para hover */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.news-item-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+/* Dentro de cada tarjeta, apilamos la imagen y el texto en columna */
+.news-item {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Imagen arriba, ocupa todo el ancho */
+.news-item img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-bottom: 12px;
+}
+
+/* Texto con padding interior */
+.news-item > div {
+  padding: 0 10px 15px;
+}
+
+/* Footer */
 footer {
-  margin-top: 60px;
+  margin-top: 80px;   /* más separación antes del footer */
+  padding: 20px 0;    /* padding superior e inferior */
   text-align: center;
   font-size: 0.85em;
   color: #666;

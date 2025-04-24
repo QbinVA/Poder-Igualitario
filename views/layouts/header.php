@@ -1,59 +1,44 @@
 <?php
 // views/layouts/header.php
 
-// Recupera el idioma actual (viene de ?lang=es o ?lang=en)
+// Recupera el idioma actual (viene de ?lang=es|en)
 $lang = $_GET['lang'] ?? 'es';
+$self = basename($_SERVER['PHP_SELF']);
 ?>
 <header class="site-header">
   <div class="site-header__inner">
     <!-- Buscador -->
-    <div class="search-wrapper">
-      <form action="index.php" method="get">
-        <input type="hidden" name="lang" value="<?= htmlspecialchars($lang) ?>">
-        <input
-          type="text"
-          name="q"
-          class="search-input"
-          placeholder="<?= $lang === 'es' ? 'Buscar...' : 'Search...' ?>"
-        >
-        <button type="submit" class="search-button">🔍</button>
-      </form>
-    </div>
+    <form action="index.php" method="get" class="search-form">
+      <input type="hidden" name="lang" value="<?= htmlspecialchars($lang) ?>">
+      <input
+        type="text"
+        name="q"
+        class="search-input"
+        placeholder="<?= $lang === 'es' ? 'Buscar...' : 'Search...' ?>"
+      >
+      <button type="submit" class="search-button">🔍</button>
+    </form>
 
-    <!-- Logo centrado -->
-    <div class="logo-wrapper">
-      <a href="index.php?lang=<?= htmlspecialchars($lang) ?>" class="logo-link">
-        <img src="assets/logo.png" alt="Voces Igualitarias" class="logo-img">
-        <span class="logo-text">Voces Igualitarias</span>
-      </a>
-    </div>
+    <!-- Logo -->
+    <a href="index.php?lang=<?= htmlspecialchars($lang) ?>" class="logo">
+      <img src="Iguales.png" alt="" class="logo-img">
+      <span class="logo-text" translate="no">Voces Igualitarias</span>
+    </a>
 
-    <!-- Navegación -->
+    <!-- Language switch + Login -->
     <nav class="main-nav">
       <a
-        href="index.php?lang=<?= htmlspecialchars($lang) ?>"
-        class="<?= basename($_SERVER['PHP_SELF']) === 'index.php' ? 'active' : '' ?>"
+        href="<?= $self ?>?lang=<?= $lang === 'es' ? 'en' : 'es' ?>"
+        class="lang-switch"
       >
-        <?= $lang === 'es' ? 'Noticias' : 'News' ?>
+        🌐 <?= $lang === 'es' ? 'English' : 'Español' ?>
       </a>
       <a
         href="login.php?lang=<?= htmlspecialchars($lang) ?>"
-        class="<?= basename($_SERVER['PHP_SELF']) === 'login.php' ? 'active' : '' ?>"
+        class="login-link"
       >
         <?= $lang === 'es' ? 'Log in' : 'Log in' ?>
       </a>
     </nav>
-
-    <!-- Language switcher -->
-    <div class="lang-switcher">
-  <?php if ($lang === 'es'): ?>
-    <a href="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>?lang=en" class="lang-btn">
-      🌐 English
-    </a>
-  <?php else: ?>
-    <a href="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>?lang=es" class="lang-btn">
-      🌐 Español
-    </a>
-  <?php endif; ?>
-</div>
+  </div>
 </header>
