@@ -20,7 +20,7 @@ if (!$noticia) {
     die("Noticia no encontrada.");
 }
 
-// 3) Imprime HEAD + HEADER sin buffer (no traducidos)
+// 3) Imprime HEAD y HEADER sin buffer (no traducidos)
 ?><!DOCTYPE html>
 <html lang="<?= htmlspecialchars($lang) ?>">
 <head>
@@ -31,13 +31,11 @@ if (!$noticia) {
   <link rel="stylesheet" href="views/css/noticia.css">
   <link rel="stylesheet" href="views/css/footer.css">
 </head>
-<body class="full-height">
-
-  <!-- Header partial -->
+<body>
   <?php include __DIR__ . '/views/layouts/header.php'; ?>
 
 <?php
-// 4) Inicia buffer para main+footer (traducibles)
+// 4) Inicia buffer para todo lo traducible: <main> + footer
 ob_start();
 ?>
 
@@ -47,7 +45,7 @@ ob_start();
       <p><strong>Fecha:</strong> <?= date("d/m/Y", strtotime($noticia['fecha'])) ?></p>
     </section>
 
-    <?php if ($noticia['url_imagen']): ?>
+    <?php if (!empty($noticia['url_imagen'])): ?>
       <section class="noticia-figure">
         <img src="<?= htmlspecialchars($noticia['url_imagen']) ?>"
              alt="Imagen de <?= htmlspecialchars($noticia['titular']) ?>">
@@ -80,14 +78,15 @@ ob_start();
       <?php endif; ?>
     </section>
 
-    <!-- Footer partial dentro del buffer -->
+    <!-- 5) Footer partial dentro del buffer -->
     <?php include __DIR__ . '/views/layouts/footer.php'; ?>
+
   </main>
 
 </body>
 </html>
 <?php
-// 5) Captura y traduce sólo el buffer
+// 6) Captura y traduce sólo el buffer
 $content = ob_get_clean();
 if ($lang === 'en') {
     echo azureTranslate($content, 'en', 'es', true);

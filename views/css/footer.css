@@ -1,16 +1,19 @@
 /* ===== Footer ===== */
 .site-footer {
     background-color: #0a1f38;
-    color: #fff;
+    color: #ffffff;
     text-align: center;
     padding: 20px 0;
   }
   .site-footer__inner {
-    max-width: 1200px;
+    max-width: 1000px;
     margin: 0 auto;
   }
   .site-footer p {
-    margin: 0;
-    font-size: 1rem;
-  }
+    color: #ffffff !important;
+   font-size: 1.25rem;     /* de 1rem a 1.25rem (≈20px) */
+   line-height: 1.5;
+    text-align: center;
+}
+
   

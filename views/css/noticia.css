@@ -1,175 +1,99 @@
-/* General Reset */
+/* ————————————————————————————————————————— */
+/* General Reset (sin cambios) */
+/* ————————————————————————————————————————— */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background: linear-gradient(to bottom, #00bcd4, #d9f2f2);
-    color: #1a1a1a;
-    padding-bottom: 40px;
-  }
-  
-  /* Header */
-  header {
-    background-color: #030617;
-    padding: 20px;
-    color: white;
-  }
-  
-  .top-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-  
-  .top-bar h1 {
-    font-size: 24px;
-    font-weight: bold;
-  }
-  
-  .search-bar {
-    padding: 5px;
-    border-radius: 4px;
-    border: none;
-  }
-  
-  nav a {
-    color: white;
-    margin: 0 10px;
-    text-decoration: none;
-  }
-  
-  /* Categoría Etiqueta */
-  .etiqueta-categoria {
-    background-color: #333;
-    color: white;
-    padding: 5px 15px;
-    border-radius: 20px;
-    display: inline-block;
-    margin-top: 20px;
-    font-size: 14px;
-  }
-  
-  /* Título */
-  h2 {
-    font-size: 22px;
-    color: white;
-    margin: 20px 0 10px;
-  }
-  
-  /* Cita */
-  blockquote {
-    color: #d0f0f0;
-    font-style: italic;
-    font-size: 14px;
-    margin: 10px auto;
-    max-width: 700px;
-  }
-  
-  /* Imagen */
-  main img {
-    width: 80%;
-    max-width: 600px;
-    border-radius: 5px;
-    margin: 20px auto;
-    display: block;
-  }
-  
-  /* Párrafos */
-  main p {
-    max-width: 750px;
-    margin: 0 auto 20px;
-    text-align: justify;
-    line-height: 1.5;
-    color: #1a1a1a;
-  }
-  
-  /* Referencias */
-  .referencias {
-    max-width: 750px;
-    margin: 30px auto;
-    text-align: left;
-  }
-  
-  .referencias h3 {
-    border-top: 1px solid #1a1a1a;
-    padding-top: 10px;
-    margin-bottom: 10px;
-  }
-  
-  .ref-box {
-    background: white;
-    padding: 10px;
-    border-radius: 10px;
-    font-size: 14px;
-    color: #333;
-  }
-  
-  .ref-box a {
-    color: #007BFF;
-    text-decoration: none;
-  }
-  
-  /* Comentarios */
-  .comentarios {
-    max-width: 750px;
-    margin: 30px auto;
-    text-align: left;
-  }
-  
-  .comentarios h3 {
-    border-top: 1px solid #1a1a1a;
-    padding-top: 10px;
-    margin-bottom: 10px;
-  }
-  
-  .comentario {
-    background-color: white;
-    padding: 10px;
-    border-radius: 10px;
-    margin-bottom: 15px;
-    font-size: 14px;
-  }
-  
-  .usuario {
-    font-weight: bold;
-    color: #007BFF;
-  }
-  
-  .fecha {
-    color: gray;
-    font-size: 12px;
-  }
-  
-  /* Footer */
-  footer {
-    background-color: transparent;
-    margin-top: 40px;
-    color: white;
-    font-style: italic;
-  }
-  
-  /* ----------------------------
-     Estilos por Categoría
-  -----------------------------*/
-  body.categoria-politica .etiqueta-categoria {
-    background-color: #003366;
-  }
-  
-  body.categoria-ambiental .etiqueta-categoria {
-    background-color: #2e7d32;
-  }
-  
-  body.categoria-comunitaria .etiqueta-categoria {
-    background-color: #6a1b9a;
-  }
-  
-  body.categoria-salud .etiqueta-categoria {
-    background-color: #0288d1;
-  }
-  
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to bottom, #00bcd4, #d9f2f2);
+  color: #1a1a1a;
+  display: flex;             /* para “empujar” footer abajo */
+  flex-direction: column;
+  min-height: 100vh;
+}
+main.noticia-page {
+  flex: 1;
+}
+
+/* ————————————————————————————————————————— */
+/* 1) Encabezado (título + fecha) más grande y centrado */
+/* ————————————————————————————————————————— */
+.encabezado {
+  max-width: 800px;
+  margin: 40px auto 20px;
+  text-align: center;
+}
+.encabezado h1 {
+  font-size: 2.5rem;    /* antes 2.25rem, lo agrandamos un pelín */
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+.encabezado p {
+  font-size: 1.1rem;    /* aumentado de 1rem */
+  color: #222;
+  margin: 0;
+}
+
+/* ————————————————————————————————————————— */
+/* 2) Blockquote estilo periódico */
+/* ————————————————————————————————————————— */
+blockquote {
+  max-width: 600px;
+  margin: 30px auto;
+  text-align: center;
+  font-style: italic;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #444;
+}
+
+/* ————————————————————————————————————————— */
+/* 3) Imagen centralizada y con separaciones */
+/* ————————————————————————————————————————— */
+.noticia-figure {
+  margin: 30px auto;
+  text-align: center;
+}
+.noticia-figure img {
+  max-width: 80%;
+  border-radius: 6px;
+}
+
+/* ————————————————————————————————————————— */
+/* 4) Bloque de párrafos ancho moderado y tipografía legible */
+/* ————————————————————————————————————————— */
+.contenido {
+  max-width: 700px;
+  margin: 30px auto;
+  text-align: left;    /* lectura más cómoda */
+  font-size: 1.1rem;   /* antes 1.05rem, un poquitín más grande */
+  line-height: 1.7;
+  color: #222;
+  letter-spacing: 0.3px;
+}
+
+/* ————————————————————————————————————————— */
+/* 5) Referencias centradas y con espacio */
+/* ————————————————————————————————————————— */
+.referencia {
+  max-width: 700px;
+  margin: 40px auto 60px;
+  text-align: center;
+}
+.referencia h3 {
+  font-size: 1.3rem;  /* antes 1.2rem */
+  margin-bottom: 10px;
+  color: #111;
+}
+.referencia a {
+  font-size: 1.05rem;
+  color: #007BFF;
+  text-decoration: underline;
+}
+
+/* ————————————————————————————————————————— */
+/* 6) Footer fijo al fondo ( sin modificar tu .site-footer ) */
+/* ————————————————————————————————————————— */
