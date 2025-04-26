@@ -57,3 +57,29 @@
 .main-nav a:hover {
   opacity: 0.8;
 }
+
+/* ===== Language switch & Login uniformes ===== */
+.main-nav .lang-switch,
+.main-nav .login-link {
+  
+  align-items: center;
+  gap: 6px;
+  margin-left: 15px;
+  padding: 6px 10px;
+  background: #000;         /* fondo negro */
+  color: #fff;              /* texto blanco */
+  text-decoration: none;
+  border-radius: 45px;
+  font-size: 0.9rem;
+  transition: opacity 0.3s ease;
+  cursor: pointer;
+}
+.main-nav .lang-switch:hover,
+.main-nav .login-link:hover {
+  opacity: 0.8;
+}
+
+.lang-switch:focus,
+.login-link:focus {
+  outline: none;
+}
