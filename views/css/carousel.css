@@ -1,0 +1,25 @@
+/* Carousel container */
+.mySwiper {
+  width: 80%;
+  max-width: 800px;
+  height: 400px;
+  margin: 40px auto;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Cada slide ocupa todo el contenedor */
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+}
+
+/* Imagen dentro de cada slide */
+.swiper-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
