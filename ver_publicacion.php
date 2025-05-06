@@ -1,26 +1,22 @@
 <?php
 // ver_publicacion.php
 
-require __DIR__.'/config/db.php';                  // Conexión MySQL
-require __DIR__.'/azure/config.php';               // Constantes Azure
-require __DIR__.'/azure/azure-translator.php';     // Función azureTranslate()
+require __DIR__.'/config/db.php';
+require __DIR__.'/azure/config.php';
+require __DIR__.'/azure/azure-translator.php';
 
-// 1) Idioma y validación de ID
 $lang = $_GET['lang'] ?? 'es';
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
     die("ID de noticia no válido.");
 }
 $id_noticia = (int)$_GET['id'];
 
-// 2) Obtener la noticia
 $stmt = $pdo->prepare("SELECT * FROM publicaciones WHERE id_noticia = :id");
 $stmt->execute([':id' => $id_noticia]);
 $noticia = $stmt->fetch(PDO::FETCH_ASSOC);
 if (!$noticia) {
     die("Noticia no encontrada.");
 }
-
-// 3) Imprime HEAD y HEADER sin buffer (no traducidos)
 ?><!DOCTYPE html>
 <html lang="<?= htmlspecialchars($lang) ?>">
 <head>
@@ -30,66 +26,75 @@ if (!$noticia) {
   <link rel="stylesheet" href="views/css/header.css">
   <link rel="stylesheet" href="views/css/noticia.css">
   <link rel="stylesheet" href="views/css/footer.css">
+  <style>
+    .descripcion-centrada,
+    .fecha-centrada {
+      text-align: center;
+      font-style: italic;
+      margin: 1em 0;
+    }
+    .imagen-principal {
+      display: block;
+      max-width: 100%;
+      margin: 1em auto;
+    }
+  </style>
 </head>
 <body>
   <?php include __DIR__ . '/views/layouts/header.php'; ?>
 
-<?php
-// 4) Inicia buffer para todo lo traducible: <main> + footer
-ob_start();
-?>
+<?php ob_start(); ?>
 
-  <main class="noticia-page">
-    <section class="encabezado">
-      <h1><?= htmlspecialchars($noticia['titular']) ?></h1>
-      <p><strong>Fecha:</strong> <?= date("d/m/Y", strtotime($noticia['fecha'])) ?></p>
+<main class="noticia-page">
+  <section class="encabezado">
+    <h1><?= htmlspecialchars($noticia['titular']) ?></h1>
+  </section>
+
+  <section class="descripcion-centrada">
+    <p><?= nl2br(htmlspecialchars($noticia['descripcion_corta'])) ?></p>
+  </section>
+
+  <?php if (!empty($noticia['imagen_principal'])): ?>
+    <section class="noticia-figure">
+      <img class="imagen-principal" src="uploads/<?= htmlspecialchars($noticia['imagen_principal']) ?>" alt="Imagen principal">
     </section>
+  <?php endif; ?>
 
-    <?php if (!empty($noticia['url_imagen'])): ?>
-      <section class="noticia-figure">
-        <img src="<?= htmlspecialchars($noticia['url_imagen']) ?>"
-             alt="Imagen de <?= htmlspecialchars($noticia['titular']) ?>">
-      </section>
-    <?php endif; ?>
+  <section class="contenido">
+    <?= nl2br(htmlspecialchars($noticia['contenido'])) ?>
+  </section>
 
-    <section class="contenido">
-      <?= nl2br(htmlspecialchars($noticia['contenido'])) ?>
-    </section>
+  <section class="fecha-centrada">
+    <p><strong></strong> <?= date("d/m/Y", strtotime($noticia['fecha'])) ?></p>
+  </section>
 
-    <?php if (!empty($noticia['imagenes'])): ?>
-      <section class="imagenes">
-        <h2>Galería de imágenes</h2>
-        <div class="galeria">
-          <?php foreach (explode(',', $noticia['imagenes']) as $img): ?>
-            <img src="<?= htmlspecialchars(trim($img)) ?>" alt="">
-          <?php endforeach; ?>
-        </div>
-      </section>
-    <?php endif; ?>
-
+  <?php if (!empty($noticia['referencia'])): ?>
     <section class="referencia">
-      <h3>Referencias</h3>
-      <?php if ($noticia['referencia']): ?>
-        <a href="<?= htmlspecialchars($noticia['referencia']) ?>" target="_blank">
-          Fuente original
-        </a>
-      <?php else: ?>
-        <p>No hay fuente original.</p>
-      <?php endif; ?>
+      <h3>Referencia</h3>
+      <a href="<?= htmlspecialchars($noticia['referencia']) ?>" target="_blank">
+        <?= htmlspecialchars($noticia['referencia']) ?>
+      </a>
     </section>
+  <?php endif; ?>
 
-    <!-- 5) Footer partial dentro del buffer -->
-    <?php include __DIR__ . '/views/layouts/footer.php'; ?>
+  <?php if (!empty($noticia['imagenes'])): ?>
+    <section class="imagenes">
+      <h2>Galería de imágenes</h2>
+      <div class="galeria">
+        <?php foreach (explode(',', $noticia['imagenes']) as $img): ?>
+          <img src="<?= htmlspecialchars(trim($img)) ?>" alt="">
+        <?php endforeach; ?>
+      </div>
+    </section>
+  <?php endif; ?>
 
-  </main>
+  <?php include __DIR__ . '/views/layouts/footer.php'; ?>
+</main>
 
 </body>
 </html>
+
 <?php
-// 6) Captura y traduce sólo el buffer
 $content = ob_get_clean();
-if ($lang === 'en') {
-    echo azureTranslate($content, 'en', 'es', true);
-} else {
-    echo $content;
-}
+echo ($lang === 'en') ? azureTranslate($content, 'en', 'es', true) : $content;
+?>
