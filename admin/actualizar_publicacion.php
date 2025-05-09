@@ -23,7 +23,8 @@ if (
     empty($_POST['titular']) ||
     empty($_POST['fecha']) ||
     empty($_POST['descripcion_corta']) ||
-    empty($_POST['contenido'])
+    empty($_POST['contenido']) ||
+    empty($_POST['categoria']) // Verificar que la categoría esté presente
 ) {
     die("Faltan campos obligatorios.");
 }
@@ -35,6 +36,7 @@ $fecha = $_POST['fecha'];
 $descripcion = $_POST['descripcion_corta'];
 $contenido = $_POST['contenido'];
 $referencia = $_POST['referencia'] ?? '';
+$id_categoria = $_POST['categoria']; // Recibir la categoría seleccionada
 
 // Obtener imagen actual
 $stmt = $pdo->prepare("SELECT imagen_principal FROM publicaciones WHERE id_noticia = ?");
@@ -56,7 +58,9 @@ if (!empty($_FILES['imagen_principal']['name'])) {
 }
 
 // Ejecutar UPDATE
-$sql = "UPDATE publicaciones SET titular = ?, fecha = ?, descripcion_corta = ?, imagen_principal = ?, contenido = ?, referencia = ? WHERE id_noticia = ?";
+$sql = "UPDATE publicaciones 
+        SET titular = ?, fecha = ?, descripcion_corta = ?, imagen_principal = ?, contenido = ?, referencia = ?, id_categoria = ? 
+        WHERE id_noticia = ?";
 $stmt = $pdo->prepare($sql);
 $exito = $stmt->execute([
     $titular,
@@ -65,6 +69,7 @@ $exito = $stmt->execute([
     $imagen_guardada,
     $contenido,
     $referencia,
+    $id_categoria, // Actualizar la categoría
     $id_noticia
 ]);
 
