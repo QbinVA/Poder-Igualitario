@@ -156,3 +156,25 @@ footer {
   font-size: 0.85em;
   color: #666;
 }
+
+/* === Slider pequeñito encima de la noticia principal === */
+#slider-panel {
+  width: 60%;                    /* más estrecho */
+  margin: 20px auto;             /* centrado con un poquito de separación */
+  border: 2px solid #001f3f;     /* azul marino muy oscuro */
+  border-radius: 8px;            /* pequeñito */
+  overflow: hidden;
+  position: relative;
+  height: 200px;                 /* altura mediana */
+}
+#slider-panel img {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+#slider-panel img.active {
+  opacity: 1;
+}

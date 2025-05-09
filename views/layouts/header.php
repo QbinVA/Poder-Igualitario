@@ -33,19 +33,7 @@ $self = basename($_SERVER['PHP_SELF']);
 <body>
 <header class="site-header">
   <div class="site-header__inner">
-    <!-- Buscador preservando ?lang -->
-    <form action="<?= $self ?>" method="get" class="search-form">
-      <input type="hidden" name="lang" value="<?= htmlspecialchars($lang) ?>">
-      <input
-        type="text"
-        name="q"
-        class="search-input"
-        placeholder="<?= $lang==='es'?'Buscar...':'Search...' ?>"
-      >
-      <button type="submit" class="search-button">🔍</button>
-    </form>
-
-    <!-- Logo -->
+  <!-- Logo -->
     <a href="index.php?lang=<?= htmlspecialchars($lang) ?>" class="logo">
       <img src="Iguales.png" alt="" class="logo-img">
       <span class="logo-text" translate="no">Voces Igualitarias</span>

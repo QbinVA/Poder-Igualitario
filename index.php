@@ -31,18 +31,23 @@ try {
   <link rel="stylesheet" href="views/css/index.css">
   <link rel="stylesheet" href="views/css/header.css">
   <link rel="stylesheet" href="views/css/footer.css">
-
-  <!-- Swiper CSS desde CDN -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
-  <!-- Tu CSS del carrusel -->
-  <link rel="stylesheet" href="carousel/carousel.css">
 </head>
 <body>
   <!-- Header fijo -->
   <?php include __DIR__ . '/views/layouts/header.php'; ?>
 
-  <!-- Carrusel -->
-  <?php include __DIR__ . '/carousel/carousel.php'; ?>
+    <!-- Slider pequeñito -->
+  <section id="slider-panel">
+    <?php
+      $imgs = glob(__DIR__ . '/carousel-fotos/*.jpg');
+      shuffle($imgs);
+      $imgs = array_slice($imgs, 0, 4); // tomo 4 imágenes al azar
+      foreach ($imgs as $i => $file):
+        $url = basename($file);
+    ?>
+      <img src="carousel-fotos/<?= $url ?>" class="<?= $i === 0 ? 'active' : '' ?>">
+    <?php endforeach; ?>
+  </section>
 
 <?php
 // 2) Abrimos buffer para TODO lo que SÍ queremos traducir:
@@ -97,10 +102,17 @@ ob_start();
   <!-- Footer (dentro del buffer para traducción) -->
   <?php include __DIR__ . '/views/layouts/footer.php'; ?>
 
-  <!-- Swiper JS -->
-  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-  <!-- Tu JS del carrusel -->
-  <script src="carousel/carousel.js" defer></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const slides = document.querySelectorAll('#slider-panel img');
+    let idx = 0;
+    setInterval(() => {
+      slides[idx].classList.remove('active');
+      idx = (idx + 1) % slides.length;
+      slides[idx].classList.add('active');
+    }, 3000);
+  });
+</script>
 </body>
 </html>
 <?php
