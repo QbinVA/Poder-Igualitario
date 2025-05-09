@@ -44,9 +44,7 @@ if (!$noticia) {
         <input type="text" name="descripcion_corta" id="descripcion_corta" value="<?php echo htmlspecialchars($noticia['descripcion_corta']); ?>" required>
 
         <label for="imagen_principal">Imagen Principal (opcional):</label>
-        <!-- <input type="file" name="imagen_principal"> -->
-        <input type="hidden" name="imagen_principal_fake" value="sin imagen">
-
+        <input type="file" name="imagen_principal" id="imagen_principal">
 
         <label for="contenido">Contenido:</label>
         <textarea name="contenido" id="contenido" rows="5" required><?php echo htmlspecialchars($noticia['contenido']); ?></textarea>
@@ -54,9 +52,23 @@ if (!$noticia) {
         <label for="referencia">Referencia:</label>
         <input type="url" name="referencia" id="referencia" value="<?php echo htmlspecialchars($noticia['referencia']); ?>">
 
+        <label for="categoria">Categoría:</label>
+        <select name="categoria" id="categoria" required>
+            <?php
+            // Obtener categorías de la base de datos
+            $sqlCategorias = "SELECT id_categoria, nombre FROM categorias";
+            $stmtCategorias = $pdo->query($sqlCategorias);
+            $categorias = $stmtCategorias->fetchAll(PDO::FETCH_ASSOC);
+
+            foreach ($categorias as $categoria) {
+                $selected = $categoria['id_categoria'] == $noticia['id_categoria'] ? 'selected' : '';
+                echo "<option value=\"{$categoria['id_categoria']}\" $selected>{$categoria['nombre']}</option>";
+            }
+            ?>
+        </select>
+
         <button type="submit">Actualizar</button>
     </form>
-
     
 </body>
 </html>
