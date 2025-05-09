@@ -10,13 +10,14 @@ $lang = $_GET['lang'] ?? 'es';
 
 // Traer publicaciones (siempre en ES)
 try {
-    $sql  = "SELECT id_noticia, fecha, titular, descripcion_corta, imagen_principal
-             FROM publicaciones
-             ORDER BY fecha DESC";
-    $stmt = $pdo->query($sql);
-    $pubs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  $sql  = "SELECT id_noticia, fecha, titular, descripcion_corta, imagen_principal
+           FROM publicaciones
+           WHERE archivada = 0
+           ORDER BY fecha DESC"; // Solo mostrar noticias no archivadas
+  $stmt = $pdo->query($sql);
+  $pubs = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
-    die("Error al obtener publicaciones: " . $e->getMessage());
+  die("Error al obtener publicaciones: " . $e->getMessage());
 }
 
 // 1) Salida fija de <head> y header (no se traduce)
