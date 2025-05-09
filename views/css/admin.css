@@ -1,136 +1,111 @@
-/* Estilos generales */
 body {
     margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
 }
 
 .container {
     display: flex;
+    min-height: 100vh;
 }
 
-/* Sidebar */
 .sidebar {
     width: 250px;
-    background: #6a0dad;
-    color: #fff;
+    background-color: #111827;
+    color: white;
     padding: 20px;
-    height: 100vh; /* Hacer que el sidebar abarque toda la altura de la página */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
 }
 
-.sidebar h2 {
-    font-size: 24px;
+.sidebar h2 a {
+    color: white;
+    text-decoration: none;
 }
 
 .user-info {
-    margin-top: 20px;
-}
-
-.user-name {
-    font-weight: bold;
-}
-
-.user-email {
+    margin-top: 30px;
     font-size: 14px;
 }
 
-.back-link {
-    display: block;
-    margin-top: 30px;
-    color: #fff;
-    text-decoration: none;
-    font-size: 16px;
-}
-
-/* Contenido principal */
 .main-content {
-    flex: 1;
-    padding: 40px;
+    flex-grow: 1;
+    padding: 30px;
+    position: relative;
 }
 
-h1 {
-    font-size: 36px;
-    color: #000000;
-}
-
-h2 {
-    font-size: 24px;
-    color: #0d0d0d;
-}
-
-/* Botón nuevo */
-.button-container {
-    text-align: right;
+h1, h2 {
     margin-bottom: 20px;
 }
 
-.new-button {
-    background: #b43de7;
-    color: #fff;
-    border: none;
+.button-container {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 15px;
+}
+
+.new-button,
+#toggleView {
+    background-color: #111827;
+    color: white;
     padding: 10px 20px;
-    font-size: 16px;
+    border: none;
+    border-radius: 12px;
     cursor: pointer;
-    border-radius: 5px;
+    font-size: 14px;
+    transition: background 0.3s;
 }
 
-.new-button:hover {
-    background: #9a32c9;
+.new-button:hover,
+#toggleView:hover {
+    background-color: #374151;
 }
 
-/* Tabla de noticias */
-.news-table {
+.tabla-publicaciones {
+    overflow-x: auto;
+    margin-top: 20px;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    opacity: 1;
+    transform: scale(1);
+    visibility: visible;
+    z-index: 1;
+}
+
+.tabla-publicaciones.hidden {
+    opacity: 0;
+    transform: scale(0.98);
+    pointer-events: none;
+    position: absolute;
+    visibility: hidden;
+    z-index: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease, visibility 0s 0.5s;
+}
+
+.tabla-publicaciones table {
     width: 100%;
-    background: #fff;
     border-collapse: collapse;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background: white;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    overflow: hidden;
 }
 
-.news-table th, .news-table td {
-    padding: 12px;
+.tabla-publicaciones th,
+.tabla-publicaciones td {
+    padding: 14px;
     text-align: left;
+    border-bottom: 1px solid #eee;
 }
 
-.news-table th {
-    background: #eee;
+.tabla-publicaciones th {
+    background-color: #f3f4f6;
+    font-weight: 600;
 }
 
-.news-table tr:nth-child(even) {
-    background: #f9f9f9;
+.tabla-publicaciones tr:hover {
+    background-color: #f9fafb;
 }
 
-.published {
-    color: green;
-}
-
-.draft {
-    color: orange;
-}
-
-/* Iconos */
-td {
-    text-align: center;
-}
-
-.news-table td:last-child {
-    color: red;
-    cursor: pointer;
-}
-
-.news-table td:last-child:hover {
-    text-decoration: underline;
-}
-
-.home-link {
-    text-decoration: none;
-    color: black !important; /* Texto en negro */
-    font-weight: bold;
-}
-
-.home-link:hover {
-    text-decoration: none;
+.hidden {
+    opacity: 0;
+    pointer-events: none;
 }
