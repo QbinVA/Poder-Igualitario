@@ -32,6 +32,7 @@ try {
   <link rel="stylesheet" href="views/css/index.css">
   <link rel="stylesheet" href="views/css/header.css">
   <link rel="stylesheet" href="views/css/footer.css">
+  <link rel="stylesheet" href="views/css/font/font.css">
 </head>
 <body>
   <!-- Header fijo -->
@@ -60,7 +61,7 @@ ob_start();
     <section class="main-news">
       <?php if (!empty($pubs)):
         $p = $pubs[0]; ?>
-        <a href="ver_publicacion.php?id=<?= $p['id_noticia'] ?>&lang=<?= $lang ?>" class="main-news-link">
+        <a href="views/layouts/ver_publicacion.php?id=<?= $p['id_noticia'] ?>&lang=<?= $lang ?>" class="main-news-link">
           <div class="main-news-card clickable">
             <img src="uploads/<?= htmlspecialchars($p['imagen_principal']) ?>" alt="">
             <h4><?= htmlspecialchars($p['titular']) ?></h4>
@@ -78,7 +79,7 @@ ob_start();
     <section class="secondary-news">
       <?php foreach ($pubs as $i => $pub):
               if ($i > 0): ?>
-        <a href="ver_publicacion.php?id=<?= $pub['id_noticia'] ?>&lang=<?= $lang ?>" class="news-item-link">
+        <a href="views/layouts/ver_publicacion.php?id=<?= $pub['id_noticia'] ?>&lang=<?= $lang ?>" class="news-item-link">
           <div class="news-item-card clickable">
             <div class="news-item">
               <img src="uploads/<?= htmlspecialchars($pub['imagen_principal']) ?>" alt="">

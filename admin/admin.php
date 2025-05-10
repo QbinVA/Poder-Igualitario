@@ -35,6 +35,7 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel de Administración</title>
     <link rel="stylesheet" href="../views/css/admin.css">
+    <link rel="stylesheet" href="../views/css/font/font.css">
 </head>
 <body>
     <div class="container">

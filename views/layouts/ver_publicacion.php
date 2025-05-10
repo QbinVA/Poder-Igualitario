@@ -1,9 +1,10 @@
 <?php
+
 // ver_publicacion.php
 
-require __DIR__.'/config/db.php';
-require __DIR__.'/azure/config.php';
-require __DIR__.'/azure/azure-translator.php';
+require dirname(__DIR__, 2) . '/config/db.php';
+require dirname(__DIR__, 2) . '/azure/config.php';
+require dirname(__DIR__, 2) . '/azure/azure-translator.php';
 
 $lang = $_GET['lang'] ?? 'es';
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
@@ -23,9 +24,10 @@ if (!$noticia) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title><?= htmlspecialchars($noticia['titular']) ?></title>
-  <link rel="stylesheet" href="views/css/header.css">
-  <link rel="stylesheet" href="views/css/noticia.css">
-  <link rel="stylesheet" href="views/css/footer.css">
+  <link rel="stylesheet" href="../css/header.css">
+  <link rel="stylesheet" href="../css/noticia.css">
+  <link rel="stylesheet" href="../css/footer.css">
+  <link rel="stylesheet" href="../css/font/font.css">
   <style>
     .descripcion-centrada,
     .fecha-centrada {
@@ -41,7 +43,7 @@ if (!$noticia) {
   </style>
 </head>
 <body>
-  <?php include __DIR__ . '/views/layouts/header.php'; ?>
+  <?php include __DIR__ . '/header.php'; ?>
 
 <?php ob_start(); ?>
 
@@ -56,7 +58,7 @@ if (!$noticia) {
 
   <?php if (!empty($noticia['imagen_principal'])): ?>
     <section class="noticia-figure">
-      <img class="imagen-principal" src="uploads/<?= htmlspecialchars($noticia['imagen_principal']) ?>" alt="Imagen principal">
+      <img class="imagen-principal" src="../../uploads/<?= htmlspecialchars($noticia['imagen_principal']) ?>" alt="Imagen principal">
     </section>
   <?php endif; ?>
 
@@ -88,7 +90,7 @@ if (!$noticia) {
     </section>
   <?php endif; ?>
 
-  <?php include __DIR__ . '/views/layouts/footer.php'; ?>
+  <?php include __DIR__ . '/footer.php'; ?>
 </main>
 
 </body>

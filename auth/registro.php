@@ -7,8 +7,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Registro</title>
-  <link rel="stylesheet" href="views/css/registro.css">
-  <script defer src="views/js/auth-carousel.js"></script>
+  <link rel="stylesheet" href="../views/css/registro.css">
+  <link rel="stylesheet" href="../views/css/font/font.css">
+  <script defer src="../views/js/auth-carousel.js"></script>
 </head>
 <body>
   <div class="auth-container">
@@ -34,7 +35,7 @@
     <div class="pane carousel-pane">
       <?php foreach (range(1,5) as $n): ?>
         <div class="slide <?= $n===1 ? 'is-active' : '' ?>">
-          <img src="carousel-fotos/<?= $n ?>.jpg" alt="Slide <?= $n ?>">
+          <img src="../carousel-fotos/<?= $n ?>.jpg" alt="Slide <?= $n ?>">
         </div>
       <?php endforeach ?>
     </div>
