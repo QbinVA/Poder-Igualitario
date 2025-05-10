@@ -1,4 +1,3 @@
-
 :root {
   --teal: #008080;
   --aquamarine: #7FFFD4;
@@ -50,29 +49,26 @@ html, body {
   height: 100%;
 }
 
-/* carrusel al 65% */
+/* formulario a la izquierda (35%) */
+.form-pane {
+  flex: 1;
+  padding: 2rem 2rem 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  box-shadow: inset 0 0 40px rgba(0,0,0,0.15);
+}
+
+/* carrusel a la derecha (65%) */
 .carousel-pane {
   flex: 0 0 65%;
 }
 
-/* formulario al 35% */
-.form-pane {
-  flex: 1;
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  box-shadow: inset 0 0 40px rgba(0,0,0,0.15);
-}
-
-/* título */
 .form-pane h2 {
   text-align: center;
   margin-bottom: 1.5rem;
   font-size: 1.6rem;
 }
-
-/* campos apilados y centrados */
 .form-pane form {
   display: flex;
   flex-direction: column;
@@ -88,18 +84,17 @@ html, body {
   font-size: 1rem;
 }
 
-/* “Olvidé mi contraseña” centrado */
-.form-pane .forgot {
+/* checkbox + texto pegados */
+.form-pane .tos {
   width: 100%;
   max-width: 320px;
-  text-align: center;
-  font-size: .9rem;
-  color: #007bff;
-  text-decoration: underline;
+  display: flex;
+  align-items: center;
+  gap: .2rem;
+  margin-bottom: 1rem;
 }
 
-/* botón login */
-.form-pane .btn-login {
+.form-pane .btn-signup {
   width: 100%;
   max-width: 320px;
   padding: .8rem;
@@ -111,7 +106,6 @@ html, body {
   cursor: pointer;
 }
 
-/* links inferiores */
 .form-pane .links {
   margin-top: 1rem;
   display: flex;
