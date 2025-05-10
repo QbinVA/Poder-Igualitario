@@ -27,6 +27,7 @@ if (!$noticia) {
     <meta charset="UTF-8">
     <title>Editar Publicación</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../views/css/font/font.css">
 </head>
 <body>
     <form action="actualizar_publicacion.php" method="POST" enctype="multipart/form-data">

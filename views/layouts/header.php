@@ -34,8 +34,8 @@ $self = basename($_SERVER['PHP_SELF']);
 <header class="site-header">
   <div class="site-header__inner">
   <!-- Logo -->
-    <a href="index.php?lang=<?= htmlspecialchars($lang) ?>" class="logo">
-      <img src="Iguales.png" alt="" class="logo-img">
+    <a href="/Poder-Igualitario/index.php?lang=<?= htmlspecialchars($lang) ?>" class="logo">
+      <img src="/Poder-Igualitario/views/assets/Iguales.png" alt="" class="logo-img">
       <span class="logo-text" translate="no">Voces Igualitarias</span>
     </a>
 
@@ -45,7 +45,7 @@ $self = basename($_SERVER['PHP_SELF']);
         🌐 <?= $lang==='es'?'English':'Español' ?>
       </button>
       <a
-        href="login.php?lang=<?= htmlspecialchars($lang) ?>"
+        href="/Poder-Igualitario/auth/login.php?lang=<?= htmlspecialchars($lang) ?>"
         class="login-link"
       >
         <?= $lang==='es'?'Log in':'Log in' ?>
