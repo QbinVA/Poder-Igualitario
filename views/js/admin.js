@@ -3,15 +3,31 @@ const toggleButton = document.getElementById('toggleView');
 const tablaActivas = document.getElementById('tablaActivas');
 const tablaArchivadas = document.getElementById('tablaArchivadas');
 
-// Lógica para alternar entre tablas
+// Lógica para alternar entre tablas con corrección visual
 toggleButton.addEventListener('click', () => {
-    console.log('Botón de alternar clicado'); // Para depuración
-    // Alternar clases para mostrar/ocultar tablas
-    tablaActivas.classList.toggle('hidden');
-    tablaArchivadas.classList.toggle('hidden');
+    const activasVisible = tablaActivas.classList.contains('visible');
 
-    // Cambiar el texto del botón según la tabla visible
-    toggleButton.textContent = tablaActivas.classList.contains('hidden') 
-        ? '📄 Ver activas' 
-        : '🗂 Ver archivadas';
+    if (activasVisible) {
+        // Ocultar activas
+        tablaActivas.classList.remove('visible');
+        tablaActivas.classList.add('hidden');
+
+        // Mostrar archivadas
+        tablaArchivadas.classList.remove('hidden');
+        tablaArchivadas.classList.add('visible');
+
+        // Cambiar texto del botón
+        toggleButton.textContent = '📄 Ver activas';
+    } else {
+        // Ocultar archivadas
+        tablaArchivadas.classList.remove('visible');
+        tablaArchivadas.classList.add('hidden');
+
+        // Mostrar activas
+        tablaActivas.classList.remove('hidden');
+        tablaActivas.classList.add('visible');
+
+        // Cambiar texto del botón
+        toggleButton.textContent = '🗂 Ver archivadas';
+    }
 });

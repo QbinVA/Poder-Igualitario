@@ -6,31 +6,42 @@ body {
 }
 
 .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 24px 16px;
+}
+
+.admin-header {
     display: flex;
-    min-height: 100vh;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 24px;
 }
 
-.sidebar {
-    width: 250px;
-    background-color: #111827;
-    color: white;
-    padding: 20px;
-}
-
-.sidebar h2 a {
-    color: white;
-    text-decoration: none;
+.admin-header h2 {
+    margin: 0;
+    font-size: 2rem;
 }
 
 .user-info {
-    margin-top: 30px;
-    font-size: 14px;
+    font-size: 15px;
+    color: #444;
+}
+
+.back-link {
+    margin-top: 8px;
+    display: inline-block;
+    color: #374151;
+    text-decoration: none;
+    font-size: 15px;
 }
 
 .main-content {
-    flex-grow: 1;
-    padding: 30px;
-    position: relative;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    padding: 24px 16px;
 }
 
 h1, h2 {
@@ -41,6 +52,7 @@ h1, h2 {
     margin-bottom: 20px;
     display: flex;
     gap: 15px;
+    flex-wrap: wrap;
 }
 
 .new-button,
@@ -61,23 +73,9 @@ h1, h2 {
 }
 
 .tabla-publicaciones {
+    width: 100%;
+    margin-bottom: 32px;
     overflow-x: auto;
-    margin-top: 20px;
-    transition: opacity 0.5s ease, transform 0.5s ease;
-    opacity: 1;
-    transform: scale(1);
-    visibility: visible;
-    z-index: 1;
-}
-
-.tabla-publicaciones.hidden {
-    opacity: 0;
-    transform: scale(0.98);
-    pointer-events: none;
-    position: absolute;
-    visibility: hidden;
-    z-index: 0;
-    transition: opacity 0.5s ease, transform 0.5s ease, visibility 0s 0.5s;
 }
 
 .tabla-publicaciones table {
@@ -87,6 +85,7 @@ h1, h2 {
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
     border-radius: 10px;
     overflow: hidden;
+    min-width: 600px;
 }
 
 .tabla-publicaciones th,
@@ -105,7 +104,99 @@ h1, h2 {
     background-color: #f9fafb;
 }
 
-.hidden {
-    opacity: 0;
-    pointer-events: none;
+.tabla-publicaciones.visible {
+    display: block;
+}
+.tabla-publicaciones.hidden {
+    display: none;
+}
+
+/* --- RESPONSIVE DESIGN --- */
+@media (max-width: 900px) {
+    .container {
+        padding: 12px 4vw;
+    }
+    .main-content {
+        padding: 16px 6px;
+    }
+}
+
+@media (max-width: 600px) {
+    .admin-header {
+        align-items: stretch;
+    }
+    .main-content {
+        padding: 8px 2px;
+    }
+    .button-container {
+        flex-direction: column;
+        gap: 8px;
+    }
+    .tabla-publicaciones table,
+    .tabla-publicaciones thead,
+    .tabla-publicaciones tbody,
+    .tabla-publicaciones th,
+    .tabla-publicaciones td,
+    .tabla-publicaciones tr {
+        display: block;
+        width: 100%;
+    }
+    .tabla-publicaciones thead {
+        display: none;
+    }
+    .tabla-publicaciones tr {
+        margin-bottom: 15px;
+        border-bottom: 2px solid #eee;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        padding: 8px 0;
+    }
+    .tabla-publicaciones td {
+        text-align: left;
+        position: relative;
+        padding-left: 50%;
+        min-height: 36px;
+        border-bottom: none;
+        border-radius: 0;
+        font-size: 15px;
+    }
+    .tabla-publicaciones td:before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        top: 8px;
+        width: 45%;
+        font-weight: bold;
+        color: #555;
+        white-space: nowrap;
+    }
+    .tabla-publicaciones th,
+    .tabla-publicaciones td {
+        border-bottom: none;
+    }
+}
+
+@media (max-width: 400px) {
+    .container, .main-content {
+        padding: 2px !important;
+    }
+    .admin-header h2 {
+        font-size: 1.2rem;
+    }
+    .tabla-publicaciones td {
+        padding-left: 38%;
+        font-size: 12px;
+    }
+    .tabla-publicaciones td:before {
+        left: 5px;
+        top: 4px;
+        width: 36%;
+        font-size: 11px;
+    }
+    .new-button,
+    #toggleView {
+        padding: 7px 5px;
+        font-size: 11px;
+    }
 }

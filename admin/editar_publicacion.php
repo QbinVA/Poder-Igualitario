@@ -26,7 +26,7 @@ if (!$noticia) {
 <head>
     <meta charset="UTF-8">
     <title>Editar Publicación</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="forms/forms.css">
     <link rel="stylesheet" href="../views/css/font/font.css">
 </head>
 <body>
@@ -71,5 +71,7 @@ if (!$noticia) {
         <button type="submit">Actualizar</button>
     </form>
     
+<script src="forms/forms.js"></script>
+<script src="forms/validar_forms.js"></script>
 </body>
 </html>
