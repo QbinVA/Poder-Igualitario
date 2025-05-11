@@ -80,8 +80,18 @@ try {
                                 <td data-label="Fecha"><?php echo date("d/m/Y", strtotime($pub['fecha'])); ?></td>
                                 <td data-label="Previsualizar"><a href="../views/layouts/ver_publicacion.php?id=<?php echo $pub['id_noticia']; ?>">🔍</a></td>
                                 <td data-label="Editar"><a href="editar_publicacion.php?id=<?php echo $pub['id_noticia']; ?>">✏️</a></td>
-                                <td data-label="Eliminar"><a href="eliminar_publicacion.php?id_noticia=<?php echo $pub['id_noticia']; ?>" onclick="return confirm('¿Eliminar publicación?');">❌</a></td>
-                                <td data-label="Archivar"><a href="archivar_publicacion.php?id_noticia=<?php echo $pub['id_noticia']; ?>" onclick="return confirm('¿Archivar publicación?');">📥</a></td>
+                                <td data-label="Eliminar">
+                                    <a href="#" 
+                                    onclick="mostrarConfirmacion('¿Estás seguro de eliminar esta publicación?', function() {
+                                        window.location.href = 'eliminar_publicacion.php?id_noticia=<?php echo $pub['id_noticia']; ?>';
+                                    }); return false;">❌</a>
+                                </td>
+                                <td data-label="Archivar">
+                                    <a href="#" 
+                                    onclick="mostrarConfirmacion('¿Estás seguro de archivar esta publicación?', function() {
+                                        window.location.href = 'archivar_publicacion.php?id_noticia=<?php echo $pub['id_noticia']; ?>';
+                                    }); return false;">📥</a>
+                                </td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -109,8 +119,18 @@ try {
                                 <td data-label="Fecha"><?php echo date("d/m/Y", strtotime($arch['fecha'])); ?></td>
                                 <td data-label="Previsualizar"><a href="../views/layouts/ver_publicacion.php?id=<?php echo $arch['id_noticia']; ?>">🔍</a></td>
                                 <td data-label="Editar"><a href="editar_publicacion.php?id=<?php echo $arch['id_noticia']; ?>">✏️</a></td>
-                                <td data-label="Eliminar"><a href="eliminar_publicacion.php?id_noticia=<?php echo $arch['id_noticia']; ?>" onclick="return confirm('¿Eliminar publicación?');">❌</a></td>
-                                <td data-label="Restaurar"><a href="restaurar_publicacion.php?id_noticia=<?php echo $arch['id_noticia']; ?>" onclick="return confirm('¿Restaurar publicación?');">♻️</a></td>
+                                <td data-label="Eliminar">
+                                    <a href="#" 
+                                    onclick="mostrarConfirmacion('¿Estás seguro de eliminar esta publicación?', function() {
+                                        window.location.href = 'eliminar_publicacion.php?id_noticia=<?php echo $pub['id_noticia']; ?>';
+                                    }); return false;">❌</a>
+                                </td>
+                                <td data-label="Restaurar">
+                                    <a href="#" 
+                                    onclick="mostrarConfirmacion('¿Estás seguro de restaurar esta publicación?', function() {
+                                        window.location.href = 'restaurar_publicacion.php?id_noticia=<?php echo $arch['id_noticia']; ?>';
+                                    }); return false;">♻️</a>
+                                </td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -119,7 +139,8 @@ try {
         </main>
     </div>
 
-    <!-- Incluir el archivo JavaScript -->
-<script src="../views/js/admin.js"></script>
+    <!-- Incluir el archivo de notificaciones -->
+    <?php include '../views/layouts/notificaciones.php'; ?>
+    <script src="../views/js/admin.js"></script>
 </body>
 </html>
