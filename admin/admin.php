@@ -1,4 +1,5 @@
 <?php
+
 require '../config/db.php';
 
 // Obtener publicaciones activas
@@ -12,7 +13,7 @@ try {
 
 // Obtener publicaciones archivadas
 try {
-    $sql = "SELECT id_noticia, fecha, titular FROM publicaciones WHERE archivada = 1 ORDER BY fecha DESC";
+    $sql = "SELECT id_noticia, fecha, titular, descripcion_corta, imagen_principal FROM publicaciones WHERE archivada = 1 ORDER BY fecha DESC";
     $stmt = $pdo->query($sql);
     $archivadas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
@@ -52,14 +53,14 @@ try {
             <h1>¡Bienvenido al panel de administración!</h1>
 
             <div class="button-container">
-                <form action="crearPublicacionForms.html" method="get">
+                <form action="crear_publicacion.php" method="get">
                     <button type="submit" class="new-button">➕ Nueva publicación</button>
                 </form>
                 <button id="toggleView">🗂 Ver archivadas</button>
             </div>
 
             <!-- Tabla principal -->
-            <div id="tablaActivas" class="tabla-publicaciones">
+            <div id="tablaActivas" class="tabla-publicaciones visible">
                 <h2>Publicaciones activas</h2>
                 <table>
                     <thead>
@@ -75,12 +76,22 @@ try {
                     <tbody>
                         <?php foreach ($publicaciones as $pub): ?>
                             <tr>
-                                <td><?php echo htmlspecialchars($pub['titular']); ?></td>
-                                <td><?php echo date("d/m/Y", strtotime($pub['fecha'])); ?></td>
-                                <td><a href="../ver_publicacion.php?id=<?php echo $pub['id_noticia']; ?>">🔍</a></td>
-                                <td><a href="editar_publicacion.php?id=<?php echo $pub['id_noticia']; ?>">✏️</a></td>
-                                <td><a href="eliminar_publicacion.php?id_noticia=<?php echo $pub['id_noticia']; ?>" onclick="return confirm('¿Eliminar publicación?');">❌</a></td>
-                                <td><a href="archivar_publicacion.php?id_noticia=<?php echo $pub['id_noticia']; ?>" onclick="return confirm('¿Archivar publicación?');">📥</a></td>
+                                <td data-label="Titular"><?php echo htmlspecialchars($pub['titular']); ?></td>
+                                <td data-label="Fecha"><?php echo date("d/m/Y", strtotime($pub['fecha'])); ?></td>
+                                <td data-label="Previsualizar"><a href="../views/layouts/ver_publicacion.php?id=<?php echo $pub['id_noticia']; ?>">🔍</a></td>
+                                <td data-label="Editar"><a href="editar_publicacion.php?id=<?php echo $pub['id_noticia']; ?>">✏️</a></td>
+                                <td data-label="Eliminar">
+                                    <a href="#" 
+                                    onclick="mostrarConfirmacion('¿Estás seguro de eliminar esta publicación?', function() {
+                                        window.location.href = 'eliminar_publicacion.php?id_noticia=<?php echo $pub['id_noticia']; ?>';
+                                    }); return false;">❌</a>
+                                </td>
+                                <td data-label="Archivar">
+                                    <a href="#" 
+                                    onclick="mostrarConfirmacion('¿Estás seguro de archivar esta publicación?', function() {
+                                        window.location.href = 'archivar_publicacion.php?id_noticia=<?php echo $pub['id_noticia']; ?>';
+                                    }); return false;">📥</a>
+                                </td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -95,15 +106,31 @@ try {
                         <tr>
                             <th>Titular</th>
                             <th>Fecha</th>
+                            <th>Previsualizar</th>
+                            <th>Editar</th>
+                            <th>Eliminar</th>
                             <th>Restaurar</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($archivadas as $arch): ?>
                             <tr>
-                                <td><?php echo htmlspecialchars($arch['titular']); ?></td>
-                                <td><?php echo date("d/m/Y", strtotime($arch['fecha'])); ?></td>
-                                <td><a href="restaurar_publicacion.php?id_noticia=<?php echo $arch['id_noticia']; ?>" onclick="return confirm('¿Restaurar publicación?');">♻️</a></td>
+                                <td data-label="Titular"><?php echo htmlspecialchars($arch['titular']); ?></td>
+                                <td data-label="Fecha"><?php echo date("d/m/Y", strtotime($arch['fecha'])); ?></td>
+                                <td data-label="Previsualizar"><a href="../views/layouts/ver_publicacion.php?id=<?php echo $arch['id_noticia']; ?>">🔍</a></td>
+                                <td data-label="Editar"><a href="editar_publicacion.php?id=<?php echo $arch['id_noticia']; ?>">✏️</a></td>
+                                <td data-label="Eliminar">
+                                    <a href="#" 
+                                    onclick="mostrarConfirmacion('¿Estás seguro de eliminar esta publicación?', function() {
+                                        window.location.href = 'eliminar_publicacion.php?id_noticia=<?php echo $pub['id_noticia']; ?>';
+                                    }); return false;">❌</a>
+                                </td>
+                                <td data-label="Restaurar">
+                                    <a href="#" 
+                                    onclick="mostrarConfirmacion('¿Estás seguro de restaurar esta publicación?', function() {
+                                        window.location.href = 'restaurar_publicacion.php?id_noticia=<?php echo $arch['id_noticia']; ?>';
+                                    }); return false;">♻️</a>
+                                </td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -112,7 +139,8 @@ try {
         </main>
     </div>
 
-    <!-- Incluir el archivo JavaScript -->
-<script src="../views/js/admin.js"></script>
+    <!-- Incluir el archivo de notificaciones -->
+    <?php include '../views/layouts/notificaciones.php'; ?>
+    <script src="../views/js/admin.js"></script>
 </body>
 </html>
