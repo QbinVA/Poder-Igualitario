@@ -18,215 +18,274 @@
   100% { background-color: var(--common-teal); }
 }
 
-/* Aplica la animación al fondo completo */
+/* Fondo de la página */
 html, body {
   width: 100%;
   height: 100%;
   margin: 0;
   padding: 0;
-  animation: bgRGB 15s ease-in-out infinite alternate;
+  background-color: whitesmoke; /* Fondo fijo en wheat */
   font-family: 'Segoe UI', sans-serif;
   color: #333;
 }
 
-/* Contenedor principal */
-.container {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 24px 16px;
-  background: transparent; /* Asegúrate de que sea transparente */
+/* Sidebar con animación RGB */
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  animation: bgRGB 15s ease-in-out infinite alternate; /* Animación RGB */
+  color: white;
+  padding: 20px;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Encabezado del administrador */
-.admin-header {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
-  margin-bottom: 24px;
-}
-
-.admin-header h2 {
-  margin: 0;
-  font-size: 2rem;
-}
-
-/* Información del usuario */
-.user-info {
-  font-size: 15px;
-  color: #444;
-}
-
-/* Enlace de regreso */
-.back-link {
-  margin-top: 8px;
-  display: inline-block;
-  color: #374151;
+.sidebar h2 a {
+  color: white;
   text-decoration: none;
-  font-size: 15px;
 }
 
-/* Contenido principal */
-.main-content {
-  background: transparent; /* Asegúrate de que no cubra el fondo */
-  border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
-  padding: 24px 16px;
+.sidebar .user-info {
+  margin-top: 20px;
+  font-size: 16px;
 }
 
-h1, h2 {
-  margin-bottom: 20px;
+.sidebar .back-link {
+  margin-top: 20px;
+  display: inline-block;
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
 }
 
-/* Botones */
-.button-container {
-  margin-bottom: 20px;
-  display: flex;
-  gap: 15px;
-}
-
+/* Botones con animación RGB */
 .new-button,
 #toggleView {
-    background-color: #111827;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background 0.3s;
+  background: var(--teal); /* Color inicial */
+  animation: bgRGB 15s ease-in-out infinite alternate; /* Animación RGB */
+  color: white;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: transform 0.3s;
 }
 
 .new-button:hover,
 #toggleView:hover {
-    background-color: #374151;
+  transform: scale(1.05); /* Efecto de hover */
 }
 
+/* Contenedor principal */
+.container {
+  display: flex; /* Flexbox para alinear el sidebar y el contenido principal */
+  flex-direction: row; /* Alineación horizontal */
+  height: 100vh; /* Altura completa de la ventana */
+  overflow: hidden; /* Evita que el contenido desborde */
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px; /* Ancho fijo del sidebar */
+  height: 100%; /* Altura completa */
+  animation: bgRGB 15s ease-in-out infinite alternate; /* Animación RGB */
+  color: white;
+  padding: 20px;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+  position: relative; /* Asegura que no se superponga */
+  flex-shrink: 0; /* Evita que el sidebar se reduzca */
+}
+
+/* Contenido principal */
+.main-content {
+  flex: 1; /* Ocupa el espacio restante */
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  padding: 32px 24px;
+  overflow-y: auto; /* Permite el scroll si el contenido es muy largo */
+}
+
+h1, h2 {
+  margin-bottom: 24px;
+  font-size: 2rem;
+}
+
+/* Tablas */
 .tabla-publicaciones {
-    width: 100%;
-    margin-bottom: 32px;
-    overflow-x: auto;
+  width: 100%;
+  margin-bottom: 40px;
+  overflow-x: auto;
 }
 
 .tabla-publicaciones table {
-    width: 100%;
-    border-collapse: collapse;
-    background: white;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
-    border-radius: 10px;
-    overflow: hidden;
-    min-width: 600px;
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+  min-width: 700px;
 }
 
 .tabla-publicaciones th,
 .tabla-publicaciones td {
-    padding: 14px;
-    text-align: left;
-    border-bottom: 1px solid #eee;
+  padding: 18px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+  font-size: 16px;
 }
 
 .tabla-publicaciones th {
-    background-color: #f3f4f6;
-    font-weight: 600;
+  background-color: #f3f4f6;
+  font-weight: 600;
 }
 
 .tabla-publicaciones tr:hover {
-    background-color: #f9fafb;
+  background-color: #f9fafb;
 }
 
 .tabla-publicaciones.visible {
-    display: block;
-}
-.tabla-publicaciones.hidden {
-    display: none;
+  display: block;
 }
 
-/* --- RESPONSIVE DESIGN --- */
+.tabla-publicaciones.hidden {
+  display: none;
+}
+
+/* Responsive Design */
 @media (max-width: 900px) {
-    .container {
-        padding: 12px 4vw;
-    }
-    .main-content {
-        padding: 16px 6px;
-    }
+  .container {
+    padding: 16px 6vw;
+  }
+  .main-content {
+    padding: 24px 12px;
+  }
 }
 
 @media (max-width: 600px) {
-    .admin-header {
-        align-items: stretch;
-    }
-    .main-content {
-        padding: 8px 2px;
-    }
-    .button-container {
-        flex-direction: column;
-        gap: 8px;
-    }
-    .tabla-publicaciones table,
-    .tabla-publicaciones thead,
-    .tabla-publicaciones tbody,
-    .tabla-publicaciones th,
-    .tabla-publicaciones td,
-    .tabla-publicaciones tr {
-        display: block;
-        width: 100%;
-    }
-    .tabla-publicaciones thead {
-        display: none;
-    }
-    .tabla-publicaciones tr {
-        margin-bottom: 15px;
-        border-bottom: 2px solid #eee;
-        background: #fff;
-        border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-        padding: 8px 0;
-    }
-    .tabla-publicaciones td {
-        text-align: left;
-        position: relative;
-        padding-left: 50%;
-        min-height: 36px;
-        border-bottom: none;
-        border-radius: 0;
-        font-size: 15px;
-    }
-    .tabla-publicaciones td:before {
-        content: attr(data-label);
-        position: absolute;
-        left: 10px;
-        top: 8px;
-        width: 45%;
-        font-weight: bold;
-        color: #555;
-        white-space: nowrap;
-    }
-    .tabla-publicaciones th,
-    .tabla-publicaciones td {
-        border-bottom: none;
-    }
+  .sidebar {
+    width: 100%;
+    height: auto;
+    animation: none; /* Desactiva la animación en pantallas pequeñas */
+  }
+  .main-content {
+    padding: 16px 8px;
+  }
+  .button-container {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .tabla-publicaciones table,
+  .tabla-publicaciones thead,
+  .tabla-publicaciones tbody,
+  .tabla-publicaciones th,
+  .tabla-publicaciones td,
+  .tabla-publicaciones tr {
+    display: block;
+    width: 100%;
+  }
+  .tabla-publicaciones thead {
+    display: none;
+  }
+  .tabla-publicaciones tr {
+    margin-bottom: 20px;
+    border-bottom: 2px solid #eee;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    padding: 12px 0;
+  }
+  .tabla-publicaciones td {
+    text-align: left;
+    position: relative;
+    padding-left: 60%;
+    min-height: 40px;
+    border-bottom: none;
+    border-radius: 0;
+    font-size: 16px;
+  }
+  .tabla-publicaciones td:before {
+    content: attr(data-label);
+    position: absolute;
+    left: 10px;
+    top: 8px;
+    width: 45%;
+    font-weight: bold;
+    color: #555;
+    white-space: nowrap;
+  }
+  .tabla-publicaciones th,
+  .tabla-publicaciones td {
+    border-bottom: none;
+  }
 }
 
 @media (max-width: 400px) {
-    .container, .main-content {
-        padding: 2px !important;
-    }
-    .admin-header h2 {
-        font-size: 1.2rem;
-    }
-    .tabla-publicaciones td {
-        padding-left: 38%;
-        font-size: 12px;
-    }
-    .tabla-publicaciones td:before {
-        left: 5px;
-        top: 4px;
-        width: 36%;
-        font-size: 11px;
-    }
-    .new-button,
-    #toggleView {
-        padding: 7px 5px;
-        font-size: 11px;
-    }
+  .container, .main-content {
+    padding: 4px !important;
+  }
+  .admin-header h2 {
+    font-size: 1.5rem;
+  }
+  .tabla-publicaciones td {
+    padding-left: 50%;
+    font-size: 14px;
+  }
+  .tabla-publicaciones td:before {
+    left: 5px;
+    top: 4px;
+    width: 40%;
+    font-size: 13px;
+  }
+  .new-button,
+  #toggleView {
+    padding: 10px 8px;
+    font-size: 14px;
+  }
+}
+
+/* Botón Nueva Publicación */
+.btn-nueva-publicacion {
+    position: relative; /* Posiciona el botón de forma absoluta */
+    top: 65px; /* Ajusta la posición vertical */
+    left: 660px; /* Ajusta la posición horizontal */
+    z-index: 10; /* Asegura que el botón esté por encima de otros elementos */
+    background: var(--teal); /* Color inicial */
+    animation: bgRGB 15s ease-in-out infinite alternate; /* Animación RGB */
+    color: white;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: transform 0.3s;
+}
+
+.btn-nueva-publicacion:hover {
+    transform: scale(1.05); /* Efecto de hover */
+}
+
+/* Botón Ver Archivadas */
+.btn-ver-archivadas {
+    background: var(--teal); /* Color inicial */
+    color: white;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: transform 0.3s;
+}
+
+.btn-ver-archivadas:hover {
+    transform: scale(1.05); /* Efecto de hover */
+}
+
+.no-archivadas {
+    text-align: center;
+    font-size: 18px;
+    color: #555;
+    margin: 100px 0;
+    font-weight: bold;
 }
