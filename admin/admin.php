@@ -51,12 +51,11 @@ try {
 
         <main class="main-content">
             <h1>¡Bienvenido al panel de administración!</h1>
-
             <div class="button-container">
+                <button id="toggleView" class="btn-ver-archivadas">🗂 Ver archivadas</button>
                 <form action="crear_publicacion.php" method="get">
-                    <button type="submit" class="new-button">➕ Nueva publicación</button>
+                    <button type="submit" class="new-button btn-nueva-publicacion">➕ Nueva publicación</button>
                 </form>
-                <button id="toggleView">🗂 Ver archivadas</button>
             </div>
 
             <!-- Tabla principal -->
@@ -101,6 +100,9 @@ try {
             <!-- Tabla archivadas -->
             <div id="tablaArchivadas" class="tabla-publicaciones hidden">
                 <h2>Publicaciones archivadas</h2>
+            <?php if (empty($archivadas)) { ?>
+                <p class="no-archivadas">No hay publicaciones archivadas.</p>
+            <?php } else { ?>    
                 <table>
                     <thead>
                         <tr>
@@ -122,7 +124,7 @@ try {
                                 <td data-label="Eliminar">
                                     <a href="#" 
                                     onclick="mostrarConfirmacion('¿Estás seguro de eliminar esta publicación?', function() {
-                                        window.location.href = 'eliminar_publicacion.php?id_noticia=<?php echo $pub['id_noticia']; ?>';
+                                        window.location.href = 'eliminar_publicacion.php?id_noticia=<?php echo $arch['id_noticia']; ?>';
                                     }); return false;">❌</a>
                                 </td>
                                 <td data-label="Restaurar">
@@ -135,6 +137,7 @@ try {
                         <?php endforeach; ?>
                     </tbody>
                 </table>
+            <?php } ?>    
             </div>
         </main>
     </div>
