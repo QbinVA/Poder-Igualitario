@@ -9,7 +9,9 @@
   <title>Registro</title>
   <link rel="stylesheet" href="../views/css/registro.css">
   <link rel="stylesheet" href="../views/css/font/font.css">
+  <link rel="stylesheet" href="../views/css/auth-transitions.css">
   <script defer src="../views/js/auth-carousel.js"></script>
+  <script defer src="../views/js/auth-transition.js"></script>
 </head>
 <body>
   <div class="auth-container">
