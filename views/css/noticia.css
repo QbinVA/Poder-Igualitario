@@ -6,9 +6,32 @@
   padding: 0;
   box-sizing: border-box;
 }
+/* Paleta RGB animada */
+:root {
+  --teal: #008080;
+  --aquamarine: #7FFFD4;
+  --bright-teal: #01F9C6;
+  --cadet-blue: #5F9EA0;
+  --caribbean-green: #00CC99;
+  --common-teal: #009193;
+}
+
+@keyframes bgRGB {
+  0%   { background-color: var(--teal); }
+  20%  { background-color: var(--aquamarine); }
+  40%  { background-color: var(--bright-teal); }
+  60%  { background-color: var(--cadet-blue); }
+  80%  { background-color: var(--caribbean-green); }
+  100% { background-color: var(--common-teal); }
+}
+
+/* Aplica animación al <body> */
+body {
+  animation: bgRGB 15s ease-in-out infinite alternate;
+}
 body {
   font-family: Arial, sans-serif;
-  background: linear-gradient(to bottom, #00bcd4, #d9f2f2);
+  background: bgRGB 15s ease-in-out infinite alternate;
   color: #1a1a1a;
   display: flex;             /* para “empujar” footer abajo */
   flex-direction: column;
