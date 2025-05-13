@@ -9,7 +9,9 @@
   <title>Log in</title>
   <link rel="stylesheet" href="../views/css/login.css">
   <link rel="stylesheet" href="../views/css/font/font.css">
+  <link rel="stylesheet" href="../views/css/auth-transitions.css">
   <script defer src="../views/js/auth-carousel.js"></script>
+  <script defer src="../views/js/auth-transition.js"></script>
 </head>
 <body>
   <div class="auth-container">

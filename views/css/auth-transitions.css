@@ -1,0 +1,95 @@
+/* ===== auth-transitions.css — Animaciones para login/registro ===== */
+
+/* Variables de color (por si las necesitas) */
+:root {
+  --bright-teal: #01F9C6;
+}
+
+/* -------- Page Load Fade-In & Fade-Out -------- */
+body {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+body.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+body.fade-out {
+  opacity: 0;
+  transform: translateY(-20px);
+  pointer-events: none;
+}
+
+/* -------- Elementos del formulario (fade + slide up) -------- */
+.form-pane h2,
+.form-pane input,
+.form-pane .forgot,
+.form-pane .btn-login,
+.form-pane .btn-signup,
+.form-pane .tos,
+.form-pane .links {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+/* Secuencia de aparición */
+.form-pane.animate h2               { animation: fade-slide-up 0.5s ease forwards 0.1s; }
+.form-pane.animate input:nth-of-type(1) { animation: fade-slide-up 0.5s ease forwards 0.2s; }
+.form-pane.animate input:nth-of-type(2) { animation: fade-slide-up 0.5s ease forwards 0.3s; }
+.form-pane.animate input:nth-of-type(3) { animation: fade-slide-up 0.5s ease forwards 0.4s; }
+.form-pane.animate input:nth-of-type(4) { animation: fade-slide-up 0.5s ease forwards 0.5s; }
+.form-pane.animate .forgot          { animation: fade-slide-up 0.5s ease forwards 0.4s; }
+.form-pane.animate .tos             { animation: fade-slide-up 0.5s ease forwards 0.5s; }
+.form-pane.animate .btn-login,
+.form-pane.animate .btn-signup      { animation: fade-slide-up 0.5s ease forwards 0.6s; }
+.form-pane.animate .links           { animation: fade-slide-up 0.5s ease forwards 0.7s; }
+
+@keyframes fade-slide-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* -------- Hover en botones -------- */
+.form-pane .btn-login,
+.form-pane .btn-signup {
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+.form-pane .btn-login:hover,
+.form-pane .btn-signup:hover {
+  transform: translateY(-3px);
+  background: #444;
+}
+
+/* -------- Carrusel (fade-in) -------- */
+.carousel-pane {
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+.carousel-pane.animate {
+  opacity: 1;
+}
+
+/* -------- Página completa “wipe” transition -------- */
+.page-transition {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: var(--bright-teal);
+  z-index: 9999;
+  transform: translateX(-100%);
+  pointer-events: none;
+}
+.page-transition.active {
+  animation: page-slide 1s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+}
+@keyframes page-slide {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
