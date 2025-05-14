@@ -41,7 +41,7 @@ try {
 <body>
     <div class="container">
         <aside class="sidebar">
-            <h2><a href="../index.php">Voces Igualitarias</a></h2>
+            <h2><a href="../index.php">Voces Igualitarias</a></h2> <img src="../views/assets/Iguales.png" alt="Logo" class="logo-img"></a>
             <div class="user-info">
                 <p><?php echo htmlspecialchars($admin['nombre']); ?></p>
                 <p><?php echo htmlspecialchars($admin['correo']); ?></p>
