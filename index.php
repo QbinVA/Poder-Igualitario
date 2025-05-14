@@ -38,7 +38,6 @@ try {
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/9.3.2/swiper-bundle.min.css" />
   
   <style>
-
     /* Estilos para el mensaje destacado y nuevo slider */
     .featured-message {
       width: 80%;
@@ -64,14 +63,14 @@ try {
       color: #333;
     }
     
-    /* Nuevo slider moderno */
+    /* Nuevo slider moderno con tamaño aumentado */
     .modern-slider {
-      width: 75%;
+      width: 85%; /* Aumentado de 75% a 85% */
       margin: 0 auto 30px;
       border-radius: 12px;
       overflow: hidden;
       position: relative;
-      height: 280px;
+      height: 350px; /* Aumentado de 280px a 350px */
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
     }
     
@@ -144,7 +143,7 @@ try {
       right: 15px;
     }
     
-    /* Estilos para Swiper */
+    /* Estilos para Swiper - tamaño ligeramente aumentado */
     .swiper-container {
       width: 100%;
       padding: 30px 10px;
@@ -154,7 +153,7 @@ try {
       background: #fff;
       border-radius: 8px;
       box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-      height: 320px;
+      height: 340px; /* Aumentado de 320px a 340px */
       overflow: hidden;
       transition: all 0.3s ease;
       border-top: 3px solid #01BDA3;
@@ -166,7 +165,7 @@ try {
     }
     
     .card-image {
-      height: 150px;
+      height: 160px; /* Aumentado de 150px a 160px */
       width: 100%;
       object-fit: cover;
     }
@@ -184,7 +183,8 @@ try {
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
-      height: 40px;
+      height: 44px; /* Aumentado de 40px a 44px */
+      text-overflow: ellipsis; /* Añadido para mostrar "..." */
     }
     
     .card-description {
@@ -195,7 +195,8 @@ try {
       -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
       overflow: hidden;
-      height: 60px;
+      height: 64px; /* Aumentado de 60px a 64px */
+      text-overflow: ellipsis; /* Añadido para mostrar "..." */
     }
     
     .card-date {
@@ -240,6 +241,7 @@ try {
       opacity: 1;
       background: #01BDA3;
     }
+  
   </style>
 </head>
 <body>
@@ -252,7 +254,7 @@ try {
     <p>Descubre las últimas noticias y contenidos enfocados en igualdad, participación y cambio social.</p>
   </section>
 
-  <!-- Nuevo slider moderno que reemplaza al anterior -->
+  <!-- Nuevo slider moderno que reemplaza al anterior (ahora con mayor tamaño) -->
   <section class="modern-slider">
     <?php
       $imgs = glob(__DIR__ . '/carousel-fotos/*.jpg');
@@ -282,30 +284,13 @@ ob_start();
 ?>
 
   <main>
-    <section class="main-news">
-      <?php if (!empty($pubs)):
-        $p = $pubs[0]; ?>
-        <a href="views/layouts/ver_publicacion.php?id=<?= $p['id_noticia'] ?>&lang=<?= $lang ?>" class="main-news-link">
-          <div class="main-news-card clickable">
-            <img src="uploads/<?= htmlspecialchars($p['imagen_principal']) ?>" alt="">
-            <h4><?= htmlspecialchars($p['titular']) ?></h4>
-            <p><?= htmlspecialchars($p['descripcion_corta']) ?></p>
-            <p class="publication-date">
-              <?= ($lang === 'es')
-                    ? date("d/m/Y", strtotime($p['fecha']))
-                    : date("m/d/Y", strtotime($p['fecha'])); ?>
-            </p>
-          </div>
-        </a>
-      <?php endif; ?>
-    </section>
+    <!-- Se ha eliminado la sección "main-news" -->
 
-    <!-- Reemplazar la sección de noticias secundarias con Swiper -->
-    <h3 class="section-title">Otras noticias</h3>
+    <!-- Swiper con todas las noticias -->
+    <h3 class="section-title">Noticias sobre la igualdad de genero.</h3>
     <div class="swiper-container">
       <div class="swiper-wrapper">
-        <?php foreach ($pubs as $i => $pub):
-                if ($i > 0): ?>
+        <?php foreach ($pubs as $pub): ?>
           <div class="swiper-slide">
             <a href="views/layouts/ver_publicacion.php?id=<?= $pub['id_noticia'] ?>&lang=<?= $lang ?>">
               <img src="uploads/<?= htmlspecialchars($pub['imagen_principal']) ?>" alt="" class="card-image">
@@ -321,9 +306,7 @@ ob_start();
               </div>
             </a>
           </div>
-        <?php 
-                endif;
-              endforeach; ?>
+        <?php endforeach; ?>
       </div>
       <!-- Agregar navegación -->
       <div class="swiper-button-next"></div>
