@@ -91,14 +91,14 @@ a {
   color: #333;
 }
 
-/* ==== Slider moderno con verde menta ==== */
+/* ==== Slider moderno con verde menta (tamaño aumentado) ==== */
 .modern-slider {
-  width: 75%;
+  width: 85%; /* Aumentado de 75% a 85% */
   margin: 0 auto 30px;
   border-radius: 12px;
   overflow: hidden;
   position: relative;
-  height: 280px;
+  height: 350px; /* Aumentado de 280px a 350px */
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
   border: 3px solid #01BDA3; /* Borde verde menta */
 }
@@ -173,48 +173,6 @@ a {
   right: 15px;
 }
 
-/* ==== Tarjeta de noticia principal ==== */
-.main-news-card {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 20px;
-  margin-bottom: 30px;
-  background-color: #f9f9f9;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.main-news-card:hover {
-  background-color: #efefef;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-  transform: translateY(-5px);
-}
-
-/* Estilo para noticia principal */
-.main-news img {
-  width: 100%;
-  max-height: 400px;
-  object-fit: cover;
-  border-radius: 8px;
-}
-
-.main-news h4 {
-  font-size: 1.5em;
-  margin-top: 15px;
-}
-
-.main-news p {
-  margin: 12px 0;
-}
-
-.publication-date {
-  font-size: 0.9em;
-  color: #555;
-  padding-top: 5px;
-}
-
 /* Título de sección */
 .section-title {
   color: #fff;
@@ -224,7 +182,7 @@ a {
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
 }
 
-/* ==== Swiper Estilos ==== */
+/* ==== Swiper Estilos (tarjetas ligeramente más grandes) ==== */
 .swiper-container {
   width: 100%;
   padding: 30px 10px;
@@ -235,7 +193,7 @@ a {
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-  height: 320px;
+  height: 340px; /* Aumentado de 320px a 340px */
   overflow: hidden;
   transition: all 0.3s ease;
   border-top: 3px solid #01BDA3;
@@ -254,7 +212,7 @@ a {
 }
 
 .card-image {
-  height: 150px;
+  height: 160px; /* Aumentado de 150px a 160px */
   width: 100%;
   object-fit: cover;
 }
@@ -272,7 +230,8 @@ a {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  height: 40px;
+  height: 44px; /* Aumentado de 40px a 44px */
+  text-overflow: ellipsis; /* Para asegurar que se muestre "..." */
 }
 
 .card-description {
@@ -283,7 +242,8 @@ a {
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  height: 60px;
+  height: 64px; /* Aumentado de 60px a 64px */
+  text-overflow: ellipsis; /* Para asegurar que se muestre "..." */
 }
 
 .card-date {
@@ -300,280 +260,32 @@ a {
   font-weight: 500;
   margin-top: 5px;
   transition: color 0.3s ease;
-}/* Reset básico */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
 }
 
-body {
-  font-family: Arial, sans-serif;
-  background: linear-gradient(
-    135deg,
-    #009193 35%,
-    #01BDA3 52%,
-    #B3D6D1 100%
-  );
-  color: #000;
-  line-height: 1.6;
-  padding: 0; /* sin padding en el body */
-  opacity: 0; /* comenzamos con opacidad 0 para el efecto fade in */
-  animation: fadeIn 1s ease forwards; /* animación fade in */
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-/* Damos padding al contenido principal */
-main {
-  padding: 20px;  /* espacio interior del main */
-}
-
-/* Eliminamos el subrayado para todos los enlaces */
-a {
-  text-decoration: none;
-}
-
-/* Enlaces específicos en las tarjetas */
-.main-news-link,
-.news-item-link {
-  display: block;
-  color: inherit;
-}
-
-/* Clickable efecto */
-.clickable {
-  cursor: pointer;
-}
-
-/* ==== Mensaje destacado ==== */
-.featured-message {
-  width: 80%;
-  margin: 20px auto;
-  padding: 25px;
-  background-color: rgba(255, 255, 255, 0.85);
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  transition: transform 0.3s ease;
-}
-
-.featured-message:hover {
-  transform: translateY(-5px);
-}
-
-.featured-message h3 {
-  color: #009193;
-  margin-bottom: 10px;
-  font-size: 1.8em;
-}
-
-.featured-message p {
-  font-size: 1.2em;
-  line-height: 1.6;
-  color: #333;
-}
-
-/* ==== Slider moderno con verde menta ==== */
-.modern-slider {
-  width: 75%;
-  margin: 0 auto 30px;
-  border-radius: 12px;
-  overflow: hidden;
-  position: relative;
-  height: 280px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-  border: 3px solid #01BDA3; /* Borde verde menta */
-}
-
-.modern-slider img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0;
-  transition: opacity 1s ease;
-}
-
-.modern-slider img.active {
-  opacity: 1;
-}
-
-.slider-controls {
-  position: absolute;
-  bottom: 15px;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  z-index: 5;
-}
-
-.slider-dot {
-  width: 12px;
-  height: 12px;
+/* Swiper Navigation */
+.swiper-button-next, 
+.swiper-button-prev {
+  color: #01BDA3;
+  background: rgba(255, 255, 255, 0.8);
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.5);
-  cursor: pointer;
-  transition: all 0.3s ease;
+  --swiper-navigation-size: 18px;
 }
 
-.slider-dot.active {
-  background-color: #01BDA3; /* Verde menta para el dot activo */
-  transform: scale(1.2);
-}
-
-.slider-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 40px;
-  height: 40px;
-  background-color: rgba(255, 255, 255, 0.7);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 5;
-  transition: all 0.3s ease;
-  font-weight: bold;
-}
-
-.slider-arrow:hover {
-  background-color: #01BDA3; /* Verde menta al hacer hover */
+.swiper-button-next:hover, 
+.swiper-button-prev:hover {
+  background: #01BDA3;
   color: white;
 }
 
-.slider-prev {
-  left: 15px;
+/* Swiper Pagination */
+.swiper-pagination-bullet {
+  background: #01BDA3;
+  opacity: 0.5;
 }
 
-.slider-next {
-  right: 15px;
-}
-
-/* ==== Tarjetas de noticias ==== */
-.main-news-card,
-.news-item-card {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;          /* más espacio entre elementos internos */
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 20px;      /* padding aumentado */
-  margin-bottom: 30px;/* margen inferior aumentado */
-  background-color: #f9f9f9;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.main-news-card:hover,
-.news-item-card:hover {
-  background-color: #efefef;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-  transform: translateY(-5px);
-}
-
-/* Estilo para noticia principal */
-.main-news img {
-  width: 100%;
-  max-height: 400px;
-  object-fit: cover;
-  border-radius: 8px;
-}
-
-.main-news h4 {
-  font-size: 1.5em;
-  margin-top: 15px;   /* un poco más de espacio arriba */
-}
-
-.main-news p {
-  margin: 12px 0;     /* espaciado vertical aumentado */
-}
-
-.publication-date {
-  font-size: 0.9em;
-  color: #555;
-  padding-top: 5px;
-}
-
-/* Noticias secundarias */
-.secondary-news {
-  margin-top: 50px;   /* más separación antes de la sección */
-  display: flex;
-  flex-direction: column;
-  gap: 30px;          /* más espacio entre items */
-}
-
-.news-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 25px;          /* más espacio entre imagen y texto */
-}
-
-.news-item img {
-  width: 160px;
-  height: 110px;
-  object-fit: cover;
-  border-radius: 5px;
-}
-
-.news-item h5 {
-  margin-bottom: 8px; /* un poco más de espacio tras el título */
-  font-size: 1.3em;
-}
-
-/* ==== Grid de tarjetitas para noticias secundarias ==== */
-.secondary-news {
-  display: grid;
-  /* Cada tarjeta mínimo 280px, y tantas columnas que entren */
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;       /* Espacio entre tarjetas */
-  margin-top: 40px;
-}
-
-/* Ajustes para cada tarjeta */
-.news-item-card {
-  /* Sombra suave y transición para hover */
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-.news-item-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-}
-
-/* Dentro de cada tarjeta, apilamos la imagen y el texto en columna */
-.news-item {
-  display: flex;
-  flex-direction: column;
-}
-
-/* Imagen arriba, ocupa todo el ancho */
-.news-item img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 5px;
-  margin-bottom: 12px;
-}
-
-/* Texto con padding interior */
-.news-item > div {
-  padding: 0 10px 15px;
-}
-
-/* Footer */
-footer {
-  margin-top: 80px;   /* más separación antes del footer */
-  padding: 20px 0;    /* padding superior e inferior */
-  text-align: center;
-  font-size: 0.85em;
-  color: #666;
+.swiper-pagination-bullet-active {
+  opacity: 1;
+  background: #01BDA3;
 }
