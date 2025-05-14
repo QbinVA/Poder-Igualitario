@@ -7,9 +7,9 @@ ini_set('display_errors', 1);
 require '../config/db.php';
 
 // Función para guardar publicación
-function guardarPublicacion($pdo, $fecha, $titular, $descripcion_corta, $imagen_principal, $contenido, $referencia, $categoria) {
-    $sql = "INSERT INTO publicaciones (fecha, titular, descripcion_corta, imagen_principal, contenido, referencia, categoria) 
-            VALUES (:fecha, :titular, :descripcion_corta, :imagen_principal, :contenido, :referencia, :categoria)";
+function guardarPublicacion($pdo, $fecha, $titular, $descripcion_corta, $imagen_principal, $contenido, $referencia, $id_categoria) {
+    $sql = "INSERT INTO publicaciones (fecha, titular, descripcion_corta, imagen_principal, contenido, referencia, id_categoria) 
+            VALUES (:fecha, :titular, :descripcion_corta, :imagen_principal, :contenido, :referencia, :id_categoria)";
     
     $stmt = $pdo->prepare($sql);
     $stmt->execute([
@@ -19,7 +19,7 @@ function guardarPublicacion($pdo, $fecha, $titular, $descripcion_corta, $imagen_
         ':imagen_principal' => $imagen_principal,
         ':contenido' => $contenido,
         ':referencia' => $referencia,
-        ':categoria' => $categoria,
+        ':id_categoria' => $id_categoria,
     ]);
 }
 
@@ -30,9 +30,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $descripcion_corta = isset($_POST['descripcion_corta']) ? htmlspecialchars($_POST['descripcion_corta']) : '';
     $contenido = isset($_POST['contenido']) ? htmlspecialchars($_POST['contenido']) : '';
     $referencia = isset($_POST['referencia']) ? htmlspecialchars($_POST['referencia']) : null;
-    $categoria = isset($_POST['categoria']) ? htmlspecialchars($_POST['categoria']) : '';
+    $id_categoria = isset($_POST['id_categoria']) ? htmlspecialchars($_POST['id_categoria']) : '';
 
-    if (empty($titular) || empty($fecha) || empty($descripcion_corta) || empty($contenido) || empty($categoria)) {
+    if (empty($titular) || empty($fecha) || empty($descripcion_corta) || empty($contenido) || empty($id_categoria)) {
         die("Error: Todos los campos obligatorios deben ser llenados.");
     }
 
@@ -46,12 +46,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!in_array($extension, $allowed_types)) {
             die("Error: Formato de imagen no permitido. Solo JPG, JPEG, PNG y GIF.");
         }
-//
+
         $upload_dir = '../uploads/';
         if (!is_dir($upload_dir) && !mkdir($upload_dir, 0777, true)) {
             die("Error: No se pudo crear la carpeta de imágenes.");
         }
- //
+
         $imagen_destino = $upload_dir . uniqid('img_', true) . '.' . $extension;
 
         if (!move_uploaded_file($imagen_tmp, $imagen_destino)) {
@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         try {
-            guardarPublicacion($pdo, $fecha, $titular, $descripcion_corta, $imagen_destino, $contenido, $referencia, $categoria);
+            guardarPublicacion($pdo, $fecha, $titular, $descripcion_corta, $imagen_destino, $contenido, $referencia, $id_categoria);
             header("Location: admin.php");
             exit;
         } catch (PDOException $e) {
