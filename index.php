@@ -8,32 +8,61 @@ require __DIR__ . '/azure/azure-translator.php';     // Función de traducción
 // Idioma solicitado
 $lang = $_GET['lang'] ?? 'es';
 
-// Traer publicaciones (siempre en ES)
+// Obtener categorías desde la base de datos
 try {
-  $sql  = "SELECT id_noticia, fecha, titular, descripcion_corta, imagen_principal
-           FROM publicaciones
-           WHERE archivada = 0
-           ORDER BY fecha DESC"; // Solo mostrar noticias no archivadas
-  $stmt = $pdo->query($sql);
-  $pubs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $sqlCategorias = "SELECT id_categoria, nombre FROM categorias";
+    $stmtCat = $pdo->query($sqlCategorias);
+    $categorias = $stmtCat->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
-  die("Error al obtener publicaciones: " . $e->getMessage());
+    die("Error al obtener categorías: " . $e->getMessage());
 }
 
-// 1) Salida fija de <head> y header (no se traduce)
+// Obtener publicaciones para el slider moderno (todas las publicaciones)
+try {
+    $sqlSlider = "SELECT id_noticia, fecha, titular, descripcion_corta, imagen_principal
+                  FROM publicaciones
+                  WHERE archivada = 0
+                  ORDER BY fecha DESC";
+    $stmtSlider = $pdo->query($sqlSlider);
+    $sliderPubs = $stmtSlider->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    die("Error al obtener publicaciones para el slider: " . $e->getMessage());
+}
+
+// Obtener publicaciones para el Swiper (filtrar por categoría si está seleccionada)
+$categoriaSeleccionada = $_GET['categoria'] ?? '';
+
+try {
+    $sql = "SELECT id_noticia, fecha, titular, descripcion_corta, imagen_principal
+            FROM publicaciones
+            WHERE archivada = 0";
+    if ($categoriaSeleccionada) {
+        $sql .= " AND id_categoria = :categoria";
+    }
+    $sql .= " ORDER BY fecha DESC";
+
+    $stmt = $pdo->prepare($sql);
+    if ($categoriaSeleccionada) {
+        $stmt->bindParam(':categoria', $categoriaSeleccionada, PDO::PARAM_INT);
+    }
+    $stmt->execute();
+    $pubs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    die("Error al obtener publicaciones: " . $e->getMessage());
+}
+
 ?><!DOCTYPE html>
 <html lang="<?= htmlspecialchars($lang) ?>">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Poder Igualitario</title>
 
-  <!-- Tus estilos habituales -->
+  <!-- Estilos -->
   <link rel="stylesheet" href="views/css/index.css">
   <link rel="stylesheet" href="views/css/header.css">
   <link rel="stylesheet" href="views/css/footer.css">
   <link rel="stylesheet" href="views/css/font/font.css">
-  
   <!-- Swiper CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/9.3.2/swiper-bundle.min.css" />
   
@@ -72,6 +101,7 @@ try {
       position: relative;
       height: 350px;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      z-index: 1;
     }
     
     .modern-slider .slide {
@@ -82,16 +112,21 @@ try {
       height: 100%;
       opacity: 0;
       transition: opacity 1s ease;
+      z-index: 2;
     }
     
     .modern-slider .slide.active {
       opacity: 1;
+      z-index: 2;
     }
     
     .modern-slider .slide img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      z-index: 3;
+      position: relative;
+      display: block;
     }
     
     .modern-slider .slide-content {
@@ -100,7 +135,7 @@ try {
       left: 0;
       width: 100%;
       padding: 20px;
-      background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0));
+      background: linear-gradient(to top, rgba(0,0,0,0.8), hsla(0, 0.00%, 0.00%, 0.00));
       color: white;
       z-index: 2;
     }
@@ -262,43 +297,42 @@ try {
 
   <!-- Slider moderno con noticias de la base de datos -->
   <section class="modern-slider">
- <?php
-  // Mezclamos y cortamos a 4
-  $random_pubs = $pubs;
-  shuffle($random_pubs);
-  $random_pubs = array_slice($random_pubs, 0, 4);
+      <?php
+      // Mezclamos y cortamos a 4 publicaciones para el slider
+      $random_pubs = $sliderPubs;
+      shuffle($random_pubs);
+      $random_pubs = array_slice($random_pubs, 0, 4);
 
-  foreach ($random_pubs as $i => $pub):
-    // Extraemos solo el nombre de fichero, eliminando cualquier ../ o uploads/
-    $file = basename($pub['imagen_principal']);
-    // Construimos la URL correcta
-    $imgSrc = "uploads/$file";
-?>
-      <div class="slide <?= $i === 0 ? 'active' : '' ?>">
-        <img src="uploads/<?= htmlspecialchars($pub['imagen_principal']) ?>" alt="<?= htmlspecialchars($pub['titular']) ?>">
-        <div class="slide-content">
-          <h3 class="slide-title">
-            <?php
-              // Cortar el título a 40 caracteres máximo
-              $title = htmlspecialchars($pub['titular']);
-              echo (strlen($title) > 40) ? substr($title, 0, 40) . '...' : $title;
-            ?>
-          </h3>
-          <div class="slide-date">
-            <?= ($lang === 'es')
-                ? date("d/m/Y", strtotime($pub['fecha']))
-                : date("m/d/Y", strtotime($pub['fecha'])); ?>
+      foreach ($random_pubs as $i => $pub):
+          // Limpiar la ruta de imagen_principal
+          $imagen = str_replace('../uploads/', '', $pub['imagen_principal']);
+          $imgSrc = "uploads/" . htmlspecialchars($imagen);
+          echo "<!-- Ruta generada: $imgSrc -->"; // Depuración
+      ?>
+          <div class="slide <?= $i === 0 ? 'active' : '' ?>">
+              <img src="<?= $imgSrc ?>" alt="<?= htmlspecialchars($pub['titular']) ?>">
+              <div class="slide-content">
+                  <h3 class="slide-title">
+                      <?php
+                      $title = htmlspecialchars($pub['titular']);
+                      echo (strlen($title) > 40) ? substr($title, 0, 40) . '...' : $title;
+                      ?>
+                  </h3>
+                  <div class="slide-date">
+                      <?= ($lang === 'es')
+                          ? date("d/m/Y", strtotime($pub['fecha']))
+                          : date("m/d/Y", strtotime($pub['fecha'])); ?>
+                  </div>
+              </div>
           </div>
-        </div>
+      <?php endforeach; ?>
+      
+      <!-- Controles del slider -->
+      <div class="slider-controls">
+          <?php for ($i = 0; $i < count($random_pubs); $i++): ?>
+              <div class="slider-dot <?= $i === 0 ? 'active' : '' ?>" data-index="<?= $i ?>"></div>
+          <?php endfor; ?>
       </div>
-    <?php endforeach; ?>
-    
-    <!-- Controles del slider -->
-    <div class="slider-controls">
-      <?php for($i = 0; $i < count($random_pubs); $i++): ?>
-        <div class="slider-dot <?= $i === 0 ? 'active' : '' ?>" data-index="<?= $i ?>"></div>
-      <?php endfor; ?>
-    </div>
   </section>
 
 <?php
@@ -307,28 +341,60 @@ try {
 ob_start();
 ?>
 
+  <!-- Noticias -->
   <main>
-    <!-- Swiper con todas las noticias -->
-    <h3 class="section-title">Noticias sobre la igualdad de género</h3>
+    <h3 class="section-title">
+      <?= $lang === 'es'
+          ? 'Noticias sobre la igualdad de género'
+          : 'News about gender equality' ?>
+    </h3>
+    <!-- Filtro de categorías -->
+    <section class="filter-section">
+      <form method="GET" action="index.php">
+        <input type="hidden" name="lang" value="<?= htmlspecialchars($lang) ?>">
+        <label for="categoria">
+          <?= $lang === 'es' ? 'Filtrar por categoría:' : 'Filter by category:' ?>
+        </label>
+        <select name="categoria" id="categoria" onchange="this.form.submit()">
+          <option value="">
+            <?= $lang === 'es' ? 'Todas las categorías' : 'All categories' ?>
+          </option>
+          <?php foreach ($categorias as $cat): ?>
+            <option value="<?= $cat['id_categoria'] ?>"
+              <?= $cat['id_categoria'] == $categoriaSeleccionada ? 'selected' : '' ?>>
+              <?= htmlspecialchars($cat['nombre']) ?>
+            </option>
+          <?php endforeach; ?>
+        </select>
+      </form>
+    </section>
     <div class="swiper-container">
       <div class="swiper-wrapper">
-        <?php foreach ($pubs as $pub): ?>
-          <div class="swiper-slide">
-            <a href="views/layouts/ver_publicacion.php?id=<?= $pub['id_noticia'] ?>&lang=<?= $lang ?>">
-              <img src="uploads/<?= htmlspecialchars($pub['imagen_principal']) ?>" alt="" class="card-image">
-              <div class="card-content">
-                <h5 class="card-title"><?= htmlspecialchars($pub['titular']) ?></h5>
-                <p class="card-description"><?= htmlspecialchars($pub['descripcion_corta']) ?></p>
-                <span class="card-date">
-                  <?= ($lang === 'es')
-                      ? date("d/m/Y", strtotime($pub['fecha']))
-                      : date("m/d/Y", strtotime($pub['fecha'])); ?>
-                </span>
-                <div class="card-more">Ver más...</div>
-              </div>
-            </a>
-          </div>
-        <?php endforeach; ?>
+        <?php if (empty($pubs)): ?>
+          <p class="no-news">
+            <?= $lang === 'es'
+                ? 'No se encontraron noticias.'
+                : 'No news found.' ?>
+          </p>
+        <?php else: ?>
+          <?php foreach ($pubs as $pub): ?>
+            <div class="swiper-slide">
+              <a href="views/layouts/ver_publicacion.php?id=<?= $pub['id_noticia'] ?>&lang=<?= $lang ?>">
+                <img src="uploads/<?= htmlspecialchars($pub['imagen_principal']) ?>" alt="" class="card-image">
+                <div class="card-content">
+                  <h5 class="card-title"><?= htmlspecialchars($pub['titular']) ?></h5>
+                  <p class="card-description"><?= htmlspecialchars($pub['descripcion_corta']) ?></p>
+                  <span class="card-date">
+                    <?= ($lang === 'es')
+                        ? date("d/m/Y", strtotime($pub['fecha']))
+                        : date("m/d/Y", strtotime($pub['fecha'])); ?>
+                  </span>
+                  <div class="card-more">Ver más...</div>
+                </div>
+              </a>
+            </div>
+          <?php endforeach; ?>
+        <?php endif; ?>
       </div>
       <!-- Agregar paginación -->
       <div class="swiper-pagination"></div>
