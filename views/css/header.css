@@ -1,13 +1,18 @@
 /* ===== Header ===== */
 .site-header {
-  position: fixed;      /* hace que quede fijo */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #0a1f38;
+  /* fondo gris oscuro semitransparente */
+  background-color: rgba(10, 31, 56, 0.5);
+  /* desenfoque del contenido detrás */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   padding: 10px 0;
   z-index: 1000;
 }
+
 body {
   /* Empuja el contenido para que no quede detrás del header */
   padding-top: 60px; /* ajusta según la altura total de tu header */
@@ -36,9 +41,16 @@ body {
 }
 
 /* Nav botones genéricos */
+.main-nav {
+  display: flex;
+  align-items: center;
+}
+
 .main-nav a,
 .main-nav .lang-switch,
-.main-nav .login-link {
+.main-nav .login-link,
+.main-nav .logout-link {
+  display: flex;
   align-items: center;
   gap: 6px;
   margin-left: 15px;
@@ -53,11 +65,13 @@ body {
 }
 .main-nav a:hover,
 .main-nav .lang-switch:hover,
-.main-nav .login-link:hover {
+.main-nav .login-link:hover,
+.main-nav .logout-link:hover {
   opacity: 0.8;
 }
 .lang-switch:focus,
-.login-link:focus {
+.login-link:focus,
+.logout-link:focus {
   outline: none;
 }
 
@@ -67,22 +81,43 @@ body {
   margin-left: 15px;
 }
 
+/* User info container (avatar + username) */
+.user-info {
+  display: flex;
+  align-items: center;
+  background: #000;
+  border-radius: 45px;
+  padding: 6px 10px 6px 6px;
+  color: #fff;
+  gap: 8px;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.user-info:hover {
+  opacity: 0.8;
+}
+
+.username {
+  font-size: 0.9rem;
+  white-space: nowrap;
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 /* Botón redondo de usuario */
 .btn-user {
   background: #000;
   border: none;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   padding: 0;
-}
-.btn-user img {
-  width: 20px;
-  height: 20px;
 }
 
 /* Pop-up de usuario (Cerrar sesión) */
@@ -90,24 +125,26 @@ body {
   position: absolute;
   top: calc(100% + 6px);
   right: 0;
-  background: #fff;
+  background: #000;
   border-radius: 6px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
   display: none;
   min-width: 140px;
   text-align: center;
   z-index: 1001;
+  overflow: hidden;
 }
 .user-popup.show {
   display: block;
 }
-.user-popup .logout {
-  display: block;
-  padding: .75rem 1rem;
-  color: #333;
-  text-decoration: none;
-  transition: background 0.2s;
+
+/* Explicit logout button */
+.logout-link {
+  background: #d32f2f;
+  font-weight: 500;
 }
-.user-popup .logout:hover {
-  background: #f2f2f2;
+
+.logout-link:hover {
+  background: #b71c1c;
+  opacity: 1;
 }

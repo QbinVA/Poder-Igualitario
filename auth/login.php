@@ -12,7 +12,7 @@ if (isset($_SESSION['usuario_id'])) {
 } elseif (isset($_COOKIE['usuario_id'])) {
     $_SESSION['usuario_id'] = $_COOKIE['usuario_id'];
     $_SESSION['usuario_nombre'] = $_COOKIE['usuario_nombre'];
-    header("Location: ../index.php?lang=$lang");
+    header("Location: index.php?lang=$lang");
     exit;
 }
 
