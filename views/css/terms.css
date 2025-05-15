@@ -1,0 +1,151 @@
+/* ————————————————————————————————————————— */
+/* Estilos para la sección de Términos y Condiciones */
+/* ————————————————————————————————————————— */
+
+:root {
+  --teal: #008080;
+  --aquamarine: #7FFFD4;
+  --bright-teal: #01F9C6;
+  --cadet-blue: #5F9EA0;
+  --caribbean-green: #00CC99;
+  --common-teal: #009193;
+}
+
+body {
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+  background-color: #f5f8f9;
+  color: #333;
+}
+
+/* Contenedor principal */
+.terms-main {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 40px 35px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+  animation: fadeIn 1s ease-in-out both;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.terms-section h1 {
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: var(--common-teal);
+  text-align: center;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+.terms-section h1::after {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(to right, #00bcd4, #009688);
+  margin: 20px auto 0;
+  border-radius: 2px;
+}
+
+.terms-section h2 {
+  font-size: 1.75rem;
+  color: var(--teal);
+  margin-top: 50px;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 3px solid var(--caribbean-green);
+}
+
+.terms-section p {
+  font-size: 1.15rem;
+  line-height: 1.8;
+  margin-bottom: 25px;
+  color: #444;
+}
+
+.terms-section ul {
+  margin-left: 25px;
+  margin-bottom: 25px;
+  list-style-type: disc;
+  color: #444;
+}
+
+.terms-section ul li {
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
+
+.terms-section a {
+  color: var(--caribbean-green);
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+.terms-section a:hover {
+  color: var(--bright-teal);
+  text-decoration: none;
+}
+
+.terms-section em {
+  display: block;
+  margin-top: 50px;
+  font-size: 1rem;
+  color: #777;
+  text-align: center;
+  font-style: italic;
+}
+
+/* ————————————————————————————————————————— */
+/* Responsive Design */
+/* ————————————————————————————————————————— */
+@media (max-width: 768px) {
+  .terms-main {
+    margin: 30px 20px;
+    padding: 30px 20px;
+  }
+
+  .terms-section h1 {
+    font-size: 2.2rem;
+  }
+
+  .terms-section h2 {
+    font-size: 1.4rem;
+  }
+
+  .terms-section p,
+  .terms-section ul li {
+    font-size: 1.05rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .terms-main {
+    padding: 25px 15px;
+  }
+
+  .terms-section h1 {
+    font-size: 1.8rem;
+  }
+
+  .terms-section h2 {
+    font-size: 1.2rem;
+  }
+
+  .terms-section p,
+  .terms-section ul li {
+    font-size: 1rem;
+  }
+}
