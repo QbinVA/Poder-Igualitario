@@ -1,8 +1,18 @@
 /* ===== Header ===== */
 .site-header {
+  position: fixed;      /* hace que quede fijo */
+  top: 0;
+  left: 0;
+  width: 100%;
   background-color: #0a1f38;
   padding: 10px 0;
+  z-index: 1000;
 }
+body {
+  /* Empuja el contenido para que no quede detrás del header */
+  padding-top: 60px; /* ajusta según la altura total de tu header */
+}
+
 .site-header__inner {
   max-width: 1200px;
   margin: 0 auto;
@@ -10,6 +20,7 @@
   align-items: center;
   justify-content: space-between;
 }
+
 /* Logo */
 .logo {
   display: flex;
@@ -23,42 +34,80 @@
   height: 40px;
   margin-right: 8px;
 }
-/* Nav botones */
-.main-nav a {
-  margin-left: 15px;
-  padding: 6px 10px;
-  background: #000;
-  color: #fff;
-  text-decoration: none;
-  border-radius: 4px;
-  transition: opacity 0.3s ease;
-}
-.main-nav a:hover {
-  opacity: 0.8;
-}
 
-/* ===== Language switch & Login uniformes ===== */
+/* Nav botones genéricos */
+.main-nav a,
 .main-nav .lang-switch,
 .main-nav .login-link {
-  
   align-items: center;
   gap: 6px;
   margin-left: 15px;
   padding: 6px 10px;
-  background: #000;         /* fondo negro */
-  color: #fff;              /* texto blanco */
+  background: #000;
+  color: #fff;
   text-decoration: none;
   border-radius: 45px;
   font-size: 0.9rem;
   transition: opacity 0.3s ease;
   cursor: pointer;
 }
+.main-nav a:hover,
 .main-nav .lang-switch:hover,
 .main-nav .login-link:hover {
   opacity: 0.8;
 }
-
 .lang-switch:focus,
 .login-link:focus {
   outline: none;
+}
+
+/* ===== User Menu ===== */
+.user-menu-wrapper {
+  position: relative;
+  margin-left: 15px;
+}
+
+/* Botón redondo de usuario */
+.btn-user {
+  background: #000;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+}
+.btn-user img {
+  width: 20px;
+  height: 20px;
+}
+
+/* Pop-up de usuario (Cerrar sesión) */
+.user-popup {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  display: none;
+  min-width: 140px;
+  text-align: center;
+  z-index: 1001;
+}
+.user-popup.show {
+  display: block;
+}
+.user-popup .logout {
+  display: block;
+  padding: .75rem 1rem;
+  color: #333;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.user-popup .logout:hover {
+  background: #f2f2f2;
 }

@@ -29,16 +29,84 @@ if (!$noticia) {
   <link rel="stylesheet" href="../css/footer.css">
   <link rel="stylesheet" href="../css/font/font.css">
   <style>
-    .descripcion-centrada,
-    .fecha-centrada {
-      text-align: center;
-      font-style: italic;
-      margin: 1em 0;
+    /* Estilos para la sección de comentarios */
+    .comentarios-seccion {
+      max-width: 700px;
+      margin: 40px auto 70px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
     }
-    .imagen-principal {
-      display: block;
-      max-width: 100%;
-      margin: 1em auto;
+    
+    .comentarios-titulo {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      color: #333;
+      position: relative;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    
+    .comentarios-vacio {
+      text-align: center;
+      padding: 30px 0;
+      color: #666;
+      font-style: italic;
+    }
+    
+    .comentar-form {
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid #e0e0e0;
+    }
+    
+    .comentar-form textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      resize: vertical;
+      min-height: 100px;
+      margin-bottom: 15px;
+      font-family: inherit;
+    }
+    
+    .comentar-form button {
+      background: linear-gradient(to right, #00bcd4, #009688);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .comentar-form button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .comentar-placeholder {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+    
+    .avatar-placeholder {
+      width: 50px;
+      height: 50px;
+      background-color: #f1f1f1;
+      border-radius: 50%;
+    }
+    
+    .input-placeholder {
+      flex: 1;
+      height: 20px;
+      background-color: #f1f1f1;
+      border-radius: 20px;
     }
   </style>
 </head>
@@ -78,6 +146,24 @@ if (!$noticia) {
       </a>
     </section>
   <?php endif; ?>
+
+  <!-- Sección de comentarios -->
+  <section class="comentarios-seccion">
+    <h2 class="comentarios-titulo">Comentarios</h2>
+    
+    <div class="comentarios-vacio">
+      Todavia no hay comentarios existentes. ¡Se el primero en comentar!
+    </div>
+    
+    <div class="comentar-form">
+      <div class="comentar-placeholder">
+        <div class="avatar-placeholder"></div>
+        <div class="input-placeholder"></div>
+      </div>
+      <textarea placeholder="Escribe tu comentario aquí..."></textarea>
+      <button type="button">Publicar comentario</button>
+    </div>
+  </section>
 
   <?php if (!empty($noticia['imagenes'])): ?>
     <section class="imagenes">

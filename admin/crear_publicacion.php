@@ -39,8 +39,8 @@ $categorias = $stmtCategorias->fetchAll(PDO::FETCH_ASSOC);
         <input type="url" name="referencia" id="referencia">
 
         <!-- Campo de Categoría dinámico -->
-        <label for="categoria">Categoría:</label>
-        <select name="categoria" id="categoria" required>
+        <label for="id_categoria">Categoría:</label>
+        <select name="id_categoria" id="id_categoria" required>
             <option value="">Selecciona una categoría</option>
             <?php foreach ($categorias as $categoria): ?>
                 <option value="<?= htmlspecialchars($categoria['id_categoria']) ?>">

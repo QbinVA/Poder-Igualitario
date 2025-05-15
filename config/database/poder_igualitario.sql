@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 11-05-2025 a las 17:53:24
+-- Tiempo de generación: 14-05-2025 a las 13:35:27
 -- Versión del servidor: 8.0.17
 -- Versión de PHP: 7.3.10
 
@@ -123,6 +123,13 @@ CREATE TABLE `usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`id_usuario`, `nombre`, `correo`, `contrasena`, `fecha_registro`) VALUES
+(1, 'qbin', 'valdokevin02@gmail.com', '$2y$10$g7NkSuEBnvXZrV1ZqLAkreb7D4O9K31qNFc4.KtvF9ffAubjE3okC', '2025-05-13 14:19:01');
+
+--
 -- Índices para tablas volcadas
 --
 
@@ -193,7 +200,7 @@ ALTER TABLE `publicaciones`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restricciones para tablas volcadas

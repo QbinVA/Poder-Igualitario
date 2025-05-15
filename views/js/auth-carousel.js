@@ -8,3 +8,4 @@
     slides[idx].classList.add('is-active');
   }, 3000);
 })();
+

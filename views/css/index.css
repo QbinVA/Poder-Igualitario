@@ -4,19 +4,43 @@
   padding: 0;
   box-sizing: border-box;
 }
+:root {
+  --teal: #008080;
+  --aquamarine: #7FFFD4;
+  --bright-teal: #01F9C6;
+  --cadet-blue: #5F9EA0;
+  --caribbean-green: #00CC99;
+  --common-teal: #009193;
+}
+
+/* animación de fondo RGB */
+@keyframes bgRGB {
+  0%   { background-color: var(--teal); }
+  20%  { background-color: var(--aquamarine); }
+  40%  { background-color: var(--bright-teal); }
+  60%  { background-color: var(--cadet-blue); }
+  80%  { background-color: var(--caribbean-green); }
+  100% { background-color: var(--common-teal); }
+}
+
+/* animación de fade-in */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
 
 body {
+  /* gradiente base */
+  /* primero aparece (fadeIn), luego empieza el ciclo RGB */
+  animation:
+    fadeIn 1s ease forwards,
+    bgRGB 15s ease-in-out infinite alternate;
   font-family: Arial, sans-serif;
-  background: linear-gradient(
-    135deg,
-    #009193 35%,
-    #01BDA3 52%,
-    #B3D6D1 100%
-  );
   color: #000;
   line-height: 1.6;
-  padding: 0; /* sin padding en el body */
+  margin: 0;
 }
+
 
 /* Damos padding al contenido principal */
 main {
@@ -29,8 +53,7 @@ a {
 }
 
 /* Enlaces específicos en las tarjetas */
-.main-news-link,
-.news-item-link {
+.main-news-link {
   display: block;
   color: inherit;
 }
@@ -40,141 +63,229 @@ a {
   cursor: pointer;
 }
 
-/* ==== Tarjetas de noticias ==== */
-.main-news-card,
-.news-item-card {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;          /* más espacio entre elementos internos */
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 20px;      /* padding aumentado */
-  margin-bottom: 30px;/* margen inferior aumentado */
-  background-color: #f9f9f9;
-}
-
-.main-news-card:hover,
-.news-item-card:hover {
-  background-color: #efefef;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-}
-
-/* Estilo para noticia principal */
-.main-news img {
-  width: 100%;
-  max-height: 400px;
-  object-fit: cover;
-  border-radius: 8px;
-}
-
-.main-news h4 {
-  font-size: 1.5em;
-  margin-top: 15px;   /* un poco más de espacio arriba */
-}
-
-.main-news p {
-  margin: 12px 0;     /* espaciado vertical aumentado */
-}
-
-.publication-date {
-  font-size: 0.9em;
-  color: #555;
-  padding-top: 5px;
-}
-
-/* Noticias secundarias */
-.secondary-news {
-  margin-top: 50px;   /* más separación antes de la sección */
-  display: flex;
-  flex-direction: column;
-  gap: 30px;          /* más espacio entre items */
-}
-
-.news-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 25px;          /* más espacio entre imagen y texto */
-}
-
-.news-item img {
-  width: 160px;
-  height: 110px;
-  object-fit: cover;
-  border-radius: 5px;
-}
-
-.news-item h5 {
-  margin-bottom: 8px; /* un poco más de espacio tras el título */
-  font-size: 1.3em;
-}
-
-/* ==== Grid de tarjetitas para noticias secundarias ==== */
-.secondary-news {
-  display: grid;
-  /* Cada tarjeta mínimo 280px, y tantas columnas que entren */
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;       /* Espacio entre tarjetas */
-  margin-top: 40px;
-}
-
-/* Ajustes para cada tarjeta */
-.news-item-card {
-  /* Sombra suave y transición para hover */
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-.news-item-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-}
-
-/* Dentro de cada tarjeta, apilamos la imagen y el texto en columna */
-.news-item {
-  display: flex;
-  flex-direction: column;
-}
-
-/* Imagen arriba, ocupa todo el ancho */
-.news-item img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 5px;
-  margin-bottom: 12px;
-}
-
-/* Texto con padding interior */
-.news-item > div {
-  padding: 0 10px 15px;
-}
-
-/* Footer */
-footer {
-  margin-top: 80px;   /* más separación antes del footer */
-  padding: 20px 0;    /* padding superior e inferior */
+/* ==== Mensaje destacado ==== */
+.featured-message {
+  width: 80%;
+  margin: 20px auto;
+  padding: 25px;
+  background-color: rgba(255, 255, 255, 0.85);
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   text-align: center;
-  font-size: 0.85em;
-  color: #666;
+  transition: transform 0.3s ease;
 }
 
-/* === Slider pequeñito encima de la noticia principal === */
-#slider-panel {
-  width: 60%;                    /* más estrecho */
-  margin: 20px auto;             /* centrado con un poquito de separación */
-  border: 2px solid #001f3f;     /* azul marino muy oscuro */
-  border-radius: 8px;            /* pequeñito */
+.featured-message:hover {
+  transform: translateY(-5px);
+}
+
+.featured-message h3 {
+  color: #009193;
+  margin-bottom: 10px;
+  font-size: 1.8em;
+}
+
+.featured-message p {
+  font-size: 1.2em;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* ==== Slider moderno con verde menta (tamaño aumentado) ==== */
+.modern-slider {
+  width: 85%; /* Aumentado de 75% a 85% */
+  margin: 0 auto 30px;
+  border-radius: 12px;
   overflow: hidden;
   position: relative;
-  height: 200px;                 /* altura mediana */
+  height: 350px; /* Aumentado de 280px a 350px */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  border: 3px solid #01BDA3; /* Borde verde menta */
 }
-#slider-panel img {
+
+.modern-slider img {
   position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   opacity: 0;
-  transition: opacity 0.5s ease;
+  transition: opacity 1s ease;
 }
-#slider-panel img.active {
+
+.modern-slider img.active {
   opacity: 1;
+}
+
+.slider-controls {
+  position: absolute;
+  bottom: 15px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  z-index: 5;
+}
+
+.slider-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.slider-dot.active {
+  background-color: #01BDA3; /* Verde menta para el dot activo */
+  transform: scale(1.2);
+}
+
+.slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 5;
+  transition: all 0.3s ease;
+  font-weight: bold;
+}
+
+.slider-arrow:hover {
+  background-color: #01BDA3; /* Verde menta al hacer hover */
+  color: white;
+}
+
+.slider-prev {
+  left: 15px;
+}
+
+.slider-next {
+  right: 15px;
+}
+
+/* Título de sección */
+.section-title {
+  color: #fff;
+  text-align: center;
+  margin: 40px 0 20px;
+  font-size: 1.8em;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* ==== Swiper Estilos (tarjetas ligeramente más grandes) ==== */
+.swiper-container {
+  width: 100%;
+  padding: 30px 10px;
+  overflow: hidden;
+}
+
+.swiper-slide {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  height: 340px; /* Aumentado de 320px a 340px */
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border-top: 3px solid #01BDA3;
+}
+
+.swiper-slide:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.swiper-slide a {
+  color: inherit;
+  text-decoration: none;
+  display: block;
+  height: 100%;
+}
+
+.card-image {
+  height: 160px; /* Aumentado de 150px a 160px */
+  width: 100%;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 15px;
+}
+
+.card-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0 0 10px;
+  color: #009193;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  height: 44px; /* Aumentado de 40px a 44px */
+  text-overflow: ellipsis; /* Para asegurar que se muestre "..." */
+}
+
+.card-description {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 10px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  height: 64px; /* Aumentado de 60px a 64px */
+  text-overflow: ellipsis; /* Para asegurar que se muestre "..." */
+}
+
+.card-date {
+  font-size: 12px;
+  color: #999;
+  display: block;
+  margin-top: 5px;
+}
+
+.card-more {
+  display: inline-block;
+  color: #01BDA3;
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 5px;
+  transition: color 0.3s ease;
+}
+
+/* Swiper Navigation */
+.swiper-button-next, 
+.swiper-button-prev {
+  color: #01BDA3;
+  background: rgba(255, 255, 255, 0.8);
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  --swiper-navigation-size: 18px;
+}
+
+.swiper-button-next:hover, 
+.swiper-button-prev:hover {
+  background: #01BDA3;
+  color: white;
+}
+
+/* Swiper Pagination */
+.swiper-pagination-bullet {
+  background: #01BDA3;
+  opacity: 0.5;
+}
+
+.swiper-pagination-bullet-active {
+  opacity: 1;
+  background: #01BDA3;
 }

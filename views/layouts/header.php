@@ -45,7 +45,7 @@ $self = basename($_SERVER['PHP_SELF']);
         🌐 <?= $lang==='es'?'English':'Español' ?>
       </button>
       <a
-        href="/Poder-Igualitario/auth/login.php?lang=<?= htmlspecialchars($lang) ?>"
+        href="Poder-Igualitario\auth\login.php?lang=<?= htmlspecialchars($lang) ?>"
         class="login-link"
       >
         <?= $lang==='es'?'Log in':'Log in' ?>
