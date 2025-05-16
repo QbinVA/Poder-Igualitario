@@ -10,10 +10,21 @@ $lang = $_GET['lang'] ?? 'es';
 // Iniciar buffer para contenido traducible
 ob_start();
 
-// Obtener publicaciones activas
+// Obtener publicaciones activas con filtro de categoría
+$categoriaFiltro = $_GET['categoria'] ?? null;
+
 try {
-    $sql = "SELECT id_noticia, fecha, titular, descripcion_corta, imagen_principal FROM publicaciones WHERE archivada = 0 ORDER BY fecha DESC";
-    $stmt = $pdo->query($sql);
+    $sql = "SELECT id_noticia, fecha, titular, descripcion_corta, imagen_principal FROM publicaciones WHERE archivada = 0";
+    if (!empty($categoriaFiltro)) {
+        $sql .= " AND id_categoria = :categoria";
+    }
+    $sql .= " ORDER BY fecha DESC";
+
+    $stmt = $pdo->prepare($sql);
+    if (!empty($categoriaFiltro)) {
+        $stmt->bindParam(':categoria', $categoriaFiltro, PDO::PARAM_INT);
+    }
+    $stmt->execute();
     $publicaciones = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     die("Error al obtener publicaciones: " . $e->getMessage());
@@ -238,6 +249,32 @@ if (isset($_GET['editar']) && is_numeric($_GET['editar'])) {
             border: 1px solid #ddd;
             border-radius: 5px;
         }
+
+        .filter-container {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .filter-container label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .filter-container select {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .no-publicaciones {
+            font-size: 18px;
+            color: #555;
+            text-align: center;
+            margin: 20px 0;
+        }
     </style>
 </head>
 <body>
@@ -255,7 +292,7 @@ if (isset($_GET['editar']) && is_numeric($_GET['editar'])) {
         </aside>
 
         <main class="main-content">
-            <h1><?= $lang==='es' ? '¡Bienvenido al panel de administración!' : 'Welcome to the Admin Panel!' ?></h1>
+            <h1><?= $lang==='es' ? '¡Voces Igualitarias te da la bienvenida!' : 'Welcome to the Admin Panel!' ?></h1>
             <div class="button-container">
                 <button id="toggleView" class="btn-ver-archivadas"><?= $lang==='es' ? '🗂 Ver archivadas' : '🗂 View Archived' ?></button>
                 <button id="openModal" class="btn-nueva-publicacion"><?= $lang==='es' ? '➕ Nueva publicación' : '➕ New Publication' ?></button>
@@ -263,45 +300,65 @@ if (isset($_GET['editar']) && is_numeric($_GET['editar'])) {
 
             <!-- Tabla principal -->
             <div id="tablaActivas" class="tabla-publicaciones visible">
-                <h2><?= $lang==='es' ? 'Publicaciones activas' : 'Active Publications' ?></h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th><?= $lang==='es' ? 'Titular' : 'Headline' ?></th>
-                            <th><?= $lang==='es' ? 'Fecha' : 'Date' ?></th>
-                            <th><?= $lang==='es' ? 'Previsualizar' : 'Preview' ?></th>
-                            <th><?= $lang==='es' ? 'Editar' : 'Edit' ?></th>
-                            <th><?= $lang==='es' ? 'Eliminar' : 'Delete' ?></th>
-                            <th><?= $lang==='es' ? 'Archivar' : 'Archive' ?></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($publicaciones as $pub): ?>
-                            <tr>
-                                <td data-label="<?= $lang==='es' ? 'Titular' : 'Headline' ?>"><?php echo htmlspecialchars($pub['titular']); ?></td>
-                                <td data-label="<?= $lang==='es' ? 'Fecha' : 'Date' ?>"><?php echo date("d/m/Y", strtotime($pub['fecha'])); ?></td>
-                                <td data-label="<?= $lang==='es' ? 'Previsualizar' : 'Preview' ?>">
-                                    <a href="../views/layouts/ver_publicacion.php?id=<?php echo $pub['id_noticia']; ?>&lang=<?= $lang ?>">🔍</a>
-                                </td>
-                                <td data-label="<?= $lang==='es' ? 'Editar' : 'Edit' ?>">
-                                    <a href="?editar=<?php echo $pub['id_noticia']; ?>&lang=<?= $lang ?>" class="edit-link" data-id="<?php echo $pub['id_noticia']; ?>">✏️</a>
-                                </td>
-                                <td data-label="<?= $lang==='es' ? 'Eliminar' : 'Delete' ?>">
-                                    <a href="#" 
-                                    onclick="mostrarConfirmacion('<?= $lang==='es' ? '¿Estás seguro de eliminar esta publicación?' : 'Are you sure you want to delete this publication?' ?>', function() {
-                                        window.location.href = 'eliminar_publicacion.php?id_noticia=<?php echo $pub['id_noticia']; ?>&lang=<?= $lang ?>';
-                                    }); return false;">❌</a>
-                                </td>
-                                <td data-label="<?= $lang==='es' ? 'Archivar' : 'Archive' ?>">
-                                    <a href="#" 
-                                    onclick="mostrarConfirmacion('<?= $lang==='es' ? '¿Estás seguro de archivar esta publicación?' : 'Are you sure you want to archive this publication?' ?>', function() {
-                                        window.location.href = 'archivar_publicacion.php?id_noticia=<?php echo $pub['id_noticia']; ?>&lang=<?= $lang ?>';
-                                    }); return false;">📥</a>
-                                </td>
-                            </tr>
+                <h2><?= $lang === 'es' ? 'Publicaciones activas' : 'Active Publications' ?></h2>
+                <div class="filter-container">
+                    <label for="filterCategoria"><?= $lang === 'es' ? 'Filtrar por categoría:' : 'Filter by category:' ?></label>
+                    <select id="filterCategoria">
+                        <option value="" <?= empty($categoriaFiltro) ? 'selected' : '' ?>>
+                            <?= $lang === 'es' ? 'Todas las categorías' : 'All categories' ?>
+                        </option>
+                        <?php foreach ($categorias as $categoria): ?>
+                            <option value="<?= htmlspecialchars($categoria['id_categoria']) ?>" <?= $categoriaFiltro == $categoria['id_categoria'] ? 'selected' : '' ?>>
+                                <?= htmlspecialchars($categoria['nombre']) ?>
+                            </option>
                         <?php endforeach; ?>
-                    </tbody>
-                </table>
+                    </select>
+                </div>
+
+                <?php if (empty($publicaciones)): ?>
+                    <p class="no-publicaciones">
+                        <?= $lang === 'es' ? 'No hay publicaciones en esta categoría.' : 'There are no publications in this category.' ?>
+                    </p>
+                <?php else: ?>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th><?= $lang === 'es' ? 'Titular' : 'Headline' ?></th>
+                                <th><?= $lang === 'es' ? 'Fecha' : 'Date' ?></th>
+                                <th><?= $lang === 'es' ? 'Previsualizar' : 'Preview' ?></th>
+                                <th><?= $lang === 'es' ? 'Editar' : 'Edit' ?></th>
+                                <th><?= $lang === 'es' ? 'Eliminar' : 'Delete' ?></th>
+                                <th><?= $lang === 'es' ? 'Archivar' : 'Archive' ?></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($publicaciones as $pub): ?>
+                                <tr>
+                                    <td data-label="<?= $lang === 'es' ? 'Titular' : 'Headline' ?>"><?= htmlspecialchars($pub['titular']); ?></td>
+                                    <td data-label="<?= $lang === 'es' ? 'Fecha' : 'Date' ?>"><?= date("d/m/Y", strtotime($pub['fecha'])); ?></td>
+                                    <td data-label="<?= $lang === 'es' ? 'Previsualizar' : 'Preview' ?>">
+                                        <a href="../views/layouts/ver_publicacion.php?id=<?= $pub['id_noticia']; ?>&lang=<?= $lang ?>">🔍</a>
+                                    </td>
+                                    <td data-label="<?= $lang === 'es' ? 'Editar' : 'Edit' ?>">
+                                        <a href="?editar=<?= $pub['id_noticia']; ?>&lang=<?= $lang ?>" class="edit-link" data-id="<?= $pub['id_noticia']; ?>">✏️</a>
+                                    </td>
+                                    <td data-label="<?= $lang === 'es' ? 'Eliminar' : 'Delete' ?>">
+                                        <a href="#" 
+                                        onclick="mostrarConfirmacion('<?= $lang === 'es' ? '¿Estás seguro de eliminar esta publicación?' : 'Are you sure you want to delete this publication?' ?>', function() {
+                                            window.location.href = 'eliminar_publicacion.php?id_noticia=<?= $pub['id_noticia']; ?>&lang=<?= $lang ?>';
+                                        }); return false;">❌</a>
+                                    </td>
+                                    <td data-label="<?= $lang === 'es' ? 'Archivar' : 'Archive' ?>">
+                                        <a href="#" 
+                                        onclick="mostrarConfirmacion('<?= $lang === 'es' ? '¿Estás seguro de archivar esta publicación?' : 'Are you sure you want to archive this publication?' ?>', function() {
+                                            window.location.href = 'archivar_publicacion.php?id_noticia=<?= $pub['id_noticia']; ?>&lang=<?= $lang ?>';
+                                        }); return false;">📥</a>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                <?php endif; ?>
             </div>
 
             <!-- Tabla archivadas -->
@@ -436,6 +493,18 @@ if (isset($_GET['editar']) && is_numeric($_GET['editar'])) {
     <script>
         // Toggle entre tablas activas y archivadas
         document.addEventListener('DOMContentLoaded', function() {
+            const filterCategoria = document.getElementById('filterCategoria');
+            filterCategoria.addEventListener('change', function() {
+                const categoria = this.value;
+                const params = new URLSearchParams(window.location.search);
+                if (categoria) {
+                    params.set('categoria', categoria);
+                } else {
+                    params.delete('categoria'); // Eliminar el filtro si no hay categoría seleccionada
+                }
+                window.location.search = params.toString();
+            });
+            
             // Guardar el idioma seleccionado en localStorage
             const params = new URLSearchParams(window.location.search);
             const urlLang = params.get('lang');
