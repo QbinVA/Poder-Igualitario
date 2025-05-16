@@ -24,7 +24,7 @@ if (
     empty($_POST['fecha']) ||
     empty($_POST['descripcion_corta']) ||
     empty($_POST['contenido']) ||
-    empty($_POST['categoria']) // Verificar que la categoría esté presente
+    empty($_POST['id_categoria']) // Verificar que la categoría esté presente
 ) {
     die("Faltan campos obligatorios.");
 }
@@ -36,7 +36,7 @@ $fecha = $_POST['fecha'];
 $descripcion = $_POST['descripcion_corta'];
 $contenido = $_POST['contenido'];
 $referencia = $_POST['referencia'] ?? '';
-$id_categoria = $_POST['categoria']; // Recibir la categoría seleccionada
+$id_categoria = $_POST['id_categoria']; // Recibir la categoría seleccionada
 
 // Obtener imagen actual
 $stmt = $pdo->prepare("SELECT imagen_principal FROM publicaciones WHERE id_noticia = ?");

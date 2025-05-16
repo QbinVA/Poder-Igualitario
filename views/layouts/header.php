@@ -62,14 +62,14 @@ $nombreUsuario = $_SESSION['usuario_nombre'] ?? $_COOKIE['usuario_nombre'] ?? ''
             <span class="username"><?= htmlspecialchars($nombreUsuario) ?></span>
           </div>
           <div class="user-popup">
-            <a href="/Poder-Igualitario/auth/logout.php?lang=<?= htmlspecialchars($lang) ?>" class="logout">
+            <a href="#" class="logout" id="logout-link">
               <?= $lang==='es'?'Cerrar sesión':'Log out' ?>
             </a>
           </div>
         </div>
         
         <!-- Explicit Logout Button -->
-        <a href="/Poder-Igualitario/auth/logout.php?lang=<?= htmlspecialchars($lang) ?>" class="logout-link">
+        <a href="#" class="logout-link" id="logout-link-explicit">
           <?= $lang==='es'?'Cerrar sesión':'Log out' ?>
         </a>
       <?php else: ?>
@@ -86,36 +86,29 @@ $nombreUsuario = $_SESSION['usuario_nombre'] ?? $_COOKIE['usuario_nombre'] ?? ''
   </div>
 </header>
 
-<!-- 2) Script que maneja el click y guarda en localStorage -->
+<!-- Incluir el sistema de notificaciones -->
+<?php include 'notificaciones.php'; ?>
+
+<!-- Script para manejar el cierre de sesión con confirmación -->
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    // Language switcher
-    document.getElementById('lang-switcher').addEventListener('click', () => {
-      // Determina el 'nuevo' idioma
-      const current = new URLSearchParams(window.location.search).get('lang') || 'es';
-      const next = current === 'es' ? 'en' : 'es';
+    const logoutLinks = document.querySelectorAll('#logout-link, #logout-link-explicit');
 
-      // Guárdalo para próximas visitas
-      localStorage.setItem('lang', next);
+    logoutLinks.forEach(link => {
+      link.addEventListener('click', (event) => {
+        event.preventDefault(); // Evita la redirección inmediata
 
-      // Recarga la página con ?lang=next
-      const params = new URLSearchParams(window.location.search);
-      params.set('lang', next);
-      window.location.search = params.toString();
+        // Muestra el cuadro de confirmación
+        mostrarConfirmacion(
+          '<?= $lang === "es" ? "¿Estás seguro de que deseas cerrar sesión?" : "Are you sure you want to log out?" ?>',
+          () => {
+            // Redirige al cerrar sesión si el usuario confirma
+            window.location.href = '/Poder-Igualitario/auth/logout.php?lang=<?= htmlspecialchars($lang) ?>';
+          }
+        );
+      });
     });
-
-    // User menu hover toggle
-    const userMenu = document.querySelector('.user-menu-wrapper');
-    if (userMenu) {
-      const popup = userMenu.querySelector('.user-popup');
-      
-      userMenu.addEventListener('mouseenter', () => {
-        popup.classList.add('show');
-      });
-      
-      userMenu.addEventListener('mouseleave', () => {
-        popup.classList.remove('show');
-      });
-    }
   });
 </script>
+</body>
+</html>
