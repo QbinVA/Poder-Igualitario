@@ -1,7 +1,7 @@
 <?php
-
 // ver_publicacion.php
 
+session_start();
 require dirname(__DIR__, 2) . '/config/db.php';
 require dirname(__DIR__, 2) . '/azure/config.php';
 require dirname(__DIR__, 2) . '/azure/azure-translator.php';
@@ -12,13 +12,43 @@ if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
 }
 $id_noticia = (int)$_GET['id'];
 
+// Recuperar la noticia
 $stmt = $pdo->prepare("SELECT * FROM publicaciones WHERE id_noticia = :id");
 $stmt->execute([':id' => $id_noticia]);
 $noticia = $stmt->fetch(PDO::FETCH_ASSOC);
 if (!$noticia) {
     die("Noticia no encontrada.");
 }
-?><!DOCTYPE html>
+
+// Procesar el comentario si se envió
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['comentario'])) {
+    if (!isset($_SESSION['usuario_id'])) {
+        die("Debes iniciar sesión para comentar.");
+    }
+
+    $comentario = trim($_POST['comentario']);
+    if (!empty($comentario)) {
+        $stmt = $pdo->prepare("INSERT INTO comentarios (id_noticia, id_usuario, comentario, fecha_comentario) VALUES (:id_noticia, :id_usuario, :comentario, NOW())");
+        $stmt->execute([
+            ':id_noticia' => $id_noticia,
+            ':id_usuario' => $_SESSION['usuario_id'],
+            ':comentario' => $comentario
+        ]);
+        header("Location: ver_publicacion.php?id=$id_noticia&lang=$lang");
+        exit;
+    }
+}
+
+// Recuperar comentarios existentes
+$stmt = $pdo->prepare("SELECT c.comentario, c.fecha_comentario, u.nombre 
+                       FROM comentarios c 
+                       JOIN usuarios u ON c.id_usuario = u.id_usuario 
+                       WHERE c.id_noticia = :id_noticia 
+                       ORDER BY c.fecha_comentario DESC");
+$stmt->execute([':id_noticia' => $id_noticia]);
+$comentarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
+<!DOCTYPE html>
 <html lang="<?= htmlspecialchars($lang) ?>">
 <head>
   <meta charset="UTF-8">
@@ -87,33 +117,10 @@ if (!$noticia) {
       transform: translateY(-2px);
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
-    
-    .comentar-placeholder {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      margin-bottom: 15px;
-    }
-    
-    .avatar-placeholder {
-      width: 50px;
-      height: 50px;
-      background-color: #f1f1f1;
-      border-radius: 50%;
-    }
-    
-    .input-placeholder {
-      flex: 1;
-      height: 20px;
-      background-color: #f1f1f1;
-      border-radius: 20px;
-    }
   </style>
 </head>
 <body>
   <?php include __DIR__ . '/header.php'; ?>
-
-<?php ob_start(); ?>
 
 <main class="noticia-page">
   <section class="encabezado">
@@ -150,19 +157,32 @@ if (!$noticia) {
   <!-- Sección de comentarios -->
   <section class="comentarios-seccion">
     <h2 class="comentarios-titulo">Comentarios</h2>
-    
-    <div class="comentarios-vacio">
-      Todavia no hay comentarios existentes. ¡Se el primero en comentar!
-    </div>
-    
-    <div class="comentar-form">
-      <div class="comentar-placeholder">
-        <div class="avatar-placeholder"></div>
-        <div class="input-placeholder"></div>
+
+    <?php if (!empty($comentarios)): ?>
+      <div class="comentarios-lista">
+        <?php foreach ($comentarios as $comentario): ?>
+          <div class="comentario">
+            <p><strong><?= htmlspecialchars($comentario['nombre']) ?></strong> - <?= date("d/m/Y H:i", strtotime($comentario['fecha_comentario'])) ?></p>
+            <p><?= nl2br(htmlspecialchars($comentario['comentario'])) ?></p>
+          </div>
+        <?php endforeach; ?>
       </div>
-      <textarea placeholder="Escribe tu comentario aquí..."></textarea>
-      <button type="button">Publicar comentario</button>
-    </div>
+    <?php else: ?>
+      <div class="comentarios-vacio">
+        Todavía no hay comentarios existentes. ¡Sé el primero en comentar!
+      </div>
+    <?php endif; ?>
+
+    <?php if (isset($_SESSION['usuario_id'])): ?>
+      <form class="comentar-form" method="POST">
+        <textarea name="comentario" placeholder="Escribe tu comentario aquí..." required></textarea>
+        <button type="submit">Publicar comentario</button>
+      </form>
+    <?php else: ?>
+      <div class="comentarios-vacio">
+        Debes <a href="/Poder-Igualitario/auth/login.php?lang=<?= htmlspecialchars($lang) ?>">iniciar sesión</a> para comentar.
+      </div>
+    <?php endif; ?>
   </section>
 
   <?php if (!empty($noticia['imagenes'])): ?>
