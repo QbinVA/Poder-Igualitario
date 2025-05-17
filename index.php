@@ -55,7 +55,7 @@ try {
 <html lang="<?= htmlspecialchars($lang) ?>">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Poder Igualitario</title>
 
   <!-- Estilos -->
@@ -63,8 +63,8 @@ try {
   <link rel="stylesheet" href="views/css/header.css">
   <link rel="stylesheet" href="views/css/footer.css">
   <link rel="stylesheet" href="views/css/font/font.css">
-  <!-- Swiper CDN -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/9.3.2/swiper-bundle.min.css" />
+  <!-- Swiper CDN - Actualizado a la versión más reciente -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
   
   <style>
     /* Estilos para el mensaje destacado y nuevo slider */
@@ -92,7 +92,7 @@ try {
       color: #333;
     }
     
-    /* Nuevo slider moderno con tamaño aumentado */
+    /* Nuevo slider moderno con tamaño aumentado - CORREGIDO */
     .modern-slider {
       width: 85%;
       margin: 0 auto 30px;
@@ -102,6 +102,7 @@ try {
       height: 350px;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
       z-index: 1;
+      border: 3px solid #01BDA3;
     }
     
     .modern-slider .slide {
@@ -112,7 +113,7 @@ try {
       height: 100%;
       opacity: 0;
       transition: opacity 1s ease;
-      z-index: 2;
+      z-index: 1;
     }
     
     .modern-slider .slide.active {
@@ -124,8 +125,6 @@ try {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      z-index: 3;
-      position: relative;
       display: block;
     }
     
@@ -135,9 +134,9 @@ try {
       left: 0;
       width: 100%;
       padding: 20px;
-      background: linear-gradient(to top, rgba(0,0,0,0.8), hsla(0, 0.00%, 0.00%, 0.00));
+      background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0));
       color: white;
-      z-index: 2;
+      z-index: 3;
     }
     
     .modern-slider .slide-title {
@@ -180,32 +179,103 @@ try {
       transform: scale(1.2);
     }
     
-    /* Estilos para Swiper - mejorado */
+    /* Estilo mejorado para el filtro de categorías */
+    .filter-section {
+      width: 80%;
+      margin: 0 auto 20px;
+      text-align: center;
+    }
+    
+    .filter-section form {
+      display: inline-flex;
+      align-items: center;
+      background-color: rgba(255, 255, 255, 0.85);
+      padding: 10px 15px;
+      border-radius: 25px;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .filter-section label {
+      color: #009193;
+      font-weight: bold;
+      margin-right: 10px;
+    }
+    
+    .filter-section select {
+      background-color: #01BDA3;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 8px 15px;
+      font-size: 0.95em;
+      cursor: pointer;
+      outline: none;
+      transition: all 0.3s ease;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      background-size: 1em;
+      padding-right: 30px;
+    }
+    
+    .filter-section select:hover {
+      background-color: #00a090;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+    
+    .filter-section select:focus {
+      box-shadow: 0 0 0 3px rgba(1, 189, 163, 0.3);
+    }
+    
+    /* Estilos para Swiper - Actualizado y mejorado */
     .swiper-container {
-      width: 100%;
-      padding: 30px 10px;
-      overflow: hidden;
+      width: 90%;
+      margin: 0 auto;
+      padding: 30px 0;
+      overflow: visible;
+      position: relative;
     }
     
     .swiper-slide {
       background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
       height: 340px;
       overflow: hidden;
-      transition: all 0.3s ease;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
       border-top: 3px solid #01BDA3;
+      opacity: 0.7;
+      transform: scale(0.9);
+    }
+    
+    .swiper-slide-active {
+      opacity: 1;
+      transform: scale(1);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+    
+    .swiper-slide-next, .swiper-slide-prev {
+      opacity: 0.85;
+      transform: scale(0.95);
     }
     
     .swiper-slide:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+      transform: translateY(-5px) scale(1.01);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
     }
     
     .card-image {
       height: 160px;
       width: 100%;
       object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    .swiper-slide:hover .card-image {
+      transform: scale(1.05);
     }
     
     .card-content {
@@ -250,12 +320,45 @@ try {
       font-size: 14px;
       font-weight: 500;
       margin-top: 5px;
+      position: relative;
+      overflow: hidden;
     }
     
-    /* Ocultamos los botones de navegación del swiper */
+    .card-more:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background-color: #01BDA3;
+      transition: width 0.3s ease;
+    }
+    
+    .swiper-slide:hover .card-more:after {
+      width: 100%;
+    }
+    
+    /* Swiper Navigation - escondido pero disponible */
     .swiper-button-next, 
     .swiper-button-prev {
-      display: none;
+      color: #01BDA3;
+      background: rgba(255, 255, 255, 0.9);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      --swiper-navigation-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+    
+    .swiper-button-next:hover, 
+    .swiper-button-prev:hover {
+      background: #01BDA3;
+      color: white;
+      transform: scale(1.1);
     }
     
     /* Swiper Pagination */
@@ -269,6 +372,7 @@ try {
       opacity: 0.5;
       width: 10px;
       height: 10px;
+      transition: all 0.3s ease;
     }
     
     .swiper-pagination-bullet-active {
@@ -279,23 +383,44 @@ try {
     
     .section-title {
       text-align: center;
-      color: #009193;
+      color: white;
       margin: 30px 0 20px;
       font-size: 1.8em;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    }
+    
+    .no-news {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      font-size: 1.2em;
+      color: #555;
+      width: 80%;
+      margin: 0 auto;
     }
   </style>
 </head>
+
+<?php
+// 2) Abrimos buffer para TODO lo que SÍ queremos traducir:
+//    <main> y el footer partial
+ob_start();
+?>
+
 <body>
   <!-- Header fijo -->
   <?php include __DIR__ . '/views/layouts/header.php'; ?>
 
   <!-- Mensaje destacado (actualizado) -->
   <section class="featured-message">
-    <h3>Bienvenidos a Poder Igualitario</h3>
-    <p>Descubre las últimas noticias y contenidos enfocados en igualdad, participación y cambio social. Y siéntete libre de comentar en las noticias.</p>
+    <h3>Bienvenidos a Voces Igualitarias</h3>
+    <p>Descubre las últimas noticias y contenidos enfocados en igualdad, participación y cambio social.  
+      ¡Siéntete libre de comentar en las noticias!</p>
   </section>
 
-  <!-- Slider moderno con noticias de la base de datos -->
+  <!-- Slider moderno con noticias de la base de datos (CORREGIDO) -->
   <section class="modern-slider">
       <?php
       // Mezclamos y cortamos a 4 publicaciones para el slider
@@ -304,10 +429,9 @@ try {
       $random_pubs = array_slice($random_pubs, 0, 4);
 
       foreach ($random_pubs as $i => $pub):
-          // Limpiar la ruta de imagen_principal
-          $imagen = str_replace('../uploads/', '', $pub['imagen_principal']);
-          $imgSrc = "uploads/" . htmlspecialchars($imagen);
-          echo "<!-- Ruta generada: $imgSrc -->"; // Depuración
+          // Preparamos correctamente la ruta de la imagen
+          $imagen = htmlspecialchars(str_replace('../uploads/', '', $pub['imagen_principal']));
+          $imgSrc = "uploads/" . $imagen;
       ?>
           <div class="slide <?= $i === 0 ? 'active' : '' ?>">
               <img src="<?= $imgSrc ?>" alt="<?= htmlspecialchars($pub['titular']) ?>">
@@ -335,12 +459,6 @@ try {
       </div>
   </section>
 
-<?php
-// 2) Abrimos buffer para TODO lo que SÍ queremos traducir:
-//    <main> y el footer partial
-ob_start();
-?>
-
   <!-- Noticias -->
   <main>
     <h3 class="section-title">
@@ -348,7 +466,7 @@ ob_start();
           ? 'Noticias sobre la igualdad de género'
           : 'News about gender equality' ?>
     </h3>
-    <!-- Filtro de categorías -->
+    <!-- Filtro de categorías con diseño renovado -->
     <section class="filter-section">
       <form method="GET" action="index.php">
         <input type="hidden" name="lang" value="<?= htmlspecialchars($lang) ?>">
@@ -368,15 +486,17 @@ ob_start();
         </select>
       </form>
     </section>
-    <div class="swiper-container">
-      <div class="swiper-wrapper">
-        <?php if (empty($pubs)): ?>
-          <p class="no-news">
-            <?= $lang === 'es'
-                ? 'No se encontraron noticias.'
-                : 'No news found.' ?>
-          </p>
-        <?php else: ?>
+
+    <!-- Nuevo Swiper fluido -->
+    <?php if (empty($pubs)): ?>
+      <p class="no-news">
+        <?= $lang === 'es'
+            ? 'No se encontraron noticias para esta categoría.'
+            : 'No news found for this category.' ?>
+      </p>
+    <?php else: ?>
+      <div class="swiper-container">
+        <div class="swiper-wrapper">
           <?php foreach ($pubs as $pub): ?>
             <div class="swiper-slide">
               <a href="views/layouts/ver_publicacion.php?id=<?= $pub['id_noticia'] ?>&lang=<?= $lang ?>">
@@ -394,22 +514,25 @@ ob_start();
               </a>
             </div>
           <?php endforeach; ?>
-        <?php endif; ?>
+        </div>
+        <!-- Navegación del Swiper -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <!-- Paginación del Swiper -->
+        <div class="swiper-pagination"></div>
       </div>
-      <!-- Agregar paginación -->
-      <div class="swiper-pagination"></div>
-    </div>
+    <?php endif; ?>
   </main>
 
   <!-- Footer (dentro del buffer para traducción) -->
   <?php include __DIR__ . '/views/layouts/footer.php'; ?>
 
-  <!-- Swiper JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/9.3.2/swiper-bundle.min.js"></script>
+  <!-- Swiper JS - Versión actualizada -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 
   <script>
   document.addEventListener('DOMContentLoaded', () => {
-    // Script para el slider moderno
+    // Script para el slider moderno - CORREGIDO
     const slides = document.querySelectorAll('.modern-slider .slide');
     const dots = document.querySelectorAll('.slider-dot');
     let currentIndex = 0;
@@ -432,10 +555,10 @@ ob_start();
       dots[currentIndex].classList.add('active');
     }
     
-    // Auto cambio cada 4 segundos
+    // Auto cambio cada 5 segundos
     let slideInterval = setInterval(() => {
       changeSlide(currentIndex + 1);
-    }, 4000);
+    }, 5000);
     
     // Event listeners para los dots
     dots.forEach((dot, index) => {
@@ -444,39 +567,68 @@ ob_start();
         changeSlide(index);
         slideInterval = setInterval(() => {
           changeSlide(currentIndex + 1);
-        }, 4000);
+        }, 5000);
       });
     });
 
-    // Inicializar Swiper para las tarjetas
-    new Swiper('.swiper-container', {
-      slidesPerView: 1,
-      spaceBetween: 20,
-      loop: true,
+    // Inicializar Swiper mejorado para las tarjetas
+    const swiper = new Swiper('.swiper-container', {
+      effect: 'coverflow',
+      grabCursor: true,
+      centeredSlides: true,
+      slidesPerView: 'auto',
+      coverflowEffect: {
+        rotate: 0,
+        stretch: 0,
+        depth: 100,
+        modifier: 1,
+        slideShadows: false,
+      },
+      speed: 600,
       autoplay: {
         delay: 3000,
         disableOnInteraction: false,
+        pauseOnMouseEnter: true
       },
       pagination: {
         el: '.swiper-pagination',
         clickable: true,
+        dynamicBullets: true
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
       },
       breakpoints: {
-        // Cuando el ancho de la ventana es >= 640px
+        320: {
+          slidesPerView: 1,
+          spaceBetween: 20
+        },
         640: {
           slidesPerView: 2,
           spaceBetween: 20,
         },
-        // Cuando el ancho de la ventana es >= 768px
         768: {
           slidesPerView: 3,
           spaceBetween: 30,
         },
-        // Cuando el ancho de la ventana es >= 1024px
         1024: {
-          slidesPerView: 4,
+          slidesPerView: 3,
           spaceBetween: 30,
         },
+      },
+      on: {
+        init: function() {
+          // Añadimos clases adicionales para mejorar la transición
+          document.querySelectorAll('.swiper-slide').forEach(slide => {
+            slide.addEventListener('mouseenter', () => {
+              slide.classList.add('swiper-slide-hovered');
+            });
+            slide.addEventListener('mouseleave', () => {
+              slide.classList.remove('swiper-slide-hovered');
+            });
+          });
+        }
       }
     });
   });

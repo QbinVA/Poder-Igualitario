@@ -29,7 +29,7 @@
 
 body {
   font-family: 'Segoe UI', Roboto, Arial, sans-serif;
-  animation:  15s ease-in-out infinite alternate;
+  animation: bgRGB 15s ease-in-out infinite alternate;
   color: #333;
   display: flex;
   flex-direction: column;
