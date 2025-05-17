@@ -542,8 +542,11 @@ if (isset($_GET['editar']) && is_numeric($_GET['editar'])) {
 
              // Función para resetear el formulario
             function resetForm() {
-                createForm.reset(); // Resetea todos los campos del formulario
-                imagenPreview.style.display = 'none'; // Oculta la vista previa de la imagen
+                // Resetea todos los campos del formulario
+                createForm.reset();
+
+                // Oculta la vista previa de la imagen
+                imagenPreview.style.display = 'none';
 
                 // Limpiar manualmente los campos del formulario
                 document.getElementById('titular').value = '';
@@ -552,12 +555,18 @@ if (isset($_GET['editar']) && is_numeric($_GET['editar'])) {
                 document.getElementById('contenido').value = '';
                 document.getElementById('id_categoria').value = '';
                 document.getElementById('imagen_principal').value = '';
+                document.getElementById('referencia').value = '';
 
                 // Ocultar la imagen actual si existe
                 const currentImageContainer = document.querySelector('.current-image');
                 if (currentImageContainer) {
                     currentImageContainer.parentElement.style.display = 'none';
                 }
+
+                // Restablecer el encabezado del modal y el botón de envío
+                document.querySelector('.modal-form h2').textContent = '<?= $lang === "es" ? "Formulario noticias" : "News Form" ?>';
+                document.querySelector('.submit-btn').textContent = '<?= $lang === "es" ? "Subir" : "Upload" ?>';
+                createForm.action = 'guardar_publicacion.php';
             }
             
             openModalBtn.addEventListener('click', function() {
