@@ -26,7 +26,7 @@ try {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Poder Igualitario</title>
+  <title>Voces Igualitarias</title>
 
   <!-- Tus estilos habituales -->
   <link rel="stylesheet" href="views/css/index.css">
@@ -131,19 +131,6 @@ try {
       z-index: 5;
     }
     
-    .slider-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background-color: rgba(255, 255, 255, 0.5);
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    
-    .slider-dot.active {
-      background-color: #01BDA3;
-      transform: scale(1.2);
-    }
     
     /* Estilos para Swiper - mejorado */
     .swiper-container {
@@ -250,14 +237,22 @@ try {
     }
   </style>
 </head>
+
+<?php
+// 2) Abrimos buffer para TODO lo que SÍ queremos traducir:
+//    <main> y el footer partial
+ob_start();
+?>
+
 <body>
   <!-- Header fijo -->
   <?php include __DIR__ . '/views/layouts/header.php'; ?>
 
   <!-- Mensaje destacado (actualizado) -->
   <section class="featured-message">
-    <h3>Bienvenidos a Poder Igualitario</h3>
-    <p>Descubre las últimas noticias y contenidos enfocados en igualdad, participación y cambio social. Y siéntete libre de comentar en las noticias.</p>
+    <h3>Bienvenidos a Voces Igualitarias</h3>
+    <p>Descubre las últimas noticias y contenidos enfocados en igualdad, participación y cambio social.  
+      ¡Siéntete libre de comentar en las noticias!</p>
   </section>
 
   <!-- Slider moderno con noticias de la base de datos -->
@@ -300,12 +295,6 @@ try {
       <?php endfor; ?>
     </div>
   </section>
-
-<?php
-// 2) Abrimos buffer para TODO lo que SÍ queremos traducir:
-//    <main> y el footer partial
-ob_start();
-?>
 
   <main>
     <!-- Swiper con todas las noticias -->

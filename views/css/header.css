@@ -44,6 +44,7 @@ body {
 .main-nav {
   display: flex;
   align-items: center;
+  flex-wrap: wrap; /* Permite que los elementos se ajusten en pantallas pequeñas */
 }
 
 .main-nav a,
@@ -147,4 +148,52 @@ body {
 .logout-link:hover {
   background: #b71c1c;
   opacity: 1;
+}
+
+/* Estilos para el botón Admin y elementos relacionados */
+.admin-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  background-color: #1a7ae0;
+  color: white !important; /* Asegura que el color del texto sea blanco */
+  text-decoration: none;
+  border-radius: 45px;
+  font-weight: 500;
+  margin-left: 15px;
+  font-size: 0.9rem;
+  transition: opacity 0.3s ease;
+  /* Asegúrate de que es visible */
+  opacity: 1;
+  visibility: visible;
+}
+
+.admin-link:hover {
+  opacity: 0.8;
+}
+
+/* Estilos específicos para el botón de actualizar publicaciones */
+.admin-link[href*="actualizar_publicaciones"] {
+  background-color: #ff6b01;
+}
+
+/* Arreglar orden y posición en móviles */
+@media (max-width: 768px) {
+  .site-header__inner {
+    flex-direction: column;
+    padding: 0 10px;
+  }
+  
+  .main-nav {
+    margin-top: 10px;
+    justify-content: center;
+  }
+  
+  .admin-link, .login-link, .logout-link {
+    margin-top: 5px;
+  }
+  
+  body {
+    padding-top: 120px; /* Ajusta para el header más alto en móvil */
+  }
 }
