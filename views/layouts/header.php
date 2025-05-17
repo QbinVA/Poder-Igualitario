@@ -20,13 +20,11 @@ $isAdmin = (isset($_SESSION['es_admin']) && $_SESSION['es_admin'] === true) ||
 // Texto según idioma
 $textos = [
     'es' => [
-        'panel_admin' => 'Panel admin',
         'admin_panel' => 'Panel del administrador', // Añadido para el nuevo botón
         'cerrar_sesion' => 'Cerrar sesión',
         'iniciar_sesion' => 'Iniciar sesión'
     ],
     'en' => [
-        'panel_admin' => 'Admin panel',
         'admin_panel' => 'Administrator panel', // Añadido para el nuevo botón
         'cerrar_sesion' => 'Log out',
         'iniciar_sesion' => 'Log in'
@@ -77,7 +75,7 @@ $txt = $textos[$lang] ?? $textos['es'];
     
     if ($show_admin):
     ?>
-      
+ 
       <a href="/Poder-Igualitario/admin/admin.php?lang=<?= htmlspecialchars($lang) ?>" class="admin-link">
         <?= $txt['admin_panel'] ?>
       </a>

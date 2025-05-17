@@ -500,6 +500,23 @@ if (isset($_GET['editar']) && is_numeric($_GET['editar'])) {
                     history.pushState({}, '', url);
                 }
             });
+
+            // Cerrar el modal con la tecla Escape
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape') {
+                    if (modal.style.display === 'block') {
+                        modal.style.display = 'none';
+                        document.body.style.overflow = 'auto';
+
+                        // Si estábamos editando, eliminar el parámetro de la URL
+                        if (window.location.href.includes('editar=')) {
+                            const url = new URL(window.location.href);
+                            url.searchParams.delete('editar');
+                            history.pushState({}, '', url);
+                        }
+                    }
+                }
+            });
             
             // Close modal when clicking outside
             window.addEventListener('click', function(event) {
