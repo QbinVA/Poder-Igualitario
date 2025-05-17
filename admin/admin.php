@@ -539,8 +539,29 @@ if (isset($_GET['editar']) && is_numeric($_GET['editar'])) {
             const modal = document.getElementById('publicacionModal');
             const openModalBtn = document.getElementById('openModal');
             const closeModalBtn = document.getElementById('closeModal');
+
+             // Función para resetear el formulario
+            function resetForm() {
+                createForm.reset(); // Resetea todos los campos del formulario
+                imagenPreview.style.display = 'none'; // Oculta la vista previa de la imagen
+
+                // Limpiar manualmente los campos del formulario
+                document.getElementById('titular').value = '';
+                document.getElementById('fecha').value = '';
+                document.getElementById('descripcion_corta').value = '';
+                document.getElementById('contenido').value = '';
+                document.getElementById('id_categoria').value = '';
+                document.getElementById('imagen_principal').value = '';
+
+                // Ocultar la imagen actual si existe
+                const currentImageContainer = document.querySelector('.current-image');
+                if (currentImageContainer) {
+                    currentImageContainer.parentElement.style.display = 'none';
+                }
+            }
             
             openModalBtn.addEventListener('click', function() {
+                resetForm(); // Resetear el formulario al abrir el modal
                 // Resetear el formulario si se está abriendo para crear una nueva publicación
                 document.getElementById('createPublicacionForm').reset();
                 document.getElementById('imagenPreview').style.display = 'none';
@@ -560,8 +581,13 @@ if (isset($_GET['editar']) && is_numeric($_GET['editar'])) {
             
             closeModalBtn.addEventListener('click', function() {
                 modal.style.display = 'none';
-                document.body.style.overflow = 'auto'; // Re-enable scrolling
-                
+                document.body.style.overflow = 'auto'; // Rehabilitar el scroll
+                resetForm(); // Resetear el formulario al cerrar el modal
+
+                // Resetear el formulario al cerrar el modal
+                document.getElementById('createPublicacionForm').reset();
+                document.getElementById('imagenPreview').style.display = 'none';
+
                 // Si estábamos editando, eliminar el parámetro de la URL
                 if (window.location.href.includes('editar=')) {
                     const url = new URL(window.location.href);
@@ -576,6 +602,11 @@ if (isset($_GET['editar']) && is_numeric($_GET['editar'])) {
                     if (modal.style.display === 'block') {
                         modal.style.display = 'none';
                         document.body.style.overflow = 'auto';
+                        resetForm(); // Resetear el formulario al cerrar el modal
+
+                        // Resetear el formulario al cerrar el modal
+                        document.getElementById('createPublicacionForm').reset();
+                        document.getElementById('imagenPreview').style.display = 'none';
 
                         // Si estábamos editando, eliminar el parámetro de la URL
                         if (window.location.href.includes('editar=')) {
@@ -592,7 +623,12 @@ if (isset($_GET['editar']) && is_numeric($_GET['editar'])) {
                 if (event.target === modal) {
                     modal.style.display = 'none';
                     document.body.style.overflow = 'auto';
-                    
+                    resetForm(); // Resetear el formulario al cerrar el modal
+
+                    // Resetear el formulario al cerrar el modal
+                    document.getElementById('createPublicacionForm').reset();
+                    document.getElementById('imagenPreview').style.display = 'none';
+
                     // Si estábamos editando, eliminar el parámetro de la URL
                     if (window.location.href.includes('editar=')) {
                         const url = new URL(window.location.href);
