@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 15-05-2025 a las 13:04:28
+-- Tiempo de generación: 17-05-2025 a las 01:36:31
 -- Versión del servidor: 8.0.17
 -- Versión de PHP: 7.3.10
 
@@ -40,7 +40,8 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id_admin`, `nombre`, `correo`, `contrasena`) VALUES
-(1, 'Kevin Valdovinos', 'kvaldovinos2@ucol.mx', 'JuanoManzano');
+(1, 'kevin123', 'kvaldovinos2@ucol.mx', 'JuanoManzano'),
+(2, 'tester1', 'testeando@gmail.com', '123456789');
 
 -- --------------------------------------------------------
 
@@ -106,7 +107,8 @@ INSERT INTO `publicaciones` (`id_noticia`, `fecha`, `titular`, `descripcion_cort
 (6, '2025-02-14', 'La brecha salarial entre mujeres y hombres en el fútbol es de un 744%', 'El Instituto de las Mujeres organizó, ayer jueves, una mesa redonda para abordar la brecha salarial entre mujeres y hombres en el deporte junto a expertas en la materia', 'uploads/img_67d2e9bd6a52e8.75835166.jpg', 'En el marco del 22 de febrero, Día de la Igualdad Salarial, el Instituto de las Mujeres organizó, ayer jueves, un encuentro para abordar la brecha salarial entre mujeres y hombres en el deporte.\r\nDurante la jornada, inaugurada por la directora del Instituto de las Mujeres, Cristina Hernández, se visibilizaron las brechas existentes en diferentes disciplinas deportivas en España a través de las experiencias profesionales de distintas expertas en la materia. Moderado por la redactora jefa de deportes de El País, Nadia Tronchoni; participaron en el conversatorio Amanda Gutiérrez, presidenta de FUTPO; Lucila Pascua, presidenta de la Asociación de Jugadoras de Baloncesto (AJUB); Laura Torvisco Pérez, entrenadora de primera división y directora deportiva; Marta Francés Gómez, triatleta y medallista olímpica en los Juegos Paralímpicos de Paris 2024 y Patricia Campos Doménech, expiloto y entrenadora de fútbol.\r\n', 'https://www.inmujeres.gob.es/actualidad/noticias/2025/BrechaSalarialDeporte.htm', 0, 0),
 (10, '2025-05-05', 'Pedro Dominguez', 'Publicacion de prueba para verificar el funcionamiento de las imagenes.', '../uploads/img_6818efc8dd17b6.21645956.jpeg', 'vowhbvibvuiopwvbwdivhpuogherivhbqergeiwrheru90gfqwkfq9fiqewfpiuqfh9rgefghqfhqer9fqoupfhqrf9orufywrchfnwe\'vfbywqhfovwqerh9fwr vnhwrf9wrhwerbwviwrherbcrkhbwer98gcerigb howreognvwrhfvwphg39broghwrepggebrg9pero8yghogvb8g0bov3hghbreerikgher98 435ughverg', 'https://youtu.be/cedT4OQnTOo?si=k4AnrYZyI3nTwX7G', 0, 0),
 (11, '2025-05-04', 'Comunidad de Tecoman', 'Publicacion dedicada a Tecoman y lo poco que hay en ese pinche rancho culero de muerda', '../uploads/img_6818f1f451ed14.42530819.jpg', 'El corrido de Tecomán es una canción que narra la historia de Marcelino Verduzco, quien intentó ser contrabandista pero fue sorprendido. La letra describe cómo Marcelino y sus compañeros dejaron Tecomán en pleno día y se dirigieron a Parotal para recoger mercancía, pasando por Santa María. Luego, Luisillo fue encargado de entregar los costales escondidos, mientras Marcelino ya había cargado las otras 30 cajas en una camioneta. Planeaban pasar por San Vicente para evitar sospechas y reunirse en Tecomán para beber cerveza, pero al llegar al pavimento fueron interceptados por soldados. Marcelino y el conductor de la camioneta fueron asesinados, mientras que el resto logró escapar. El que fue capturado vivo acabó confesando todo, dejando a Marcelino esperando en Tecomán.', 'https://es.wikipedia.org/wiki/Tecom%C3%A1n', 0, 0),
-(14, '2013-02-13', 'PRUEBA NUEVO FORMULARIO', 'nuevo formulario para noticias :p', '../uploads/img_6825b4f2b8acd1.56497045.jpeg', 'HOLA', 'https://youtu.be/WOD66Fz2biU?si=25YnV1JBHObeAkwt', 0, 2);
+(14, '2013-02-13', 'PRUEBA NUEVO FORMULARIO', 'nuevo formulario para noticias :p', '../uploads/img_6825b4f2b8acd1.56497045.jpeg', 'HOLA', 'https://youtu.be/WOD66Fz2biU?si=25YnV1JBHObeAkwt', 0, 2),
+(15, '2006-02-10', 'HOLA', 'fgnhbgrfbg', '../uploads/img_682785dbcc77e9.80382044.jpeg', 'hytrdfghjihgxg', 'https://github.com/', 0, 6);
 
 -- --------------------------------------------------------
 
@@ -129,7 +131,8 @@ CREATE TABLE `usuarios` (
 INSERT INTO `usuarios` (`id_usuario`, `nombre`, `correo`, `contrasena`, `fecha_registro`) VALUES
 (1, 'qbin', 'valdokevin02@gmail.com', '$2y$10$g7NkSuEBnvXZrV1ZqLAkreb7D4O9K31qNFc4.KtvF9ffAubjE3okC', '2025-05-13 14:19:01'),
 (2, 'niñochancla28', 'elchalecos13@gmail.com', '$2y$10$hPKAwCsAx6IRa8NZa3ZHK.rm6xHbyceeXEjfEw1xbyiUhC5NQsHL2', '2025-05-14 16:22:29'),
-(3, 'testeador1', 'test1@gmail.com', '$2y$10$us71v..sgWjs3y1KXgumSeKfOHasTZX.oGk1.WGG8qL0n2VLYxuAG', '2025-05-15 05:09:23');
+(3, 'testeador1', 'test1@gmail.com', '$2y$10$us71v..sgWjs3y1KXgumSeKfOHasTZX.oGk1.WGG8qL0n2VLYxuAG', '2025-05-15 05:09:23'),
+(4, '1', '1@gmail.com', '$2y$10$0W/4tv2GyPLZQJk.e2LFHOGsHIMfvJzzzQDMiNSQpgUV8/Yk685EC', '2025-05-16 18:34:22');
 
 --
 -- Índices para tablas volcadas
@@ -178,7 +181,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `categorias`
@@ -196,13 +199,13 @@ ALTER TABLE `comentarios`
 -- AUTO_INCREMENT de la tabla `publicaciones`
 --
 ALTER TABLE `publicaciones`
-  MODIFY `id_noticia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_noticia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restricciones para tablas volcadas

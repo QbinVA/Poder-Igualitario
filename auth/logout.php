@@ -27,6 +27,10 @@ if (isset($_COOKIE['usuario_id'])) {
 if (isset($_COOKIE['usuario_nombre'])) {
     setcookie('usuario_nombre', '', time() - 3600, '/');
 }
+// Clear admin cookie if exists
+if (isset($_COOKIE['es_admin'])) {
+    setcookie('es_admin', '', time() - 3600, '/');
+}
 
 // Redirect to homepage
 header("Location: ../index.php?lang=$lang");
